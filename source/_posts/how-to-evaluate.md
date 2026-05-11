@@ -68,8 +68,6 @@ index_img: /images/posts/how-to-evaluate.jpg
 
 线路质量是直接影响使用体验的核心因素。理解不同的线路类型以及如何测试它们，是评估机场的关键步骤。
 
-![数据分析仪表盘](/images/inline/dashboard-analytics.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ### 直连 vs 中转 vs CDN
 
@@ -205,8 +203,6 @@ SLA（Service Level Agreement）用月度不可用时间占比来衡量。虽然
 
 ### 隐私
 
-![安全锁](/images/inline/lock-security.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 使用任何代理服务，你都需要理解一个事实：**机场运营者理论上可以看到你的所有流量元数据**，包括你访问了哪些域名。如果使用 TLS 类协议（如 VLESS+TLS、Trojan），运营者虽然看不到你传输的具体内容，但依然能看到你连接的目标域名（通过 SNI 信息）。
 

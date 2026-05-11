@@ -68,8 +68,6 @@ TLSVersion,Ciphers,Extensions,EllipticCurves,ECPointFormats
 
 简而言之，JA3 指纹就像是 TLS 客户端的一个"身份证号"，虽然不是百分之百唯一，但足以在大多数场景下区分客户端类型。
 
-![数字指纹与加密](/images/inline/matrix-code.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ## JA4 与 JA3 的区别
 
@@ -155,8 +153,6 @@ Reality 的工作流程如下：
 
 Reality 的主要注意事项是目标网站（dest）的选择：应选择支持 TLS 1.3、有 HTTP/2 支持、在目标地区正常可访问且不会频繁变化的大型网站。
 
-![安全加密防护](/images/inline/lock-security.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ### ECH (Encrypted Client Hello)：未来方向
 

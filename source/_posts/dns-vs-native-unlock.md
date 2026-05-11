@@ -10,7 +10,7 @@ tags:
   - Netflix
   - 对比
 excerpt: "DNS 解锁通过重定向实现，原生 IP 依赖节点 IP 类型。两者在可靠性和成本上差异显著。"
-index_img: /images/posts/dns-vs-native-unlock.jpg
+index_img: /images/posts/dns-vs-native-unlock.png
 ---
 
 > **摘要**：流媒体解锁主要有两种实现方式——DNS 解锁和原生 IP 解锁。前者通过 DNS 层面的重定向实现，后者依赖节点本身的 IP 类型。两者在可靠性、成本、维护难度上有明显差异。本文深入对比两种方案的技术原理和实际效果。
@@ -30,8 +30,6 @@ Netflix、Disney+、Hulu、YouTube Premium、Spotify 等流媒体平台通过检
 
 ## 原生 IP 解锁
 
-![服务器机房](/images/inline/server-room.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ### 什么是原生 IP
 
@@ -157,8 +155,6 @@ DNS 解锁的核心思想是：**在 DNS 层面将流媒体域名的解析结果
                Netflix → 解锁服务器 → 代理节点 → 用户
 ```
 
-![网络线缆连接](/images/inline/network-cables.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 值得注意的是，DNS 解锁只对特定域名生效。普通网站的 DNS 解析不受影响，流量也不经过中间服务器。DNS 解锁服务维护着一份流媒体域名列表，只有命中这个列表的域名才会被重定向。
 

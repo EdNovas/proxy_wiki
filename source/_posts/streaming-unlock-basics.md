@@ -18,8 +18,6 @@ index_img: /images/posts/streaming-unlock-basics.jpg
 
 ## 什么是流媒体地区限制
 
-![Netflix 流媒体界面](/images/inline/netflix-screen.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 如果你用过 [Netflix](https://www.netflix.com/)，可能会注意到一个现象：同一个 Netflix 账号，在不同国家打开看到的内容库完全不同。一部在美国能看的电影，换到日本可能就找不到了；一部在新加坡上线的动画，在美区可能根本不存在。
 
@@ -200,8 +198,6 @@ graph LR
 
 ## 主流服务的解锁难度
 
-![全球网络连接](/images/inline/globe-network.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 不同的流媒体和在线服务，对代理的检测严格程度差异很大。以下是目前主流服务的解锁难度概览：
 

@@ -114,8 +114,6 @@ IP 情报数据库（如 ipinfo.io）会根据 ASN 和其他信息，为每个 I
 
 ---
 
-![服务器机房](/images/inline/server-room.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ## 数据中心 IP / 机房 IP（Datacenter IP）
 
@@ -278,8 +276,6 @@ IP 情报数据库（如 ipinfo.io）会根据 ASN 和其他信息，为每个 I
 
 ## 各类 IP 对比
 
-![全球网络连接](/images/inline/globe-network.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 | 特征 | 原生 IP | 数据中心 IP | 广播 IP | 住宅 IP |
 |------|--------|------------|--------|--------|

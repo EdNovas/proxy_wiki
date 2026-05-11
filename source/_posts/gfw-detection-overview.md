@@ -26,8 +26,6 @@ index_img: /images/posts/gfw-detection-overview.jpg
 
 下面按检测复杂度从低到高，逐层拆解 GFW 的核心检测机制。
 
-![网络安全与封锁](/images/inline/lock-security.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ---
 
@@ -176,8 +174,6 @@ GFW 的行为分析系统会关注以下维度：
 
 ---
 
-![服务器机房](/images/inline/server-room.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ```mermaid
 graph TD

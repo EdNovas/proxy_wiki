@@ -11,7 +11,7 @@ tags:
   - Shadowrocket
   - 最佳实践
 excerpt: 各主流客户端的推荐 DNS 配置，以及最常见的 DNS 配置错误——Fake-IP 下不要配置 fallback。
-index_img: /images/posts/dns-best-practices.jpg
+index_img: /images/posts/dns-best-practices.png
 ---
 
 > **摘要**：DNS 配置是科学上网中最容易出错、也最影响体验的环节。配置不当会导致 DNS 泄漏（暴露访问意图）、解析失败（网页打不开）、或国内网站变慢（走了错误的 CDN 节点）。本文给出各主流客户端的推荐 DNS 配置，并解释每个参数背后的原理。
@@ -141,8 +141,6 @@ dns:
 - `fake-ip-range: 198.18.0.1/16`：Fake-IP 分配的地址段，使用默认值即可。这是一个保留地址段，不会与实际网络冲突
 - `nameserver`：上游 DNS 服务器。这里只需要配置国内 DNS，因为在 Fake-IP 模式下，只有直连域名才会真正触发 DNS 解析。推荐使用 DoH（DNS over HTTPS）来防止 DNS 请求被运营商劫持
 
-![配置代码示例](/images/inline/code-screen.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ### 最常见的配置错误
 
@@ -215,8 +213,6 @@ hijack-dns = *:53
 
 ---
 
-![网络连接与传输](/images/inline/network-cables.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ## 特殊场景
 

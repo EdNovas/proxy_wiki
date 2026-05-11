@@ -10,7 +10,7 @@ tags:
   - 分流
   - 配置
   - 进阶
-index_img: /images/posts/custom-rules.jpg
+index_img: /images/posts/custom-rules.webp
 excerpt: 教你在 Clash 中自定义分流规则——让特定网站走代理、公司内网直连、游戏走特定节点。
 ---
 
@@ -162,8 +162,6 @@ function main(config) {
 }
 ```
 
-![在笔记本上编写覆写脚本](/images/inline/laptop-coding.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 **优点**：订阅更新不会覆盖你的自定义规则。脚本逻辑灵活，可以根据现有节点动态创建策略组。一次配置，长期有效。
 
@@ -492,8 +490,6 @@ my-rules:
 
 解决方案：使用方式二（覆写脚本）或方式三（独立 rule-provider 文件配合覆写脚本）。覆写脚本在订阅配置加载后运行，不受更新影响。
 
-![规则语法参考代码](/images/inline/code-screen.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ## 规则语法速查表
 

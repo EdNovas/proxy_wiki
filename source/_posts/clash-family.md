@@ -10,7 +10,7 @@ tags:
   - Clash Verge
   - OpenClash
   - 客户端
-index_img: /images/posts/clash-family.jpg
+index_img: /images/posts/clash-family.png
 excerpt: Clash 生态经历了开源、闭源、删库、fork 等戏剧性事件。梳理 Clash 系列的演变历史和当前应该使用的版本。
 ---
 

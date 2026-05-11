@@ -46,8 +46,6 @@ index_img: /images/posts/airport-parameters.jpg
 
 **"不限量"套餐的真相**。号称不限量的套餐往往附带隐性限制：可能有公平使用政策（Fair Use Policy），超过某个阈值后自动降速；可能高峰时段优先级低于限量套餐用户；也可能只是把限速设得很低，让你物理上用不了太多。购买前务必看清条款。
 
-![数据分析仪表盘](/images/inline/dashboard-analytics.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 **闲时流量不计费**。部分机场会在非高峰时段（通常是凌晨到早上）不计算流量消耗。如果你有大文件需要下载，可以安排在这个时间段进行，可以省下不少配额。
 
@@ -117,8 +115,6 @@ index_img: /images/posts/airport-parameters.jpg
 
 绝大多数机场采用的是共享带宽模式。这意味着标称速度只是理论最大值，实际速度取决于同时在线的用户数量和他们的使用情况。
 
-![速度仪表盘](/images/inline/speedometer.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ### 实际速度需求
 

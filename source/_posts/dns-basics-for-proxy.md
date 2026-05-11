@@ -11,7 +11,7 @@ tags:
   - 代理
 excerpt: DNS 是互联网的电话簿。在代理场景中，DNS 解析的正确性直接决定上网体验。
 mermaid: true
-index_img: /images/posts/dns-basics-for-proxy.jpg
+index_img: /images/posts/dns-basics-for-proxy.png
 ---
 
 > **摘要**: DNS 是互联网的"电话簿"，将域名翻译成 IP 地址。在使用代理时，DNS 解析的正确性直接决定了你能不能打开网站、会不会泄漏隐私、国内网站会不会变慢。本文从基础讲起，解释 DNS 在代理场景中的特殊性和常见问题。
@@ -71,8 +71,6 @@ graph LR
     G --> H[✅ 真实IP]
 ```
 
-![网络连接与数据传输](/images/inline/network-cables.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ---
 
@@ -201,8 +199,6 @@ Redir-Host 的问题：
 
 选择合适的 DNS 服务器是配置代理 DNS 的第一步。以下是国内外常用的 DNS 服务。
 
-![全球 DNS 服务](/images/inline/globe-network.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ### 国内 DNS
 

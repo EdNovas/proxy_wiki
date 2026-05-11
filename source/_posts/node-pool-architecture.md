@@ -10,7 +10,7 @@ tags:
   - 运营
   - 进阶
 excerpt: "成熟代理服务背后的节点池架构：负载均衡、健康检查、自动故障转移和容量规划。"
-index_img: /images/posts/node-pool-architecture.jpg
+index_img: /images/posts/node-pool-architecture.png
 ---
 
 > **摘要**：成熟的代理服务不是简单地部署几台服务器——它们背后是一套节点池架构，包含负载均衡、健康检查、自动故障转移和容量规划。本文解释节点池的概念、典型架构和关键技术决策，适合对代理服务后端感兴趣的技术用户和运营者。
@@ -100,8 +100,6 @@ index_img: /images/posts/node-pool-architecture.jpg
 
 ### 完整节点池架构：大规模服务
 
-![服务器机房](/images/inline/server-room.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ```
 用户 → 负载均衡器 → 入口池 → [Entry-1, Entry-2, Entry-3]
@@ -134,8 +132,6 @@ index_img: /images/posts/node-pool-architecture.jpg
 
 ## 负载均衡策略
 
-![网络线缆连接](/images/inline/network-cables.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 负载均衡器是节点池的调度中枢。选择什么策略，直接影响用户体验和资源利用率。以下是代理服务中常用的几种策略。
 

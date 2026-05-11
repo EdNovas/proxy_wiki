@@ -46,8 +46,6 @@ index_img: /images/posts/ipv4-vs-ipv6-unlock.jpg
 
 ### IPv6 地址的天然优势
 
-![全球网络连接](/images/inline/globe-network.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 相比之下，IPv6 在解锁场景中拥有几个结构性的优势：
 
@@ -75,8 +73,6 @@ index_img: /images/posts/ipv4-vs-ipv6-unlock.jpg
 
 ## 代理客户端中的 IPv4/IPv6 设置
 
-![网络线缆连接](/images/inline/network-cables.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 了解了原理之后，关键问题是：作为用户，你的代理客户端实际上是通过 IPv4 还是 IPv6 出口访问目标网站的？这取决于 DNS 解析结果和客户端配置。
 

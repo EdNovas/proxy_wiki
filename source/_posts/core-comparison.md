@@ -10,7 +10,7 @@ tags:
   - Sing-box
   - 内核
   - 对比
-index_img: /images/posts/core-comparison.jpg
+index_img: /images/posts/core-comparison.png
 excerpt: V2Ray、Xray、Sing-box 三个代理内核的历史渊源、技术差异和各自适用场景。
 ---
 

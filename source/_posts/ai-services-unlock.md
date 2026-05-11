@@ -21,8 +21,6 @@ index_img: /images/posts/ai-services-unlock.jpg
 
 ## 为什么 AI 服务需要"解锁"
 
-![AI 技术芯片](/images/inline/ai-chip.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 如果你之前了解过流媒体解锁，会发现 AI 服务的访问限制有很多相似之处——但也有本质区别。
 
@@ -270,8 +268,6 @@ rules:
   - DOMAIN-SUFFIX,openrouter.ai,AI
 ```
 
-![代码屏幕](/images/inline/code-screen.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 如果使用 rule-provider，也可以将这些规则整理为一个独立的规则集文件，方便维护和更新。
 

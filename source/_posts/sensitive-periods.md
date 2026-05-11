@@ -10,7 +10,7 @@ tags:
   - 国庆
   - 应对策略
 excerpt: "每年特定时期 GFW 封锁力度显著加强。了解规律和时间节点，提前做好准备。"
-index_img: /images/posts/sensitive-periods.jpg
+index_img: /images/posts/sensitive-periods.png
 ---
 
 > **摘要**：每年特定时期（如全国两会、国庆节等），GFW 的封锁力度会显著加强，大量代理节点短时间内失效。理解封锁加强的规律和时间节点，有助于提前做好准备，减少影响。
@@ -68,8 +68,6 @@ index_img: /images/posts/sensitive-periods.jpg
 
 理解敏感时期封锁加强的具体表现，有助于你判断当前情况并采取正确的应对措施。
 
-![封锁加强的影响](/images/inline/lock-security.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ### IP 被主动封锁
 
@@ -111,8 +109,6 @@ GFW 在敏感时期会降低各层检测机制的触发阈值：
 
 ---
 
-![全球网络连接](/images/inline/globe-network.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ## 应对策略
 

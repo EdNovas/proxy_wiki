@@ -10,7 +10,7 @@ tags:
   - Clash
   - Sing-box
   - 配置
-index_img: /images/posts/tun-vs-system-proxy.jpg
+index_img: /images/posts/tun-vs-system-proxy.png
 excerpt: 系统代理只能捕获部分应用流量，TUN 模式接管整个系统网络。解释两者原理、优劣和选择建议。
 ---
 

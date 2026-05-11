@@ -10,7 +10,7 @@ tags:
   - 年付
   - 决策
 excerpt: "自建和机场各有优劣，月付和年付各有风险。一套决策框架帮你做出适合自己的选择。"
-index_img: /images/posts/decision-framework.jpg
+index_img: /images/posts/decision-framework.webp
 ---
 
 > **摘要**："该买月付还是年付？""自己建还是用机场？"——这两个问题几乎是每个代理用户都会面对的。答案取决于你的技术能力、预算、需求优先级和风险偏好。本文提供一套决策框架，帮你做出适合自己的选择。
@@ -31,8 +31,6 @@ index_img: /images/posts/decision-framework.jpg
 
 ### 自建代理的优势
 
-![服务器机房](/images/inline/server-room.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 **完全控制**
 
@@ -124,8 +122,6 @@ index_img: /images/posts/decision-framework.jpg
 
 ### 决策矩阵
 
-![数据分析仪表盘](/images/inline/dashboard-analytics.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 下表帮你快速判断哪种方案更适合你的情况：
 

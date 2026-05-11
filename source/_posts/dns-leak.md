@@ -10,7 +10,7 @@ tags:
   - Fake-IP
   - 安全
 excerpt: DNS 泄漏意味着你的 ISP 仍然知道你在访问哪些网站。解释泄漏原理、检测方法和预防措施。
-index_img: /images/posts/dns-leak.jpg
+index_img: /images/posts/dns-leak.png
 ---
 
 > **摘要**: DNS 泄漏是指你以为所有流量都走了代理，但 DNS 查询实际上仍然发往了本地 ISP 的 DNS 服务器。这意味着你的 ISP（以及 GFW）仍然知道你在访问哪些网站。本文解释 DNS 泄漏的原理、检测方法和预防措施。
@@ -41,8 +41,6 @@ DNS 泄漏（DNS Leak）的定义很简单：**你以为自己完全走了代理
 
 DNS 泄漏不是一个单一的问题，它有多种触发场景。理解每种场景的发生机制，才能有针对性地预防。
 
-![DNS 泄漏风险](/images/inline/lock-security.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ### 场景一：系统代理模式（最常见）
 
@@ -255,8 +253,6 @@ dns:
 
 > 关于 Fake-IP 的详细原理，参见 [Fake-IP vs Redir-Host](./fake-ip-vs-redir-host.md)。
 
-![防泄漏配置代码](/images/inline/code-screen.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ### 方案三：正确配置 DNS 加密
 

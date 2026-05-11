@@ -11,7 +11,7 @@ tags:
   - 配置
 excerpt: 2026 年绝大多数用户应该使用 Fake-IP 模式。彻底讲清两种 DNS 处理模式的原理和区别。
 mermaid: true
-index_img: /images/posts/fake-ip-vs-redir-host.jpg
+index_img: /images/posts/fake-ip-vs-redir-host.png
 ---
 
 > **摘要**：Fake-IP 和 Redir-Host 是代理客户端处理 DNS 的两种模式。选错模式或配置不当是代理使用中最常见的问题来源。本文用通俗的语言彻底讲清两者的原理、区别和选择。
@@ -77,8 +77,6 @@ graph TD
     style J fill:#48f,color:#fff
 ```
 
-![网络数据流转](/images/inline/network-cables.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 ### 工作流程：直连域名
 
@@ -312,8 +310,6 @@ dns:
   # 不需要 fallback-filter
 ```
 
-![正确的 DNS 配置示例](/images/inline/code-screen.jpg)
-*图片来源：[Unsplash](https://unsplash.com/)*
 
 这个配置的逻辑非常清晰：
 
