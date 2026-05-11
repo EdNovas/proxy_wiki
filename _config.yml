@@ -68,7 +68,7 @@ prismjs:
 # Home page setting
 index_generator:
   path: ''
-  per_page: 12
+  per_page: 20
   order_by: -date
 
 # Category & Tag
@@ -85,7 +85,7 @@ time_format: HH:mm:ss
 updated_option: 'mtime'
 
 # Pagination
-per_page: 12
+per_page: 20
 pagination_dir: page
 
 # Disable archive pagination (required by hexo-theme-vivia)

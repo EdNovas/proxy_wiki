@@ -34,6 +34,9 @@ links:
   - name: GitHub
     icon: fa-brands fa-github
     url: https://github.com/EdNovas/proxy-wiki
+  - name: Telegram 群组
+    icon: fa-brands fa-telegram
+    url: https://t.me/ednovas2
   - name: Blog
     icon: fa-solid fa-link
     url: https://ednovas.xyz

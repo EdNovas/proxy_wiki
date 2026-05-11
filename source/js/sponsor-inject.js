@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', function () {
       + '    <span class="sponsor-card-tag" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.1)">回国节点</span>'
       + '  </div>'
       + '  <div class="sponsor-card-buttons">'
-      + '    <a href="https://ednovas.me" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-primary" style="background:linear-gradient(135deg,#3b82f6,#2563eb)">访问 ednovas 云</a>'
-      + '    <a href="https://help.ednovas.me" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary">使用帮助</a>'
-      + '    <a href="https://t.me/ednovasyun" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary">Telegram 群组</a>'
+      + '    <a href="https://ednovas.me" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-primary" style="background:linear-gradient(135deg,#3b82f6,#2563eb)"><i class="fa-solid fa-bolt"></i><span>访问 ednovas 云</span></a>'
+      + '    <a href="https://help.ednovas.me" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary"><i class="fa-solid fa-circle-question"></i><span>使用帮助</span></a>'
+      + '    <a href="https://t.me/ednovasyun" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary"><i class="fa-brands fa-telegram"></i><span>Telegram 群组</span></a>'
       + '  </div>'
       + '</div>'
       // TransLink
@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
       + '    <span class="sponsor-card-tag">支持高审查地区</span>'
       + '  </div>'
       + '  <div class="sponsor-card-buttons">'
-      + '    <a href="https://translink.cc" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-primary">访问 TransLink</a>'
-      + '    <a href="https://t.me/translink_cloud" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary">Telegram 群组</a>'
+      + '    <a href="https://translink.cc" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-primary"><i class="fa-solid fa-shield-halved"></i><span>访问 TransLink</span></a>'
+      + '    <a href="https://t.me/translink_cloud" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary"><i class="fa-brands fa-telegram"></i><span>Telegram 群组</span></a>'
       + '  </div>'
       + '</div>'
       // 底部链接
