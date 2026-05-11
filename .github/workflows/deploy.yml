@@ -60,7 +60,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   # 自动清理旧的 workflow 运行记录和 artifact，防止存储膨胀
   cleanup:
