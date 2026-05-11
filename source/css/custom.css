@@ -1,3 +1,71 @@
+/* ========== 分类 / 标签 全景页 ========== */
+.all-categories-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem;
+}
+
+.all-categories-list li {
+  padding: 0.6rem 0.9rem;
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  border-radius: 8px;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.all-categories-list li:hover {
+  background: rgba(99, 102, 241, 0.12);
+  transform: translateY(-1px);
+}
+
+.all-categories-list a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.all-categories-list .category-count {
+  color: #94a3b8;
+  font-weight: 400;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+}
+
+.all-tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.all-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 999px;
+  text-decoration: none !important;
+  font-size: 0.9rem;
+  transition: background 0.15s;
+}
+
+.all-tag-chip:hover {
+  background: rgba(99, 102, 241, 0.18);
+}
+
+.all-tags-cloud .tag-count {
+  background: rgba(99, 102, 241, 0.18);
+  color: #6366f1;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
 /* TransLink 广告卡片 */
 .sponsor-card {
   margin: 2.5rem 0 1.5rem;

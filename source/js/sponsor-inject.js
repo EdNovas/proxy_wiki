@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   // ========== 1. 文章底部广告卡片（仅文章页） ==========
-  var postContent = document.querySelector('.markdown-body');
+  // vivia 用 .article-entry 包裹正文；只在 post 类型上注入
+  var postContent = document.querySelector('.article-type-post .article-entry');
   if (postContent) {
     var sponsorHTML = ''
       // ednovas 云
@@ -96,12 +97,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // ========== 3. 侧边栏赞助组件（文章页，TOC 下方） ==========
-  var tocContainer = document.querySelector('.tocbot-list')
-    || document.querySelector('.toc-content')
-    || document.querySelector('.sidebar-inner');
-
-  if (tocContainer) {
+  // ========== 3. 侧边栏赞助组件（vivia 侧边栏底部） ==========
+  var sidebar = document.getElementById('sidebar-wrapper');
+  if (sidebar) {
     var sidebarHTML = ''
       + '<div class="sidebar-sponsor">'
       + '  <div class="sidebar-sponsor-title">推荐服务</div>'
@@ -115,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
       + '  </a>'
       + '</div>';
 
-    tocContainer.insertAdjacentHTML('afterend', sidebarHTML);
+    sidebar.insertAdjacentHTML('beforeend', sidebarHTML);
   }
 
 });

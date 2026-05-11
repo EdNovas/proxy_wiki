@@ -1,0 +1,19 @@
+{
+  "$schema": "https://agentskills.io/schemas/v0.2.0/index.json",
+  "skills": [
+    {
+      "name": "fetch-markdown",
+      "type": "skill",
+      "description": "Retrieve any blog post in raw Markdown (with YAML frontmatter) instead of HTML.",
+      "url": "https://blog.e.show/.well-known/agent-skills/fetch-markdown/SKILL.md",
+      "sha256": "b4c383d56c7a6a79e4eb98804be3abf0f2648d38bc48d627e8bcffc64ba0c3ec"
+    },
+    {
+      "name": "browse-content",
+      "type": "skill",
+      "description": "Discover and enumerate all posts, categories, and tags via Atom feed, sitemap, and search index.",
+      "url": "https://blog.e.show/.well-known/agent-skills/browse-content/SKILL.md",
+      "sha256": "29e2494aca89307b0f3779f5890e0e2f34b331e9c06676b75dcdb059862620c8"
+    }
+  ]
+}

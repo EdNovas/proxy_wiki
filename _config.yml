@@ -38,6 +38,7 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
   - googled854f8ce33296a3c.html
+  - .well-known/**/*
 
 # Writing
 new_post_name: :title.md
@@ -93,6 +94,7 @@ archive_generator:
 
 # Include / Exclude file(s)
 include:
+  - .well-known/**/*
 exclude:
 ignore:
 
