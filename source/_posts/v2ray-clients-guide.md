@@ -10,7 +10,7 @@ tags:
   - Windows
   - Android
   - 教程
-index_img: /images/posts/v2ray-clients-guide.jpg
+index_img: /images/posts/v2ray-clients-guide.png
 excerpt: v2rayN（Windows）和 v2rayNG（Android）是基于 Xray-core 的代理客户端，支持最新的协议和配置。
 ---
 

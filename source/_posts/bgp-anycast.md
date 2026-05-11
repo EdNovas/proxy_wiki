@@ -10,7 +10,7 @@ tags:
   - 路由
   - 网络
   - CDN
-index_img: /images/posts/bgp-anycast.jpg
+index_img: /images/posts/bgp-anycast.png
 excerpt: BGP 决定了互联网流量的路径，Anycast 让同一个 IP 在全球多个位置响应。理解这些概念有助于理解为什么某些节点特别快。
 ---
 

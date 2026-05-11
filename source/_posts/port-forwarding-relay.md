@@ -10,7 +10,7 @@ tags:
   - NAT
   - iptables
   - 网络
-index_img: /images/posts/port-forwarding-relay.jpg
+index_img: /images/posts/port-forwarding-relay.png
 excerpt: 中转节点是怎么把流量从国内服务器转发到海外的？本文解释端口转发、iptables 中转和隧道中转的原理。
 ---
 

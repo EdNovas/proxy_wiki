@@ -10,7 +10,7 @@ tags:
   - TUN
   - 性能
   - 对比
-index_img: /images/posts/singbox-vs-clash-tun.jpg
+index_img: /images/posts/singbox-vs-clash-tun.png
 excerpt: 两大主流代理平台的 TUN 实现各有特点。Sing-box TUN 性能略优，Clash Verge TUN 配置更友好。
 ---
 

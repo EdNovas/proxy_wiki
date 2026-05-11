@@ -10,7 +10,7 @@ tags:
   - Ansible
   - Docker
   - 运维
-index_img: /images/posts/node-deployment-automation.jpg
+index_img: /images/posts/node-deployment-automation.png
 excerpt: 手动 SSH 到每台服务器安装后端？当节点数超过 10 台，自动化部署就成了必需品。本文介绍从脚本到工具的自动化方案。
 ---
 

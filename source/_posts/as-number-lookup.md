@@ -10,7 +10,7 @@ tags:
   - BGP
   - 查询
   - 工具
-index_img: /images/posts/as-number-lookup.jpg
+index_img: /images/posts/as-number-lookup.png
 excerpt: 每个 IP 地址都属于一个 AS（自治系统）。通过 AS 号可以判断 IP 是数据中心还是 ISP，进而评估节点的解锁能力和稳定性。
 ---
 

@@ -9,7 +9,7 @@ tags:
   - 教程
   - 配置
   - JSON
-index_img: /images/posts/singbox-guide.jpg
+index_img: /images/posts/singbox-guide.png
 excerpt: Sing-box 是新一代代理平台，支持几乎所有协议。本文介绍其配置格式、使用方法和与 Clash 的主要区别。
 ---
 

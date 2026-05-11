@@ -10,7 +10,7 @@ tags:
   - macOS
   - 教程
   - 高级
-index_img: /images/posts/surge-guide.jpg
+index_img: /images/posts/surge-guide.webp
 excerpt: Surge 是 iOS/macOS 上功能最强大的网络工具，价格也最高（$49.99+）。本文介绍其核心功能和适用人群。
 ---
 

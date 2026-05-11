@@ -10,7 +10,7 @@ tags:
   - Netflix
   - 工具
   - 测试
-index_img: /images/posts/unlock-testing-tools.jpg
+index_img: /images/posts/unlock-testing-tools.png
 excerpt: 怎么知道你的节点能不能解锁 Netflix、Disney+、ChatGPT？本文介绍常用的检测工具和测试方法。
 ---
 

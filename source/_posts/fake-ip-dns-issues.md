@@ -10,7 +10,7 @@ tags:
   - 排障
   - Clash
   - 配置
-index_img: /images/posts/fake-ip-dns-issues.jpg
+index_img: /images/posts/fake-ip-dns-issues.png
 excerpt: Fake-IP 模式虽然是推荐方案，但也可能遇到特定问题——关闭代理后网页打不开、部分应用异常、局域网设备发现失败等。
 ---
 

@@ -11,7 +11,7 @@ tags:
   - 配置
   - Windows
   - macOS
-index_img: /images/posts/clash-verge-guide.jpg
+index_img: /images/posts/clash-verge-guide.webp
 excerpt: Clash Verge Rev 是当前最推荐的桌面代理客户端。本文详解安装、导入订阅、节点选择、规则配置、TUN 模式等核心功能。
 ---
 

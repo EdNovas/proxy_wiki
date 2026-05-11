@@ -9,7 +9,7 @@ tags:
   - IPv6
   - 网络
   - 基础
-index_img: /images/posts/ipv4-vs-ipv6-basics.jpg
+index_img: /images/posts/ipv4-vs-ipv6-basics.png
 excerpt: IPv4 地址即将耗尽，IPv6 地址几乎无限。在代理场景中，IPv6 正变得越来越重要——从解锁到抗封锁都有影响。
 ---
 

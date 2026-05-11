@@ -10,7 +10,7 @@ tags:
   - ACL4SSR
   - MetaCubeX
   - Clash
-index_img: /images/posts/popular-rulesets.jpg
+index_img: /images/posts/popular-rulesets.png
 excerpt: 三大主流规则集各有特点。Loyalsoldier 最流行，MetaCubeX 官方配套，ACL4SSR 分类最细。本文对比它们的差异和选择建议。
 ---
 

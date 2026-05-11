@@ -9,7 +9,7 @@ tags:
   - iOS
   - 教程
   - 配置
-index_img: /images/posts/shadowrocket-guide.jpg
+index_img: /images/posts/shadowrocket-guide.webp
 excerpt: Shadowrocket 是 iOS 上最具性价比的代理客户端（$2.99）。本文详解购买、订阅导入、节点管理、规则配置等操作。
 ---
 
