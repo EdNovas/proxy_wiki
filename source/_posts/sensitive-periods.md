@@ -68,6 +68,9 @@ index_img: /images/posts/sensitive-periods.jpg
 
 理解敏感时期封锁加强的具体表现，有助于你判断当前情况并采取正确的应对措施。
 
+![封锁加强的影响](/images/inline/lock-security.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 ### IP 被主动封锁
 
 常规时段下，GFW 主要通过被动检测来识别和封锁代理节点——你的流量先被检测到异常，然后才被封锁。但在敏感时期，GFW 会切换到更主动的模式：
@@ -107,6 +110,9 @@ GFW 在敏感时期会降低各层检测机制的触发阈值：
 - 不同运营商的执行力度也存在差异——中国电信的国际出口管控通常最严格，中国联通次之，中国移动在部分地区相对宽松。
 
 ---
+
+![全球网络连接](/images/inline/globe-network.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
 
 ## 应对策略
 

@@ -26,7 +26,7 @@ index_img: /images/posts/ip-types.jpg
 - **Whois 数据库**：记录 IP 的注册者、注册机构、分配时间等信息。
 - **RDAP（Registration Data Access Protocol）**：Whois 的现代化替代方案，提供结构化的 IP 归属数据。
 - **BGP 路由表**：记录 IP 地址块的实际路由路径，显示哪个自治系统（AS）正在广播这些 IP。
-- **IP 情报数据库**：MaxMind、IP2Location、ipinfo.io 等商业数据库，不仅记录 IP 的地理位置，还标注 IP 的使用类型——是住宅用户、数据中心、教育机构还是企业。
+- **IP 情报数据库**：MaxMind、IP2Location、[ipinfo.io](https://ipinfo.io/) 等商业数据库，不仅记录 IP 的地理位置，还标注 IP 的使用类型——是住宅用户、数据中心、教育机构还是企业。
 
 Netflix、Disney+、ChatGPT、Claude 等服务在判断是否允许你访问时，查的不只是"这个 IP 在哪个国家"，更重要的是"这个 IP 是什么性质"。一个美国 IP 如果被标记为数据中心 IP，Netflix 会直接拒绝它，即使它确实位于美国。
 
@@ -113,6 +113,9 @@ IP 情报数据库（如 ipinfo.io）会根据 ASN 和其他信息，为每个 I
 反面例子：如果 org 字段显示 `AS16276 OVH SAS`、`AS14061 DigitalOcean`、`AS63949 Akamai Connected Cloud`（Linode）、`AS20473 The Constant Company`（Vultr），这些全部是数据中心 IP。
 
 ---
+
+![服务器机房](/images/inline/server-room.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
 
 ## 数据中心 IP / 机房 IP（Datacenter IP）
 
@@ -275,6 +278,9 @@ IP 情报数据库（如 ipinfo.io）会根据 ASN 和其他信息，为每个 I
 
 ## 各类 IP 对比
 
+![全球网络连接](/images/inline/globe-network.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 | 特征 | 原生 IP | 数据中心 IP | 广播 IP | 住宅 IP |
 |------|--------|------------|--------|--------|
 | **解锁能力** | 极强 | 极弱 | 中等（不稳定） | 极强 |
@@ -303,21 +309,21 @@ IP 情报数据库（如 ipinfo.io）会根据 ASN 和其他信息，为每个 I
 - `city`、`region`、`country`：地理位置信息
 - 付费 API 还能获取 `type` 字段，明确标注 `isp`、`hosting`、`business` 等类型
 
-**2. [ip.sb](https://ip.sb)**
+**2. [ip.sb](https://ip.sb/)**
 
 简洁的 IP 查询工具，显示当前 IP 地址和基本地理位置信息。适合快速确认代理是否生效。
 
-**3. [whoer.net](https://whoer.net)**
+**3. [whoer.net](https://whoer.net/)**
 
 综合检测工具，除了 IP 信息外，还检测浏览器指纹、WebRTC 泄漏、DNS 泄漏等。适合全面评估代理配置的安全性。
 
 ### 进阶查询工具
 
-**4. [bgp.tools](https://bgp.tools)**
+**4. [bgp.tools](https://bgp.tools/)**
 
 BGP 路由信息查询平台。可以查看一个 IP 的 AS 路径、ASN 详细信息、IP 前缀公告等。适合判断一个 IP 是否为广播 IP——对比 IP 的注册 ASN 和实际广播 ASN 是否一致。
 
-**5. [bgpview.io](https://bgpview.io)**
+**5. [bgpview.io](https://bgpview.io/)**
 
 另一个 BGP 信息查询工具。提供 ASN 查询、IP 前缀查询、AS 上下游关系等功能。界面直观，适合查看一个 AS 拥有多少 IP 段、这些 IP 段的广播状态。
 

@@ -21,6 +21,9 @@ index_img: /images/posts/ai-services-unlock.jpg
 
 ## 为什么 AI 服务需要"解锁"
 
+![AI 技术芯片](/images/inline/ai-chip.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 如果你之前了解过流媒体解锁，会发现 AI 服务的访问限制有很多相似之处——但也有本质区别。
 
 ### 与流媒体解锁的异同
@@ -47,7 +50,7 @@ AI 服务的访问限制则有所不同。它的根源主要是以下几点：
 
 ### ChatGPT (OpenAI)
 
-ChatGPT 是目前对 IP 限制最严格的主流 AI 服务。
+[ChatGPT](https://chat.openai.com/) 是目前对 IP 限制最严格的主流 AI 服务。
 
 **可用地区**
 
@@ -104,7 +107,7 @@ ChatGPT Plus / Pro 订阅需要绑定支付方式。OpenAI 接受的支付方式
 
 ### Claude (Anthropic)
 
-Claude 的 IP 限制策略目前比 ChatGPT 宽松不少，但服务的可用地区本身比较有限。
+[Claude](https://claude.ai/) 的 IP 限制策略目前比 ChatGPT 宽松不少，但服务的可用地区本身比较有限。
 
 **可用地区**
 
@@ -234,7 +237,7 @@ Claude 的要求相对宽松：
 
 ### 代理规则配置
 
-在 Clash（mihomo）配置中，为 AI 服务创建专门的分流规则：
+在 Clash（[mihomo](https://github.com/MetaCubeX/mihomo)）配置中，为 AI 服务创建专门的分流规则：
 
 ```yaml
 # AI 服务分流规则
@@ -266,6 +269,9 @@ rules:
   # 通用 AI 相关
   - DOMAIN-SUFFIX,openrouter.ai,AI
 ```
+
+![代码屏幕](/images/inline/code-screen.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
 
 如果使用 rule-provider，也可以将这些规则整理为一个独立的规则集文件，方便维护和更新。
 

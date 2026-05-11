@@ -31,6 +31,9 @@ index_img: /images/posts/decision-framework.jpg
 
 ### 自建代理的优势
 
+![服务器机房](/images/inline/server-room.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 **完全控制**
 
 自建意味着你是唯一的管理员。服务器上运行什么软件、什么协议、什么配置，全部由你决定。你清楚地知道数据经过了哪些节点，不存在第三方中间人。对于安全性有极高要求的用户（记者、研究人员、安全从业者），这一点至关重要。
@@ -120,6 +123,9 @@ index_img: /images/posts/decision-framework.jpg
 ---
 
 ### 决策矩阵
+
+![数据分析仪表盘](/images/inline/dashboard-analytics.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
 
 下表帮你快速判断哪种方案更适合你的情况：
 

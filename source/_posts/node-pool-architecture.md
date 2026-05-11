@@ -100,6 +100,9 @@ index_img: /images/posts/node-pool-architecture.jpg
 
 ### 完整节点池架构：大规模服务
 
+![服务器机房](/images/inline/server-room.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 ```
 用户 → 负载均衡器 → 入口池 → [Entry-1, Entry-2, Entry-3]
                                      ↓
@@ -125,11 +128,14 @@ index_img: /images/posts/node-pool-architecture.jpg
 
 **IP 管理器（IP Manager）**：管理 IP 资源的生命周期。当 IP 被封锁时自动调度更换，维护 IP 池的库存水位，跟踪每个 IP 的使用历史和健康状态。
 
-**面板集成（Panel API）**：与前端用户管理面板（如 Xboard、SSPanel 等）对接。节点池中的变更需要实时同步到面板，确保用户订阅链接中的节点信息是最新的。
+**面板集成（Panel API）**：与前端用户管理面板（如 [Xboard](https://github.com/cedar2025/Xboard)、SSPanel 等）对接。节点池中的变更需要实时同步到面板，确保用户订阅链接中的节点信息是最新的。
 
 ---
 
 ## 负载均衡策略
+
+![网络线缆连接](/images/inline/network-cables.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
 
 负载均衡器是节点池的调度中枢。选择什么策略，直接影响用户体验和资源利用率。以下是代理服务中常用的几种策略。
 

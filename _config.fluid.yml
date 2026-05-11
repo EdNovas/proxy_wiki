@@ -81,7 +81,7 @@ navbar:
 #---------------------------
 
 index:
-  banner_img: /images/banner.jpg
+  banner_img: https://api.ednovas.xyz
   banner_img_height: 60
   banner_mask_alpha: 0.3
   post_default_img: ''
@@ -103,7 +103,7 @@ index:
 #---------------------------
 
 post:
-  banner_img: /images/banner.jpg
+  banner_img: https://api.ednovas.xyz
   banner_img_height: 40
   banner_mask_alpha: 0.3
   default_index_img: /images/default-post.jpg
@@ -152,7 +152,7 @@ post:
 #---------------------------
 
 archive:
-  banner_img: /images/banner.jpg
+  banner_img: https://api.ednovas.xyz
   banner_img_height: 40
   banner_mask_alpha: 0.3
 
@@ -162,7 +162,7 @@ archive:
 
 category:
   enable: true
-  banner_img: /images/banner.jpg
+  banner_img: https://api.ednovas.xyz
   banner_img_height: 40
   banner_mask_alpha: 0.3
   order_by: "-length"
@@ -176,7 +176,7 @@ category:
 
 tag:
   enable: true
-  banner_img: /images/banner.jpg
+  banner_img: https://api.ednovas.xyz
   banner_img_height: 40
   banner_mask_alpha: 0.3
   tagcloud:
@@ -192,7 +192,7 @@ tag:
 
 about:
   enable: true
-  banner_img: /images/banner.jpg
+  banner_img: https://api.ednovas.xyz
   banner_img_height: 40
   banner_mask_alpha: 0.3
   avatar: /images/avatar.png
@@ -208,14 +208,20 @@ about:
 
 links:
   enable: true
-  banner_img: /images/banner.jpg
+  banner_img: https://api.ednovas.xyz
   banner_img_height: 40
   banner_mask_alpha: 0.3
   items:
     - {
         title: "ednovas Blog",
-        intro: "更多技术分析与教程",
+        intro: "技术分析与教程",
         link: "https://ednovas.xyz",
+        avatar: "/images/avatar.png"
+      }
+    - {
+        title: "ednovas.me",
+        intro: "ednovas 主站",
+        link: "https://ednovas.me",
         avatar: "/images/avatar.png"
       }
     - {
@@ -238,12 +244,9 @@ links:
 footer:
   content: '
     <div>
-      <span id="timeDate">载入天数...</span>
-      <span id="times">载入时分秒...</span>
-    </div>
-    <div>
-      由 <a href="https://ednovas.me" target="_blank" rel="nofollow noopener">ednovas</a> 维护
-      | 本项目运营成本由 <a href="https://translink.cc" target="_blank">TransLink 代理服务</a> 支撑
+      由 <a href="https://ednovas.xyz" target="_blank">ednovas</a> 维护
+      | <a href="https://ednovas.me" target="_blank">ednovas.me</a>
+      | <a href="https://translink.cc" target="_blank">TransLink 代理服务</a> 支撑
     </div>
     <div>
       <a href="https://hexo.io" target="_blank" rel="nofollow noopener">Hexo</a>

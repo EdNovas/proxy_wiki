@@ -68,6 +68,9 @@ TLSVersion,Ciphers,Extensions,EllipticCurves,ECPointFormats
 
 简而言之，JA3 指纹就像是 TLS 客户端的一个"身份证号"，虽然不是百分之百唯一，但足以在大多数场景下区分客户端类型。
 
+![数字指纹与加密](/images/inline/matrix-code.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 ## JA4 与 JA3 的区别
 
 **JA4** 是 2023 年由 FoxIO 推出的下一代 TLS 指纹方案，旨在解决 JA3 的若干局限性。
@@ -110,11 +113,11 @@ JA4 的改进主要体现在以下几个方面：
 
 ### uTLS：模拟浏览器指纹
 
-**uTLS** 是目前最广泛使用的应对方案。它是一个 Go 语言库，核心功能是**手动构造 Client Hello 消息**，使其看起来与特定浏览器的 Client Hello 完全一致。
+**[uTLS](https://github.com/refraction-networking/utls)** 是目前最广泛使用的应对方案。它是一个 Go 语言库，核心功能是**手动构造 Client Hello 消息**，使其看起来与特定浏览器的 Client Hello 完全一致。
 
 uTLS 的工作原理并不复杂：它预先收集了各种浏览器（Chrome、Firefox、Safari、Edge 等）在不同版本下的 Client Hello 参数模板。当代理客户端需要发起 TLS 连接时，uTLS 不使用 Go 标准库的默认参数，而是按照选定的浏览器模板来构造 Client Hello，包括完全一致的加密套件列表及顺序、扩展列表及顺序、椭圆曲线选择等。
 
-在 **Xray-core** 和 **Sing-box** 中，用户可以通过 `fingerprint` 参数来启用 uTLS，并指定要模拟的浏览器类型：
+在 **[Xray-core](https://github.com/XTLS/Xray-core)** 和 **Sing-box** 中，用户可以通过 `fingerprint` 参数来启用 uTLS，并指定要模拟的浏览器类型：
 
 ```json
 {
@@ -152,9 +155,12 @@ Reality 的工作流程如下：
 
 Reality 的主要注意事项是目标网站（dest）的选择：应选择支持 TLS 1.3、有 HTTP/2 支持、在目标地区正常可访问且不会频繁变化的大型网站。
 
+![安全加密防护](/images/inline/lock-security.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 ### ECH (Encrypted Client Hello)：未来方向
 
-**ECH（Encrypted Client Hello）** 是 TLS 协议层面的一项标准化工作，其设计目的就是**加密 Client Hello 中的敏感字段**，从根本上消除 TLS 握手阶段的信息泄露。
+**[ECH（Encrypted Client Hello）](https://datatracker.ietf.org/doc/draft-ietf-tls-esni/)** 是 TLS 协议层面的一项标准化工作，其设计目的就是**加密 Client Hello 中的敏感字段**，从根本上消除 TLS 握手阶段的信息泄露。
 
 ECH 的基本原理是：服务器预先通过 DNS 记录（HTTPS RR）发布一个公钥，客户端用这个公钥加密 Client Hello 中的敏感部分（称为 Inner Client Hello），只留下一个不包含有用信息的 Outer Client Hello 在明文中传输。服务器收到后用对应私钥解密 Inner Client Hello，获取客户端的真实请求参数。
 
@@ -177,7 +183,7 @@ ECH 的基本原理是：服务器预先通过 DNS 记录（HTTPS RR）发布一
 
 ### 方法一：使用在线检测工具
 
-1. **直接用浏览器访问 [ja3er.com](https://ja3er.com)**，记录页面显示的 JA3 指纹值。这是你浏览器的真实指纹。
+1. **直接用浏览器访问 [ja3er.com](https://ja3er.com/)**，记录页面显示的 JA3 指纹值。这是你浏览器的真实指纹。
 2. **通过代理访问同一网站**，记录此时显示的 JA3 指纹值。这是你的代理客户端呈现给服务器的指纹。
 3. **对比两个指纹**：
    - 如果两者一致或非常接近，说明 uTLS 模拟成功，你的代理连接在 JA3 层面与浏览器无法区分。
@@ -185,7 +191,7 @@ ECH 的基本原理是：服务器预先通过 DNS 记录（HTTPS RR）发布一
 
 ### 方法二：使用 Wireshark 抓包分析
 
-对于需要更详细分析的用户，可以使用 Wireshark 在本地抓包：
+对于需要更详细分析的用户，可以使用 [Wireshark](https://www.wireshark.org/) 在本地抓包：
 
 1. 启动 Wireshark，开始捕获网络流量。
 2. 在过滤器中输入 `tls.handshake.type == 1` 过滤 Client Hello 消息。

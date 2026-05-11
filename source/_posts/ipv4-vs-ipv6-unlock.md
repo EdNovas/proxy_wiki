@@ -46,6 +46,9 @@ index_img: /images/posts/ipv4-vs-ipv6-unlock.jpg
 
 ### IPv6 地址的天然优势
 
+![全球网络连接](/images/inline/globe-network.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 相比之下，IPv6 在解锁场景中拥有几个结构性的优势：
 
 **地址空间带来的反封锁韧性。** 一个标准的 IPv6 /48 分配就包含约 1.2×10^24 个地址（2^80 个）。即使平台封锁了某些 IPv6 地址，运营者可以轻松切换到同一分配段内的其他地址。而封锁整个 /48 甚至 /32 段的做法对平台来说风险极大——因为同一个前缀下可能同时服务着大量合法的普通用户。
@@ -72,6 +75,9 @@ index_img: /images/posts/ipv4-vs-ipv6-unlock.jpg
 
 ## 代理客户端中的 IPv4/IPv6 设置
 
+![网络线缆连接](/images/inline/network-cables.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 了解了原理之后，关键问题是：作为用户，你的代理客户端实际上是通过 IPv4 还是 IPv6 出口访问目标网站的？这取决于 DNS 解析结果和客户端配置。
 
 ### DNS 解析与协议选择的关系
@@ -85,7 +91,7 @@ index_img: /images/posts/ipv4-vs-ipv6-unlock.jpg
 
 问题在于，大多数代理客户端默认只请求 A 记录（IPv4），不请求 AAAA 记录。这意味着即使你的节点服务器有 IPv6 出口、目标网站也支持 IPv6，流量仍然走的是 IPv4——你在无意中放弃了可能更好的 IPv6 解锁路径。
 
-### Clash / mihomo 中的 IPv6 配置
+### Clash / [mihomo](https://github.com/MetaCubeX/mihomo) 中的 IPv6 配置
 
 在 Clash 或 mihomo 中，IPv6 相关的配置主要涉及两个层面：
 

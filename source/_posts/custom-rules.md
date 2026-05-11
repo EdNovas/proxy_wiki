@@ -66,7 +66,7 @@ rules:
 
 ### 方式二：使用 Clash Verge Rev 的覆写功能（推荐）
 
-Clash Verge Rev 提供了"覆写"（Override / Script）功能，允许你用一段 JavaScript 脚本在订阅配置加载后对其进行修改。这段脚本不会被订阅更新覆盖——它在订阅配置更新之后运行，每次都会把你的自定义规则注入进去。
+[Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev) 提供了"覆写"（Override / Script）功能，允许你用一段 JavaScript 脚本在订阅配置加载后对其进行修改。这段脚本不会被订阅更新覆盖——它在订阅配置更新之后运行，每次都会把你的自定义规则注入进去。
 
 **操作步骤**：
 
@@ -161,6 +161,9 @@ function main(config) {
   return config;
 }
 ```
+
+![在笔记本上编写覆写脚本](/images/inline/laptop-coding.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
 
 **优点**：订阅更新不会覆盖你的自定义规则。脚本逻辑灵活，可以根据现有节点动态创建策略组。一次配置，长期有效。
 
@@ -489,9 +492,12 @@ my-rules:
 
 解决方案：使用方式二（覆写脚本）或方式三（独立 rule-provider 文件配合覆写脚本）。覆写脚本在订阅配置加载后运行，不受更新影响。
 
+![规则语法参考代码](/images/inline/code-screen.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 ## 规则语法速查表
 
-以下是 Clash / mihomo 支持的所有常用规则类型：
+以下是 Clash / mihomo 支持的所有常用规则类型（完整规则文档请参阅 [Clash Wiki](https://wiki.metacubex.one/)）：
 
 | 类型 | 语法 | 示例 | 说明 |
 |------|------|------|------|

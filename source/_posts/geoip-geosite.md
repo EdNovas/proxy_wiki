@@ -34,6 +34,9 @@ GEOIP,CN,DIRECT
 
 在整套分流逻辑中，`GEOIP,CN,DIRECT` 通常放在规则列表的倒数第二条（最后一条是 `MATCH` 兜底），充当"所有中国 IP 一律直连"的安全网。即使某个国内网站没有被任何域名规则命中，只要它的服务器 IP 在 GeoIP 数据库中标记为中国，就会被这条规则拦下来走直连。
 
+![全球网络地图](/images/inline/globe-network.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 ### 数据来源
 
 GeoIP 数据库不是凭空造的，它的数据来源有几个层面。
@@ -105,6 +108,9 @@ rules:
   - GEOIP,CN,DIRECT                         # 中国 IP 直连（兜底）
   - MATCH,Proxy                             # 其余走代理（最终兜底）
 ```
+
+![GeoSite 配置代码示例](/images/inline/code-screen.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
 
 这套规则的工作流程是：客户端拦截到一个网络请求后，提取目标域名，先在 GeoSite 数据库中查找这个域名属于哪个类别。从上到下逐条匹配——如果域名在 `category-ads-all` 里，REJECT；如果在 `cn` 里，DIRECT；如果在 `google` 里，走 Proxy。如果所有 GeoSite 规则都没命中，继续检查 GeoIP（基于 IP 地址），最后由 MATCH 兜底。
 

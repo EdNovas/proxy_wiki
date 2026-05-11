@@ -68,6 +68,9 @@ index_img: /images/posts/how-to-evaluate.jpg
 
 线路质量是直接影响使用体验的核心因素。理解不同的线路类型以及如何测试它们，是评估机场的关键步骤。
 
+![数据分析仪表盘](/images/inline/dashboard-analytics.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 ### 直连 vs 中转 vs CDN
 
 代理服务的线路大致可以分为三种类型，各有优劣：
@@ -114,7 +117,7 @@ index_img: /images/posts/how-to-evaluate.jpg
 
 1. **Ping / TCPing 测延迟**：使用 TCPing 工具测试到代理节点的延迟。注意区分 ICMP Ping 和 TCP Ping——有些服务器禁止 ICMP 响应，此时 Ping 不通不代表节点不可用，应以 TCPing 结果为准。一般来说，到日本/香港节点的延迟在 50-150ms 属于正常范围。
 
-2. **Speedtest 测带宽**：连接代理节点后访问 Speedtest.net 或 fast.com 进行测速。注意选择与代理节点同地区的测试服务器，这样测试结果更能反映代理线路的真实带宽。
+2. **Speedtest 测带宽**：连接代理节点后访问 [Speedtest](https://www.speedtest.net/).net 或 fast.com 进行测速。注意选择与代理节点同地区的测试服务器，这样测试结果更能反映代理线路的真实带宽。
 
 3. **实际使用体验测试**：
    - **视频流媒体**：YouTube 4K 视频能否流畅播放（观察统计信息中的连接速度，建议稳定在 35Mbps 以上）；Netflix 能否正常解锁并播放
@@ -201,6 +204,9 @@ SLA（Service Level Agreement）用月度不可用时间占比来衡量。虽然
 ## 一些额外的考量
 
 ### 隐私
+
+![安全锁](/images/inline/lock-security.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
 
 使用任何代理服务，你都需要理解一个事实：**机场运营者理论上可以看到你的所有流量元数据**，包括你访问了哪些域名。如果使用 TLS 类协议（如 VLESS+TLS、Trojan），运营者虽然看不到你传输的具体内容，但依然能看到你连接的目标域名（通过 SNI 信息）。
 

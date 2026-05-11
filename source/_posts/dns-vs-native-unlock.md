@@ -30,12 +30,15 @@ Netflix、Disney+、Hulu、YouTube Premium、Spotify 等流媒体平台通过检
 
 ## 原生 IP 解锁
 
+![服务器机房](/images/inline/server-room.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 ### 什么是原生 IP
 
 原生 IP（Native IP）是指由目标国家或地区的本地互联网服务提供商（ISP）直接注册和分配的 IP 地址。关键特征如下：
 
 - **归属地明确**：通过 Whois 查询时，该 IP 的 ASN（自治系统号）属于当地的电信运营商或 ISP。例如日本的 NTT、美国的 Comcast、台湾的中华电信等。
-- **类型标识为住宅或 ISP**：在 ipinfo.io、IP2Location 等 IP 情报数据库中，该 IP 的类型被标记为 residential（住宅）或 ISP，而非 hosting（托管/数据中心）。
+- **类型标识为住宅或 ISP**：在 [ipinfo.io](https://ipinfo.io/)、IP2Location 等 IP 情报数据库中，该 IP 的类型被标记为 residential（住宅）或 ISP，而非 hosting（托管/数据中心）。
 - **流媒体平台信任**：因为这些 IP 来自真实的用户网络环境，流媒体平台默认认为使用这些 IP 的是当地的真实用户，不会触发地域检测的拦截机制。
 
 原生 IP 也被称为住宅 IP、本地 IP、native IP。它和数据中心 IP 最本质的区别在于：数据中心 IP 的 ASN 归属于 IDC 或云服务商（如 AWS、GCP、DigitalOcean），而原生 IP 的 ASN 归属于面向终端用户提供网络接入的运营商。
@@ -154,6 +157,9 @@ DNS 解锁的核心思想是：**在 DNS 层面将流媒体域名的解析结果
                Netflix → 解锁服务器 → 代理节点 → 用户
 ```
 
+![网络线缆连接](/images/inline/network-cables.jpg)
+*图片来源：[Unsplash](https://unsplash.com/)*
+
 值得注意的是，DNS 解锁只对特定域名生效。普通网站的 DNS 解析不受影响，流量也不经过中间服务器。DNS 解锁服务维护着一份流媒体域名列表，只有命中这个列表的域名才会被重定向。
 
 ### 常见的 DNS 解锁实现方式
@@ -238,7 +244,7 @@ DNS 解锁的核心思想是：**在 DNS 层面将流媒体域名的解析结果
 
 ### 方法一：查询 IP 类型
 
-使用 `ipinfo.io`、`bgp.tools` 或 `ip.sb` 等工具查询你代理节点的出口 IP。重点看两个信息：
+使用 `ipinfo.io`、[bgp.tools](https://bgp.tools/) 或 `ip.sb` 等工具查询你代理节点的出口 IP。重点看两个信息：
 
 - **ASN 归属**：如果 ASN 属于 AWS、GCP、DigitalOcean、Vultr 等云服务商/IDC，说明这是数据中心 IP。如果此时流媒体服务仍然能正常使用，那大概率是通过 DNS 解锁实现的。
 - **IP 类型**：ipinfo.io 会标注 IP 的类型（hosting、isp、residential 等）。如果类型是 hosting 但流媒体解锁正常，几乎可以确定使用了 DNS 解锁。
