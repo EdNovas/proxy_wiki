@@ -94,6 +94,22 @@ ignore:
 # Extensions
 theme: fluid
 
+# Sitemap
+sitemap:
+  path: sitemap.xml
+  rel: true
+  tags: true
+  categories: true
+
+# RSS Feed
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+  content: true
+  content_limit: 300
+
 # Deployment
 deploy:
   type: git

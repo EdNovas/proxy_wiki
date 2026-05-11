@@ -351,7 +351,7 @@ index_img: /images/posts/decision-framework.webp
 
 ### Q: 多个机场订阅会互相冲突吗？
 
-不会。Clash 系列客户端（Clash Verge Rev、mihomo 等）和其他现代客户端都支持同时管理多个订阅。每个订阅的节点会被分别列出，你可以在策略组中自由组合来自不同订阅的节点。
+不会。Clash 系列客户端（[Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev)、mihomo 等）和其他现代客户端都支持同时管理多个订阅。每个订阅的节点会被分别列出，你可以在策略组中自由组合来自不同订阅的节点。
 
 唯一需要注意的是合理组织策略组——不要把所有节点混在一个组里，按照用途（日常、流媒体、AI 服务等）或地区分组会更方便管理。
 

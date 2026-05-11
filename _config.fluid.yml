@@ -223,21 +223,15 @@ links:
         avatar: "/images/avatar.png"
       }
     - {
-        title: "ednovas.me",
-        intro: "ednovas 主站",
+        title: "ednovas 云",
+        intro: "高质量国内中转代理服务",
         link: "https://ednovas.me",
         avatar: "/images/avatar.png"
       }
     - {
         title: "TransLink",
-        intro: "高质量代理服务",
+        intro: "高质量海外中转代理服务",
         link: "https://translink.cc",
-        avatar: "/images/avatar.png"
-      }
-    - {
-        title: "ednovas 帮助中心",
-        intro: "使用文档与帮助",
-        link: "https://help.ednovas.me",
         avatar: "/images/avatar.png"
       }
 
@@ -249,8 +243,8 @@ footer:
   content: '
     <div>
       由 <a href="https://ednovas.xyz" target="_blank">ednovas</a> 维护
-      | <a href="https://ednovas.me" target="_blank">ednovas.me</a>
-      | <a href="https://translink.cc" target="_blank">TransLink 代理服务</a> 支撑
+      | <a href="https://ednovas.me" target="_blank">ednovas云</a>代理服务
+      | <a href="https://translink.cc" target="_blank">TransLink</a> 代理服务 支持
     </div>
     <div>
       <a href="https://hexo.io" target="_blank" rel="nofollow noopener">Hexo</a>
