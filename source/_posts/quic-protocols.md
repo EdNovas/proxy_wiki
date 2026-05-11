@@ -35,6 +35,9 @@ QUIC 基于 UDP 构建，支持多路复用的独立流消除队头阻塞；0-RT
 
 QUIC 已经是 HTTP/3 的基础，截至 2026 年，全球超过 30% 的 Web 流量通过 QUIC 传输。基于 QUIC 的代理流量在网络中并不异常。
 
+![QUIC 与 TCP 对比](/images/inline/quic-vs-tcp.png)
+*图片来源：[Catchpoint](https://www.catchpoint.com/)*
+
 
 ## Hysteria2
 

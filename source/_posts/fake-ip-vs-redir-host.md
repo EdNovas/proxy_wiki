@@ -77,6 +77,8 @@ graph TD
     style J fill:#48f,color:#fff
 ```
 
+![Fake-IP 模式工作原理图](/images/inline/fake-ip-diagram.png)
+*图片来源：[csl.cool](https://www.csl.cool/)*
 
 ### 工作流程：直连域名
 

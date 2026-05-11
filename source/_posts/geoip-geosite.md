@@ -34,6 +34,9 @@ GEOIP,CN,DIRECT
 
 在整套分流逻辑中，`GEOIP,CN,DIRECT` 通常放在规则列表的倒数第二条（最后一条是 `MATCH` 兜底），充当"所有中国 IP 一律直连"的安全网。即使某个国内网站没有被任何域名规则命中，只要它的服务器 IP 在 GeoIP 数据库中标记为中国，就会被这条规则拦下来走直连。
 
+![GeoIP 全球 IP 地理位置分布](/images/inline/geoip-map.jpg)
+*图片来源：[Stack Overflow](https://stackoverflow.com/)*
+
 
 ### 数据来源
 

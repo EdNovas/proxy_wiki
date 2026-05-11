@@ -171,6 +171,9 @@ index_img: /images/posts/node-pool-architecture.png
 
 真实的生产环境通常不会只用单一策略，而是组合使用。一种常见的做法是：**地理路由 + 加权最少连接**。先根据用户位置选择最近的入口池，然后在该池内按加权最少连接分配到具体服务器。这样既优化了延迟，又实现了合理的负载分布。
 
+![负载均衡架构图](/images/inline/load-balancer.jpg)
+*图片来源：[EdrawMax](https://www.edrawmax.com/)*
+
 ---
 
 ## 健康检查与故障转移

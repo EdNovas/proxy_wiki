@@ -24,6 +24,9 @@ index_img: /images/posts/gfw-detection-overview.jpg
 
 理解这一点很重要：**没有一种协议能"永远安全"，因为检测侧也在持续迭代。** 今天有效的规避方案，明天可能就被针对。反过来，今天被封锁的协议，通过改进也可能重新获得生存空间。封锁与反封锁本质上是一场持续的技术博弈。
 
+![GFW 检测体系示意图](/images/inline/gfw-layers.png)
+*图片来源：[DomainTools](https://www.domaintools.com/)*
+
 下面按检测复杂度从低到高，逐层拆解 GFW 的核心检测机制。
 
 

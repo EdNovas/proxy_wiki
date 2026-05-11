@@ -60,6 +60,9 @@ DNS 服务器分两种角色：
 
 整个过程通常在几十毫秒内完成。看起来简单直接，但在代理场景下，几乎每一步都可能出问题。
 
+![DNS 解析流程图](/images/inline/dns-resolution-flow.png)
+*图片来源：[Indusface](https://www.indusface.com/)*
+
 ```mermaid
 graph LR
     A[你的设备] -->|DNS查询| B[ISP DNS]

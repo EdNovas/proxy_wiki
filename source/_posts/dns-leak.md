@@ -154,6 +154,9 @@ Chrome 和 Firefox 默认都启用了 WebRTC。这意味着除非你主动关闭
 
 建议至少用两个工具交叉验证。单一工具的结果有时可能因为网络波动不够准确。
 
+![DNS 泄漏检测结果示例](/images/inline/dns-leak-test.png)
+*图片来源：[Reddit](https://www.reddit.com/)*
+
 ### 方法二：代理客户端日志
 
 如果你使用 Clash Verge、mihomo 等代理客户端，可以通过日志直接观察 DNS 查询的去向。

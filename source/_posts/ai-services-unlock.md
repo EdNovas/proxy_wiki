@@ -24,6 +24,9 @@ index_img: /images/posts/ai-services-unlock.jpg
 
 如果你之前了解过流媒体解锁，会发现 AI 服务的访问限制有很多相似之处——但也有本质区别。
 
+![ChatGPT 地区限制提示](/images/inline/chatgpt-blocked.jpg)
+*图片来源：[Tenorshare](https://www.tenorshare.com/)*
+
 ### 与流媒体解锁的异同
 
 流媒体解锁的核心问题是**版权授权的地域分割**：Netflix 在不同国家拥有不同的内容库，解锁的目的是访问特定地区的内容。

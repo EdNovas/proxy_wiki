@@ -23,6 +23,9 @@ index_img: /images/posts/streaming-unlock-basics.jpg
 
 这不是 Bug，而是流媒体行业的基本运作方式。
 
+![Netflix 各地区内容库差异](/images/inline/netflix-region.jpg)
+*图片来源：[Surfshark](https://surfshark.com/)*
+
 ### 地区限制的根源：版权授权
 
 流媒体平台上的内容分为两类：**自制内容**和**授权内容**。

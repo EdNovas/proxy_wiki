@@ -305,6 +305,9 @@ IP 情报数据库（如 ipinfo.io）会根据 ASN 和其他信息，为每个 I
 - `city`、`region`、`country`：地理位置信息
 - 付费 API 还能获取 `type` 字段，明确标注 `isp`、`hosting`、`business` 等类型
 
+![ipinfo.io IP 查询结果示例](/images/inline/ipinfo-result.jpg)
+*图片来源：[IPinfo](https://ipinfo.io/)*
+
 **2. [ip.sb](https://ip.sb/)**
 
 简洁的 IP 查询工具，显示当前 IP 地址和基本地理位置信息。适合快速确认代理是否生效。

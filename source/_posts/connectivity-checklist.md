@@ -110,7 +110,7 @@ nslookup baidu.com
 **操作方法**：
 
 1. 在客户端中找到订阅管理
-2. 手动更新订阅（Clash Verge：右键订阅 → 更新；v2rayN：订阅 → 更新全部）
+2. 手动更新订阅（Clash Verge：右键订阅 → 更新；[v2rayN](https://github.com/2dust/v2rayN)：订阅 → 更新全部）
 3. 如果更新失败 → 尝试在浏览器中直接打开订阅链接，看是否能访问
 4. 如果订阅链接打不开 → 登录机场面板检查是否更换了订阅地址
 
@@ -290,7 +290,10 @@ nexttrace your-server-ip
 
 - **[Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev)**：设置 → 日志等级调为 Debug → 查看实时日志
 - **v2rayN**：主界面底部有日志窗口，或点击菜单 → 查看日志
-- **sing-box**：检查日志文件或终端输出
+- **[sing-box](https://github.com/SagerNet/sing-box)**：检查日志文件或终端输出
+
+![Clash Verge 连接日志界面](/images/inline/clash-connections.png)
+*图片来源：[ZGC VPN](https://zgcvpn.com/)*
 
 **重点关注**：
 

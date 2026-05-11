@@ -44,8 +44,10 @@ font:
   code_font_size: 85%
 
 custom_css:
+  - /css/custom.css
 
 custom_js:
+  - /js/sponsor-inject.js
 
 custom_html: ''
 

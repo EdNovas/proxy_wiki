@@ -77,6 +77,9 @@ https://doh.360.cn/dns-query          # 360 DNS
 
 **DNS 服务器可见客户端 IP。** DoH 服务器能看到你的真实源 IP 地址。虽然加密保护了查询内容不被第三方看到，但 DNS 服务器本身仍然知道是谁在查询什么域名。这是所有直连式加密 DNS 协议的共同局限，不是 DoH 特有的问题。
 
+![DNS over HTTPS 工作原理](/images/inline/doh-diagram.jpg)
+*图片来源：[Heimdal Security](https://heimdalsecurity.com/)*
+
 ---
 
 ## DNS over TLS (DoT)
