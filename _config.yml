@@ -2,9 +2,9 @@
 ## Docs: https://hexo.io/docs/configuration.html
 
 # Site
-title: Proxy Wiki
+title: 代理百科
 subtitle: 科学上网技术文档
-description: 一份面向中文用户的代理技术参考手册。从零基础入门到深度技术解析，涵盖协议原理、GFW检测机制、客户端配置、DNS优化、流媒体解锁等全方位内容。
+description: 入门 · 协议 · 工具 · 实践 —— 一站式代理技术博客。涵盖代理协议原理、GFW检测机制、客户端配置、DNS优化、流媒体解锁等全方位内容。
 keywords:
   - 科学上网
   - 代理

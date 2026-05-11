@@ -1,60 +1,142 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+  // ========== 1. 文章底部广告卡片（仅文章页） ==========
   var postContent = document.querySelector('.markdown-body');
-  if (!postContent) return;
+  if (postContent) {
+    var sponsorHTML = ''
+      // ednovas 云
+      + '<div class="sponsor-card" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#0f172a 100%);border-color:rgba(59,130,246,0.3)">'
+      + '  <div class="sponsor-card-header">'
+      + '    <span class="sponsor-card-badge" style="background:rgba(59,130,246,0.2);color:#93c5fd">ednovas</span>'
+      + '    <h3 class="sponsor-card-title">ednovas 云 — 全球代理服务</h3>'
+      + '  </div>'
+      + '  <div class="sponsor-card-desc">'
+      + '    覆盖 80+ 国家节点，大部分节点支持流媒体和 AI 服务解锁。'
+      + '    采用 IEPL 和隧道中转线路，提供回国节点，晚高峰也能流畅访问外网。'
+      + '  </div>'
+      + '  <div class="sponsor-card-features">'
+      + '    <span class="sponsor-card-tag" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.1)">80+ 国家节点</span>'
+      + '    <span class="sponsor-card-tag" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.1)">流媒体 & AI 解锁</span>'
+      + '    <span class="sponsor-card-tag" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.1)">IEPL + 隧道中转</span>'
+      + '    <span class="sponsor-card-tag" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.1)">回国节点</span>'
+      + '  </div>'
+      + '  <div class="sponsor-card-buttons">'
+      + '    <a href="https://ednovas.me" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-primary" style="background:linear-gradient(135deg,#3b82f6,#2563eb)">访问 ednovas 云</a>'
+      + '    <a href="https://help.ednovas.me" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary">使用帮助</a>'
+      + '    <a href="https://t.me/ednovasyun" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary">Telegram 群组</a>'
+      + '  </div>'
+      + '</div>'
+      // TransLink
+      + '<div class="sponsor-card">'
+      + '  <div class="sponsor-card-header">'
+      + '    <span class="sponsor-card-badge">Sponsor</span>'
+      + '    <h3 class="sponsor-card-title">TransLink — 高审查地区代理服务</h3>'
+      + '  </div>'
+      + '  <div class="sponsor-card-desc">'
+      + '    采用 VLESS+Reality 和 AnyTLS 协议，通过 AWS 负载均衡中转线路，'
+      + '    专为高审查地区设计。支持在俄罗斯、伊朗、土库曼斯坦等地区稳定使用。'
+      + '  </div>'
+      + '  <div class="sponsor-card-features">'
+      + '    <span class="sponsor-card-tag">VLESS + Reality</span>'
+      + '    <span class="sponsor-card-tag">AnyTLS</span>'
+      + '    <span class="sponsor-card-tag">AWS 负载中转</span>'
+      + '    <span class="sponsor-card-tag">支持高审查地区</span>'
+      + '  </div>'
+      + '  <div class="sponsor-card-buttons">'
+      + '    <a href="https://translink.cc" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-primary">访问 TransLink</a>'
+      + '    <a href="https://t.me/translink_cloud" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary">Telegram 群组</a>'
+      + '  </div>'
+      + '</div>'
+      // 底部链接
+      + '<div class="ednovas-card">'
+      + '  <span class="ednovas-card-text">'
+      + '    更多技术文章：<a href="https://ednovas.xyz" target="_blank">ednovas.xyz</a>'
+      + '    · ednovas 云帮助中心：<a href="https://help.ednovas.me" target="_blank">help.ednovas.me</a>'
+      + '  </span>'
+      + '</div>';
 
-  var sponsorHTML = ''
-    // ednovas 云
-    + '<div class="sponsor-card" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#0f172a 100%);border-color:rgba(59,130,246,0.3)">'
-    + '  <div class="sponsor-card-header">'
-    + '    <span class="sponsor-card-badge" style="background:rgba(59,130,246,0.2);color:#93c5fd">ednovas</span>'
-    + '    <h3 class="sponsor-card-title">ednovas 云 — 全球代理服务</h3>'
-    + '  </div>'
-    + '  <div class="sponsor-card-desc">'
-    + '    覆盖 80+ 国家节点，大部分节点支持流媒体和 AI 服务解锁。'
-    + '    采用 IEPL 和隧道中转线路，提供回国节点，晚高峰也能流畅访问外网。'
-    + '  </div>'
-    + '  <div class="sponsor-card-features">'
-    + '    <span class="sponsor-card-tag" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.1)">80+ 国家节点</span>'
-    + '    <span class="sponsor-card-tag" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.1)">流媒体 & AI 解锁</span>'
-    + '    <span class="sponsor-card-tag" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.1)">IEPL + 隧道中转</span>'
-    + '    <span class="sponsor-card-tag" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.1)">回国节点</span>'
-    + '  </div>'
-    + '  <div class="sponsor-card-buttons">'
-    + '    <a href="https://ednovas.me" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-primary" style="background:linear-gradient(135deg,#3b82f6,#2563eb)">访问 ednovas 云</a>'
-    + '    <a href="https://help.ednovas.me" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary">使用帮助</a>'
-    + '    <a href="https://t.me/ednovasyun" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary">Telegram 群组</a>'
-    + '  </div>'
-    + '</div>'
+    postContent.insertAdjacentHTML('beforeend', sponsorHTML);
+  }
 
-    // TransLink
-    + '<div class="sponsor-card">'
-    + '  <div class="sponsor-card-header">'
-    + '    <span class="sponsor-card-badge">Sponsor</span>'
-    + '    <h3 class="sponsor-card-title">TransLink — 高审查地区代理服务</h3>'
+  // ========== 2. 右下角悬浮按钮（全站） ==========
+  var fabHTML = ''
+    + '<div class="fab-sponsor">'
+    + '  <div class="fab-sponsor-panel" id="fabPanel">'
+    + '    <h4>🚀 推荐服务</h4>'
+    + '    <a class="fab-sponsor-link" href="https://ednovas.me" target="_blank">'
+    + '      <span class="fab-sponsor-dot" style="background:#3b82f6"></span>'
+    + '      <span>ednovas 云<small>80+ 国家 · IEPL 中转</small></span>'
+    + '    </a>'
+    + '    <a class="fab-sponsor-link" href="https://translink.cc" target="_blank">'
+    + '      <span class="fab-sponsor-dot" style="background:#8b5cf6"></span>'
+    + '      <span>TransLink<small>高审查地区 · AWS 中转</small></span>'
+    + '    </a>'
+    + '    <a class="fab-sponsor-link" href="https://t.me/ednovasyun" target="_blank">'
+    + '      <span class="fab-sponsor-dot" style="background:#0ea5e9"></span>'
+    + '      <span>ednovas 云 TG 群</span>'
+    + '    </a>'
+    + '    <a class="fab-sponsor-link" href="https://t.me/translink_cloud" target="_blank">'
+    + '      <span class="fab-sponsor-dot" style="background:#0ea5e9"></span>'
+    + '      <span>TransLink TG 群</span>'
+    + '    </a>'
     + '  </div>'
-    + '  <div class="sponsor-card-desc">'
-    + '    采用 VLESS+Reality 和 AnyTLS 协议，通过 AWS 负载均衡中转线路，'
-    + '    专为高审查地区设计。支持在俄罗斯、伊朗、土库曼斯坦等地区稳定使用。'
-    + '  </div>'
-    + '  <div class="sponsor-card-features">'
-    + '    <span class="sponsor-card-tag">VLESS + Reality</span>'
-    + '    <span class="sponsor-card-tag">AnyTLS</span>'
-    + '    <span class="sponsor-card-tag">AWS 负载中转</span>'
-    + '    <span class="sponsor-card-tag">支持高审查地区</span>'
-    + '  </div>'
-    + '  <div class="sponsor-card-buttons">'
-    + '    <a href="https://translink.cc" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-primary">访问 TransLink</a>'
-    + '    <a href="https://t.me/translink_cloud" target="_blank" rel="noopener" class="sponsor-card-btn sponsor-card-btn-secondary">Telegram 群组</a>'
-    + '  </div>'
-    + '</div>'
-
-    // 底部链接
-    + '<div class="ednovas-card">'
-    + '  <span class="ednovas-card-text">'
-    + '    更多技术文章：<a href="https://ednovas.xyz" target="_blank">ednovas.xyz</a>'
-    + '    · ednovas 云帮助中心：<a href="https://help.ednovas.me" target="_blank">help.ednovas.me</a>'
-    + '  </span>'
+    + '  <button class="fab-sponsor-toggle" id="fabToggle" title="推荐服务">✦</button>'
     + '</div>';
 
-  postContent.insertAdjacentHTML('beforeend', sponsorHTML);
+  document.body.insertAdjacentHTML('beforeend', fabHTML);
+
+  var fabToggle = document.getElementById('fabToggle');
+  var fabPanel = document.getElementById('fabPanel');
+  fabToggle.addEventListener('click', function () {
+    fabPanel.classList.toggle('open');
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.fab-sponsor')) {
+      fabPanel.classList.remove('open');
+    }
+  });
+
+  // ========== 3. 侧边栏赞助组件（文章页，TOC 下方） ==========
+  var tocContainer = document.querySelector('.tocbot-list')
+    || document.querySelector('.toc-content')
+    || document.querySelector('.sidebar-inner');
+
+  if (tocContainer) {
+    var sidebarHTML = ''
+      + '<div class="sidebar-sponsor">'
+      + '  <div class="sidebar-sponsor-title">推荐服务</div>'
+      + '  <a href="https://ednovas.me" target="_blank">'
+      + '    ednovas 云'
+      + '    <small>高质量国内中转代理服务</small>'
+      + '  </a>'
+      + '  <a href="https://translink.cc" target="_blank">'
+      + '    TransLink'
+      + '    <small>高质量海外中转代理服务</small>'
+      + '  </a>'
+      + '</div>';
+
+    tocContainer.insertAdjacentHTML('afterend', sidebarHTML);
+  }
+
+  // ========== 4. 首页文章列表间广告（首页，第3篇后插入） ==========
+  var postCards = document.querySelectorAll('.index-card');
+  if (postCards.length > 3) {
+    var indexAdHTML = ''
+      + '<div class="row" style="margin-bottom:1.5rem">'
+      + '  <div class="col-12">'
+      + '    <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">'
+      + '      <div>'
+      + '        <span style="color:#a5b4fc;font-weight:600;font-size:0.9rem">🚀 ednovas 云</span>'
+      + '        <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem">80+ 国家 · IEPL 中转 · 流媒体解锁</span>'
+      + '      </div>'
+      + '      <div style="display:flex;gap:0.5rem">'
+      + '        <a href="https://ednovas.me" target="_blank" style="background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;padding:0.4rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:600;text-decoration:none">了解更多</a>'
+      + '        <a href="https://translink.cc" target="_blank" style="background:rgba(255,255,255,0.1);color:#cbd5e1;padding:0.4rem 1rem;border-radius:6px;font-size:0.8rem;border:1px solid rgba(255,255,255,0.15);text-decoration:none">TransLink</a>'
+      + '      </div>'
+      + '    </div>'
+      + '  </div>'
+      + '</div>';
+
+    postCards[2].closest('.row').insertAdjacentHTML('afterend', indexAdHTML);
+  }
 });

@@ -288,6 +288,9 @@ nexttrace your-server-ip
 
 客户端日志是最重要的排查信息来源：
 
+![Clash Verge Rev 日志界面](/images/inline/clash-verge-logs.jpg)
+*图片来源：[clash.info](https://clash.info/)*
+
 - **[Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev)**：设置 → 日志等级调为 Debug → 查看实时日志
 - **v2rayN**：主界面底部有日志窗口，或点击菜单 → 查看日志
 - **[sing-box](https://github.com/SagerNet/sing-box)**：检查日志文件或终端输出

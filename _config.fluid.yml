@@ -65,7 +65,7 @@ lazyload:
 #---------------------------
 
 navbar:
-  blog_title: Proxy Wiki
+  blog_title: 代理百科
   ground_glass:
     enable: true
     px: 3
@@ -89,7 +89,7 @@ index:
   post_default_img: ''
   slogan:
     enable: true
-    text: 从零基础入门到深度技术解析
+    text: 入门 · 协议 · 工具 · 实践 —— 一站式代理技术博客
     api:
       enable: false
   auto_excerpt:
@@ -200,8 +200,8 @@ about:
   banner_img_height: 40
   banner_mask_alpha: 0.3
   avatar: /images/avatar.png
-  name: "Proxy Wiki"
-  intro: "一份面向中文用户的代理技术参考手册"
+  name: "代理百科"
+  intro: "入门 · 协议 · 工具 · 实践 —— 一站式代理技术博客"
   icons:
     - { class: "iconfont icon-github-fill", link: "https://github.com/EdNovas/proxy-wiki", tip: "GitHub" }
     - { class: "iconfont icon-link-fill", link: "https://ednovas.xyz", tip: "Blog" }
