@@ -36,34 +36,56 @@
 .all-tags-cloud {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 1.5rem 0;
+  gap: 0.85rem 0.75rem;
+  margin: 1.8rem 0;
+  line-height: 1.6;
 }
 
 .all-tag-chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.75rem;
+  gap: 0.55rem;
+  padding: 0.5rem 1rem;
   background: rgba(99, 102, 241, 0.08);
   border: 1px solid rgba(99, 102, 241, 0.2);
   border-radius: 999px;
   text-decoration: none !important;
-  font-size: 0.9rem;
-  transition: background 0.15s;
+  font-size: 0.92rem;
+  transition: background 0.15s, transform 0.15s, border-color 0.15s;
 }
 
 .all-tag-chip:hover {
   background: rgba(99, 102, 241, 0.18);
+  border-color: rgba(99, 102, 241, 0.35);
+  transform: translateY(-1px);
 }
 
 .all-tags-cloud .tag-count {
-  background: rgba(99, 102, 241, 0.18);
-  color: #6366f1;
-  padding: 0 0.45rem;
+  background: rgba(99, 102, 241, 0.22);
+  color: #c7d2fe;
+  padding: 0.05rem 0.55rem;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 600;
+  min-width: 1.4rem;
+  text-align: center;
+}
+
+/* ========== 侧边栏头像 —— 比 vivia 默认 100% 宽度小很多 ========== */
+.info-card .avatar {
+  width: 96px;
+  height: 96px;
+  margin: 8px auto 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.info-card .avatar img,
+.info-card .avatar image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* TransLink 广告卡片 */

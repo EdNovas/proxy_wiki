@@ -1,8 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ========== 1. 文章底部广告卡片（仅文章页） ==========
-  // vivia 用 .article-entry 包裹正文；只在 post 类型上注入
-  var postContent = document.querySelector('.article-type-post .article-entry');
+  // ========== 1. 文章底部广告卡片（仅单篇文章页） ==========
+  // querySelector 在列表页会命中第一篇文章的摘要块，
+  // 所以先用 URL 锁定到 /posts/{slug}/ 这种单篇页，再注入。
+  var isSinglePost = /^\/posts\/[^/]+\/?$/.test(location.pathname);
+  var postContent = isSinglePost
+    ? document.querySelector('.article-type-post .article-entry')
+    : null;
   if (postContent) {
     var sponsorHTML = ''
       // ednovas 云
