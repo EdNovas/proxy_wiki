@@ -47,8 +47,8 @@ GeoIP 数据库不是凭空造的，它的数据来源有几个层面。
 
 但对于科学上网用户来说，更重要的是**社区维护的专用版本**。原版 MaxMind 数据虽然通用，但并非针对代理场景优化。社区项目对数据做了以下改进：
 
-- **Loyalsoldier/geoip**：最流行的社区 GeoIP 项目。它在 MaxMind 和 DB-IP 数据的基础上，合并了中国大陆的 CIDR 数据（来自 IPIP.net 等更精准的国内 IP 数据源），移除了不可达的 IP 段，增强了 CN 数据的准确性。对于代理使用场景，这个项目的数据比原版 MaxMind 更可靠。
-- **MetaCubeX/meta-rules-dat**：mihomo（原 Clash Meta）官方维护的规则数据项目。它打包了适用于 mihomo 内核的 GeoIP 数据，和 mihomo 的兼容性最好。如果你使用 Clash Verge Rev 等基于 mihomo 的客户端，优先使用这个项目的数据。
+- **[Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip)**：最流行的社区 GeoIP 项目。它在 MaxMind 和 DB-IP 数据的基础上，合并了中国大陆的 CIDR 数据（来自 IPIP.net 等更精准的国内 IP 数据源），移除了不可达的 IP 段，增强了 CN 数据的准确性。对于代理使用场景，这个项目的数据比原版 MaxMind 更可靠。
+- **[MetaCubeX/meta-rules-dat](https://github.com/MetaCubeX/meta-rules-dat)**：mihomo（原 Clash Meta）官方维护的规则数据项目。它打包了适用于 mihomo 内核的 GeoIP 数据，和 mihomo 的兼容性最好。如果你使用 [Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev) 等基于 mihomo 的客户端，优先使用这个项目的数据。
 
 ### 数据格式
 
@@ -139,7 +139,7 @@ rules:
 
 GeoSite 数据的上游主要来自以下项目：
 
-**v2fly/domain-list-community**：这是 GeoSite 数据的"源头"项目。V2Ray 社区维护，任何人都可以通过 Pull Request 添加新域名或新类别。项目的数据以纯文本格式存储，每个类别一个文件，内容就是属于这个类别的域名列表。编译工具将这些文本文件打包成二进制的 `geosite.dat` 文件。
+**[v2fly/domain-list-community](https://github.com/v2fly/domain-list-community)**：这是 GeoSite 数据的"源头"项目。V2Ray 社区维护，任何人都可以通过 Pull Request 添加新域名或新类别。项目的数据以纯文本格式存储，每个类别一个文件，内容就是属于这个类别的域名列表。编译工具将这些文本文件打包成二进制的 `geosite.dat` 文件。
 
 **Loyalsoldier 的增强版本**：在 v2fly/domain-list-community 的基础上，Loyalsoldier 合并了额外的数据源，增加了更多域名覆盖，改善了分类的准确性。很多社区用户使用的实际上是这个增强版。
 

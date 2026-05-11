@@ -143,7 +143,9 @@ post:
   math:
     enable: false
   mermaid:
-    enable: false
+    enable: true
+    specific: true
+    options:
   comments:
     enable: false
 

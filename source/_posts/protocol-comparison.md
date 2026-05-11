@@ -13,6 +13,7 @@ tags:
   - Hysteria2
   - 对比
 excerpt: 系统对比 SS、VMess、VLESS+Reality、Trojan、Hysteria2、NaiveProxy 等主流代理协议。
+mermaid: true
 index_img: /images/posts/protocol-comparison.jpg
 ---
 
@@ -146,6 +147,22 @@ Trojan 的设计目标是让代理流量完全模仿正常的 HTTPS 流量。它
 你是否需要极简部署？
 ├── 是 → VLESS+Reality（无需域名证书）
 ├── 否 → 根据抗检测需求选择
+```
+
+```mermaid
+graph TD
+    A[选择代理协议] --> B{网络环境是否封锁 UDP?}
+    B -->|是| C[排除 Hysteria2]
+    B -->|否| D[Hysteria2 可作为备选]
+    C --> E{是否在高审查地区?}
+    D --> E
+    E -->|是| F[推荐 VLESS+Reality]
+    E -->|否| G{是否需要极简部署?}
+    G -->|是| H[VLESS+Reality<br/>无需域名证书]
+    G -->|否| I[SS-2022 / Trojan<br/>通常足够]
+    
+    style F fill:#4a9,color:#fff
+    style H fill:#4a9,color:#fff
 ```
 
 **补充建议**：

@@ -10,6 +10,7 @@ tags:
   - CDN
   - 代理
 excerpt: DNS 是互联网的电话簿。在代理场景中，DNS 解析的正确性直接决定上网体验。
+mermaid: true
 index_img: /images/posts/dns-basics-for-proxy.jpg
 ---
 
@@ -58,6 +59,17 @@ DNS 服务器分两种角色：
 **第七步：浏览器连接目标服务器。** 拿到 IP 地址后，浏览器直接向这个 IP 发起 HTTP/HTTPS 连接，网页内容开始加载。
 
 整个过程通常在几十毫秒内完成。看起来简单直接，但在代理场景下，几乎每一步都可能出问题。
+
+```mermaid
+graph LR
+    A[你的设备] -->|DNS查询| B[ISP DNS]
+    B -->|被污染| C[❌ 错误IP]
+    A -->|使用代理| D[代理客户端]
+    D -->|国内域名| E[国内 DoH]
+    E --> F[✅ 正确CDN]
+    D -->|国外域名| G[远端解析]
+    G --> H[✅ 真实IP]
+```
 
 ![网络连接与数据传输](/images/inline/network-cables.jpg)
 *图片来源：[Unsplash](https://unsplash.com/)*

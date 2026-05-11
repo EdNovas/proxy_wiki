@@ -10,6 +10,7 @@ tags:
   - 主动探测
   - 流量分析
 excerpt: "GFW 是多种检测手段的组合系统。拆解六层检测机制及对应规避策略。"
+mermaid: true
 index_img: /images/posts/gfw-detection-overview.jpg
 ---
 
@@ -177,6 +178,31 @@ GFW 的行为分析系统会关注以下维度：
 
 ![服务器机房](/images/inline/server-room.jpg)
 *图片来源：[Unsplash](https://unsplash.com/)*
+
+```mermaid
+graph TD
+    A[网络流量] --> B{第一层: DNS 污染}
+    B -->|命中黑名单| C[返回错误 IP]
+    B -->|未命中| D{第二层: IP 封锁}
+    D -->|IP 在黑名单| E[RST / 丢包]
+    D -->|IP 正常| F{第三层: DPI 深度包检测}
+    F -->|协议特征匹配| G[标记为代理流量]
+    F -->|未识别| H{第四层: TLS 指纹}
+    H -->|指纹异常| I[标记可疑]
+    H -->|指纹正常| J{第五层: 主动探测}
+    J -->|探测确认| K[封锁 IP]
+    J -->|探测失败| L{第六层: 行为分析}
+    L -->|流量模式异常| M[降低阈值/封锁]
+    L -->|正常| N[放行]
+    
+    style C fill:#f66,color:#fff
+    style E fill:#f66,color:#fff
+    style G fill:#f96,color:#fff
+    style I fill:#f96,color:#fff
+    style K fill:#f66,color:#fff
+    style M fill:#f96,color:#fff
+    style N fill:#6f6,color:#fff
+```
 
 ## 各层检测 vs 主流协议
 
