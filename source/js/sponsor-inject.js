@@ -118,25 +118,4 @@ document.addEventListener('DOMContentLoaded', function () {
     tocContainer.insertAdjacentHTML('afterend', sidebarHTML);
   }
 
-  // ========== 4. 首页文章列表间广告（首页，第3篇后插入） ==========
-  var postCards = document.querySelectorAll('.index-card');
-  if (postCards.length > 3) {
-    var indexAdHTML = ''
-      + '<div class="row" style="margin-bottom:1.5rem">'
-      + '  <div class="col-12">'
-      + '    <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">'
-      + '      <div>'
-      + '        <span style="color:#a5b4fc;font-weight:600;font-size:0.9rem">🚀 ednovas 云</span>'
-      + '        <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem">80+ 国家 · IEPL 中转 · 流媒体解锁</span>'
-      + '      </div>'
-      + '      <div style="display:flex;gap:0.5rem">'
-      + '        <a href="https://ednovas.me" target="_blank" style="background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;padding:0.4rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:600;text-decoration:none">了解更多</a>'
-      + '        <a href="https://translink.cc" target="_blank" style="background:rgba(255,255,255,0.1);color:#cbd5e1;padding:0.4rem 1rem;border-radius:6px;font-size:0.8rem;border:1px solid rgba(255,255,255,0.15);text-decoration:none">TransLink</a>'
-      + '      </div>'
-      + '    </div>'
-      + '  </div>'
-      + '</div>';
-
-    postCards[2].closest('.row').insertAdjacentHTML('afterend', indexAdHTML);
-  }
 });
