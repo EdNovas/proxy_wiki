@@ -37,6 +37,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - googled854f8ce33296a3c.html
 
 # Writing
 new_post_name: :title.md
@@ -86,13 +87,17 @@ updated_option: 'mtime'
 per_page: 12
 pagination_dir: page
 
+# Disable archive pagination (required by hexo-theme-vivia)
+archive_generator:
+  per_page: 0
+
 # Include / Exclude file(s)
 include:
 exclude:
 ignore:
 
 # Extensions
-theme: fluid
+theme: vivia
 
 # Search
 search:

@@ -162,9 +162,7 @@ ufw enable
 ufw status verbose
 ```
 
-{% note warning %}
-**务必先放行 SSH 端口再启用 ufw**，否则你会被锁在服务器外面，只能通过 VPS 提供商的控制台 VNC 才能重新登录。
-{% endnote %}
+> ⚠️ **警告：务必先放行 SSH 端口再启用 ufw**，否则你会被锁在服务器外面，只能通过 VPS 提供商的控制台 VNC 才能重新登录。
 
 ### （可选）创建普通用户
 
@@ -278,9 +276,7 @@ vim /usr/local/etc/xray/config.json
 }
 ```
 
-{% note info %}
-Xray 的 JSON 配置支持 `//` 注释，这是 Xray 的特性而非 JSON 标准。如果你使用其他工具解析此文件可能会报错。
-{% endnote %}
+> ℹ️ Xray 的 JSON 配置支持 `//` 注释，这是 Xray 的特性而非 JSON 标准。如果你使用其他工具解析此文件可能会报错。
 
 ### 关键参数说明
 
@@ -388,9 +384,7 @@ rules:
 
 保存后，在 Clash Verge 中选中这个配置，切换代理模式为"规则"模式（Rule），然后开启系统代理或 TUN 模式。打开浏览器访问 `https://www.google.com`，如果能正常加载，说明一切配置正确。
 
-{% note info %}
-上面的 rules 只是最简化的示例——大陆 IP 直连，其余走代理。如果需要更精细的分流规则，参考 [规则入门](./what-are-rules.md) 和 [自定义规则](./custom-rules.md)。
-{% endnote %}
+> ℹ️ 上面的 rules 只是最简化的示例——大陆 IP 直连，其余走代理。如果需要更精细的分流规则，参考 [规则入门](./what-are-rules.md) 和 [自定义规则](./custom-rules.md)。
 
 ### v2rayN（Windows）
 
