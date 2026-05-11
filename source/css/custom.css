@@ -91,6 +91,11 @@
   color: #c7d2fe !important;
 }
 
+/* ========== 隐藏 profile widget 里 username 和 subtitle 之间的小蓝条 ========== */
+.info-card .info > .dot {
+  display: none;
+}
+
 /* ========== 侧边栏头像 —— 比 vivia 默认 100% 宽度小很多 ========== */
 .info-card .avatar {
   width: 96px;
