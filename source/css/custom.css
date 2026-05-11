@@ -72,9 +72,17 @@
 }
 
 /* ========== 页脚代理服务支持行 ========== */
+/* vivia 的 #footer 是 height: 72px 写死的，加第三行会溢出。
+   改成 min-height + 自动撑开。 */
+#footer {
+  height: auto !important;
+  min-height: 72px;
+  padding: 22px 20px;
+}
+
 .footer-sponsor {
-  margin-top: 0.6rem;
-  padding-top: 0.6rem;
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 0.85rem;
   color: #94a3b8;
