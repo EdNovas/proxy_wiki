@@ -1,0 +1,101 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+
+# Site
+title: Proxy Wiki
+subtitle: 科学上网技术文档
+description: 一份面向中文用户的代理技术参考手册。从零基础入门到深度技术解析，涵盖协议原理、GFW检测机制、客户端配置、DNS优化、流媒体解锁等全方位内容。
+keywords:
+  - 科学上网
+  - 代理
+  - 翻墙
+  - VPN
+  - Clash
+  - VLESS
+  - Reality
+  - GFW
+  - 机场
+  - proxy
+author: ednovas
+language: zh-CN
+timezone: Asia/Shanghai
+
+# URL
+url: https://wiki.ednovas.me
+permalink: posts/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: false
+  trailing_html: false
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: true
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+highlight:
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+# Home page setting
+index_generator:
+  path: ''
+  per_page: 12
+  order_by: -date
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Metadata elements
+meta_generator: false
+
+# Date / Time format
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: 'mtime'
+
+# Pagination
+per_page: 12
+pagination_dir: page
+
+# Include / Exclude file(s)
+include:
+exclude:
+ignore:
+
+# Extensions
+theme: fluid
+
+# Deployment
+deploy:
+  type: git
+  repo: https://github.com/EdNovas/proxy-wiki.git
+  branch: gh-pages

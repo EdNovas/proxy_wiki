@@ -1,0 +1,8 @@
+node_modules/
+public/
+db.json
+*.log
+.DS_Store
+Thumbs.db
+_hexo_temp/
+.deploy_git/
