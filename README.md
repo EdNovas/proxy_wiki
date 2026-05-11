@@ -3,7 +3,7 @@
 > 入门 · 协议 · 工具 · 实践 —— 一站式代理技术博客。  
 > 帮助你理解"为什么"而不仅仅是"怎么做"。
 
-🌐 **在线访问**：[wiki.ednovas.me](https://wiki.ednovas.me)
+🌐 **在线访问**：[blog.e.show](https://blog.e.show)
 
 ---
 

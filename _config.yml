@@ -21,7 +21,7 @@ language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
-url: https://wiki.ednovas.me
+url: https://blog.e.show
 permalink: posts/:title/
 permalink_defaults:
 pretty_urls:

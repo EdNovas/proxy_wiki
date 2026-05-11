@@ -16,4 +16,4 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-Sitemap: https://wiki.ednovas.me/sitemap.xml
+Sitemap: https://blog.e.show/sitemap.xml
