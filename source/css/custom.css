@@ -71,6 +71,26 @@
   text-align: center;
 }
 
+/* ========== 页脚代理服务支持行 ========== */
+.footer-sponsor {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.footer-sponsor a {
+  color: #a5b4fc !important;
+  text-decoration: none !important;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.footer-sponsor a:hover {
+  color: #c7d2fe !important;
+}
+
 /* ========== 侧边栏头像 —— 比 vivia 默认 100% 宽度小很多 ========== */
 .info-card .avatar {
   width: 96px;

@@ -47,3 +47,21 @@ hexo.extend.filter.register('after_render:html', function (str, data) {
   }
   return str;
 });
+
+// 在全站页脚末尾注入"代理服务支持"一行链接。
+// vivia 的 footer.ejs 是 hard-code，没有可配置入口；
+// 这里在每个页面渲染完后向 #footer-info 末尾追加一段 HTML。
+const FOOTER_SPONSOR_HTML =
+  '<div class="footer-sponsor">' +
+  '代理服务支持：' +
+  '<a href="https://ednovas.me" target="_blank" rel="noopener">ednovas 云</a>' +
+  ' · ' +
+  '<a href="https://translink.cc" target="_blank" rel="noopener">TransLink</a>' +
+  '</div>';
+
+hexo.extend.filter.register('after_render:html', function (str) {
+  return str.replace(
+    /<\/div>\s*<\/footer>/,
+    FOOTER_SPONSOR_HTML + '</div></footer>'
+  );
+});
