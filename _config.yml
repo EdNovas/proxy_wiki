@@ -94,6 +94,12 @@ ignore:
 # Extensions
 theme: fluid
 
+# Search
+search:
+  path: /local-search.xml
+  field: post
+  content: true
+
 # Sitemap
 sitemap:
   path: sitemap.xml

@@ -10,7 +10,7 @@ tags:
   - 质量
   - 指南
 excerpt: "从协议安全性、线路质量、运维能力、稳定性四个维度评估机场质量。"
-index_img: /images/posts/how-to-evaluate.jpg
+index_img: /images/posts/how-to-evaluate.png
 ---
 
 > **摘要**：机场（代理服务）的选择不能只看价格和节点数量。本文从协议安全性、线路质量、运维能力、稳定性四个维度提供一套系统的评估框架，帮助你做出理性选择。

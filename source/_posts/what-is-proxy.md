@@ -10,7 +10,7 @@ tags:
   - 翻墙
   - VPN
   - 新手入门
-index_img: /images/posts/what-is-proxy.jpg
+index_img: /images/posts/what-is-proxy.webp
 excerpt: 科学上网的本质是通过中间服务器访问被封锁的网站。本文从零解释代理的概念、实现方式和基本准备。
 ---
 

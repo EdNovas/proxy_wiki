@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     + '  </div>'
     + '  <div class="sponsor-card-desc">'
     + '    覆盖 80+ 国家节点，大部分节点支持流媒体和 AI 服务解锁。'
-    + '    采用 IEPL 和隧道中转线路，提供回国节点。完整日志记录，安全可靠。'
+    + '    采用 IEPL 和隧道中转线路，提供回国节点，晚高峰也能流畅访问外网。'
     + '  </div>'
     + '  <div class="sponsor-card-features">'
     + '    <span class="sponsor-card-tag" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.1)">80+ 国家节点</span>'

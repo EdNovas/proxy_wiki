@@ -10,7 +10,7 @@ tags:
   - 延迟
   - 带宽
   - 排障
-index_img: /images/posts/speed-optimization.jpg
+index_img: /images/posts/speed-optimization.png
 excerpt: 代理速度慢的常见原因：节点问题、线路拥堵、配置不当、本地网络。按优先级列出优化方法。
 ---
 
