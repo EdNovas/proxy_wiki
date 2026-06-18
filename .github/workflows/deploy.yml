@@ -45,7 +45,7 @@ jobs:
         run: npx hexo generate
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
           retention-days: 1  # artifact 只保留 1 天，防止存储堆积
