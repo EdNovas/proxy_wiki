@@ -1,7 +1,7 @@
 ---
 title: Windows / macOS / iOS / Android 平台特有问题
 date: 2026-05-10
-updated: 2026-05-10
+updated: 2026-09-25
 categories:
   - 排障手册
 tags:
@@ -68,10 +68,10 @@ FOR /F "tokens=11 delims=\" %p IN ('REG QUERY "HKCU\Software\Classes\Local Setti
 - **最佳方案**：使用 TUN 模式。TUN 模式在网络接口层接管流量，所有应用的流量都会经过代理，无论它们是否遵循系统代理设置
 - **Git 等命令行工具**：手动设置代理环境变量
   ```bash
-  # Git 配置代理
+  # Git 配置代理（HTTPS 远程同样由 http.proxy 控制，Git 没有 https.proxy 这个配置项）
   git config --global http.proxy http://127.0.0.1:7890
-  git config --global https.proxy http://127.0.0.1:7890
   ```
+  SSH 远程、npm、pip、Docker 等工具的写法见 [命令行与开发工具走代理](/posts/terminal-proxy/)。
 - **终端全局代理**：在 PowerShell 或 CMD 中设置环境变量
   ```powershell
   $env:HTTP_PROXY = "http://127.0.0.1:7890"
@@ -89,15 +89,17 @@ FOR /F "tokens=11 delims=\" %p IN ('REG QUERY "HKCU\Software\Classes\Local Setti
 方案一：让代理客户端监听在 `0.0.0.0` 而非 `127.0.0.1`（允许局域网连接），然后在 WSL2 中使用宿主机的内网 IP：
 
 ```bash
-# 获取宿主机 IP（WSL2 中执行）
-host_ip=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+# 获取宿主机 IP（WSL2 中执行，取默认路由的网关地址）
+host_ip=$(ip route show | grep -i default | awk '{ print $3}')
 
 # 设置代理
 export http_proxy="http://${host_ip}:7890"
 export https_proxy="http://${host_ip}:7890"
 ```
 
-方案二：在 WSL2 的 `.wslconfig` 或 `wsl.conf` 中启用镜像网络模式（Windows 11 22H2+）：
+较早的教程用 `/etc/resolv.conf` 里的 nameserver 当宿主机 IP，但 Windows 11 22H2 及以上默认开启 DNS 隧道（`dnsTunneling`），那里写的是 `10.255.255.254`，并不是宿主机地址。防火墙放行等细节见 [命令行与开发工具走代理](/posts/terminal-proxy/) 的 WSL2 一节。
+
+方案二：在 `.wslconfig` 中启用镜像网络模式（Windows 11 22H2+）：
 
 ```ini
 # %USERPROFILE%\.wslconfig
@@ -322,7 +324,7 @@ sudo xattr -rd com.apple.quarantine /Applications/ClashVergeRev.app
 
 ### iOS 的 Shadowrocket 和 Quantumult X 有什么区别？
 
-两者都是功能完善的代理客户端。Shadowrocket 价格较低（约 $2.99），界面简洁，上手容易，适合大多数用户。Quantumult X 价格较高（约 $7.99），功能更丰富，规则系统更灵活，适合高级用户进行精细配置。
+两者都是功能完善的代理客户端。Shadowrocket 价格较低（约 $2.99），界面简洁，上手容易，适合大多数用户。Quantumult X 价格较高（约 $9.99），功能更丰富，规则系统更灵活，适合高级用户进行精细配置。以上均为美区价格，实际以 App Store 为准，其他 iOS 客户端的对比见 [2026 各平台代理客户端推荐清单](/posts/client-recommendations-2026/)。
 
 ### Android 上哪个代理客户端最稳定？
 

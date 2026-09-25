@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="1" stop-color="#171b36"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.5">
+      <stop offset="0" stop-color="#34d399" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+  <line x1="90" y1="120" x2="330" y2="90" stroke="#34d399" stroke-opacity="0.18" stroke-width="1.5"/><line x1="90" y1="120" x2="160" y2="360" stroke="#34d399" stroke-opacity="0.18" stroke-width="1.5"/><line x1="160" y1="360" x2="210" y2="560" stroke="#34d399" stroke-opacity="0.18" stroke-width="1.5"/><line x1="160" y1="360" x2="260" y2="250" stroke="#34d399" stroke-opacity="0.18" stroke-width="1.5"/><line x1="260" y1="250" x2="330" y2="90" stroke="#34d399" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1050" y1="110" x2="880" y2="70" stroke="#34d399" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1050" y1="110" x2="1000" y2="300" stroke="#34d399" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1000" y1="300" x2="1110" y2="420" stroke="#34d399" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1110" y1="420" x2="960" y2="580" stroke="#34d399" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1000" y1="300" x2="960" y2="580" stroke="#34d399" stroke-opacity="0.18" stroke-width="1.5"/><circle cx="90" cy="120" r="5" fill="#34d399" fill-opacity="0.45"/><circle cx="210" cy="560" r="3.5" fill="#34d399" fill-opacity="0.45"/><circle cx="330" cy="90" r="3.5" fill="#34d399" fill-opacity="0.45"/><circle cx="160" cy="360" r="5" fill="#34d399" fill-opacity="0.45"/><circle cx="1050" cy="110" r="3.5" fill="#34d399" fill-opacity="0.45"/><circle cx="1110" cy="420" r="3.5" fill="#34d399" fill-opacity="0.45"/><circle cx="960" cy="580" r="5" fill="#34d399" fill-opacity="0.45"/><circle cx="880" cy="70" r="3.5" fill="#34d399" fill-opacity="0.45"/><circle cx="260" cy="250" r="3.5" fill="#34d399" fill-opacity="0.45"/><circle cx="1000" cy="300" r="5" fill="#34d399" fill-opacity="0.45"/>
+  <g>
+        <line x1="530" y1="180" x2="510" y2="120" stroke="#34d399" stroke-width="5" stroke-linecap="round"/>
+        <line x1="600" y1="180" x2="600" y2="112" stroke="#34d399" stroke-width="5" stroke-linecap="round"/>
+        <line x1="670" y1="180" x2="690" y2="120" stroke="#34d399" stroke-width="5" stroke-linecap="round"/>
+        <rect x="460" y="178" width="280" height="72" rx="16" fill="#0f172a" stroke="#34d399" stroke-width="3"/>
+        <circle cx="500" cy="214" r="7" fill="#34d399"/><circle cx="528" cy="214" r="7" fill="#34d399" fill-opacity="0.6"/><circle cx="556" cy="214" r="7" fill="#34d399" fill-opacity="0.35"/>
+        <rect x="610" y="206" width="100" height="16" rx="8" fill="#34d399" fill-opacity="0.25"/>
+        <path d="M600 250 C600 290 420 290 420 322" fill="none" stroke="#34d399" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="6 6"/><path d="M600 250 C600 290 540 290 540 322" fill="none" stroke="#34d399" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="6 6"/><path d="M600 250 C600 290 660 290 660 322" fill="none" stroke="#34d399" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="6 6"/><path d="M600 250 C600 290 780 290 780 322" fill="none" stroke="#34d399" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="6 6"/>
+        <rect x="390" y="338" width="60" height="38" rx="5" fill="none" stroke="#34d399" stroke-width="3"/><line x1="408" y1="384" x2="432" y2="384" stroke="#34d399" stroke-width="3"/><rect x="525" y="332" width="30" height="54" rx="6" fill="none" stroke="#34d399" stroke-width="3"/><circle cx="540" cy="378" r="2.5" fill="#34d399"/><rect x="628" y="346" width="64" height="30" rx="15" fill="none" stroke="#34d399" stroke-width="3"/><line x1="642" y1="361" x2="652" y2="361" stroke="#34d399" stroke-width="3"/><line x1="647" y1="356" x2="647" y2="366" stroke="#34d399" stroke-width="3"/><circle cx="674" cy="358" r="3" fill="#34d399"/><circle cx="680" cy="365" r="3" fill="#34d399"/><rect x="754" y="338" width="52" height="34" rx="4" fill="none" stroke="#34d399" stroke-width="3"/><path d="M744 378H816" stroke="#34d399" stroke-width="4" stroke-linecap="round"/>
+      </g>
+  <text x="600" y="500" text-anchor="middle" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="60" font-weight="700" fill="#f1f5f9" letter-spacing="2">软路由 · 全家科学上网</text>
+  <rect x="540" y="524" width="120" height="4" rx="2" fill="url(#acc)"/>
+  <text x="600" y="572" text-anchor="middle" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="20" font-weight="600" fill="#34d399" fill-opacity="0.9" letter-spacing="5">OPENWRT · GATEWAY · TRANSPARENT PROXY</text>
+</svg>

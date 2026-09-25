@@ -1,7 +1,7 @@
 ---
 title: V2Ray、Xray、Clash、Sing-box……我该用哪个？
 date: 2026-05-10
-updated: 2026-05-10
+updated: 2026-09-25
 categories:
   - 入门指南
 tags:
@@ -47,7 +47,7 @@ excerpt: V2Ray、Xray、Clash、Sing-box——先分清内核和客户端的区�
 
 关键要点：
 
-- **一个内核可以驱动多个不同的客户端**。比如 xray-core 被 v2rayN、v2rayNG、NekoBox 等多个客户端使用。
+- **一个内核可以驱动多个不同的客户端**。比如 xray-core 被 v2rayN、v2rayNG 等多个客户端使用。
 - **一个客户端在同一时间只使用一个内核**。但有些客户端（如 v2rayN）支持在设置中切换不同的内核。
 - **客户端决定了你的使用体验**，但**内核决定了你能使用哪些协议和功能**。
 
@@ -118,7 +118,7 @@ sing-box 正在成为越来越多客户端的底层引擎选择，有逐步取�
 | 独有特性 | 强大的规则分流系统、proxy-provider、rule-provider |
 | 当前状态 | 活跃维护，Clash 生态的核心引擎 |
 
-先说背景：最初的 Clash Premium 内核由原作者开发，于 2023 年 11 月突然删库停更。但 Clash 的社区分叉——Clash Meta——早在停更之前就已经独立发展，功能上远超原版。后来 Clash Meta 更名为 **mihomo**，这就是当前所有 Clash 系客户端实际使用的内核。
+先说背景：最初的 Clash Premium 内核由原作者开发，于 2023 年 11 月突然删库停更。但 Clash 的社区分叉——Clash Meta——早在停更之前就已经独立发展，功能上远超原版。后来 Clash Meta 更名为 **mihomo**，这就是当前绝大多数 Clash 系客户端实际使用的内核。
 
 mihomo 最核心的优势在于它的**规则分流体系**：
 
@@ -148,7 +148,7 @@ mihomo 最核心的优势在于它的**规则分流体系**：
 
 ## 各平台推荐客户端
 
-选择客户端时需要考虑三个因素：你的操作系统、你需要的内核、以及你对界面和功能的偏好。
+选择客户端时需要考虑三个因素：你的操作系统、你需要的内核、以及你对界面和功能的偏好。下面每个平台只列最常用的几款，更完整的候选、版本与下载渠道见 [2026 各平台代理客户端推荐清单](/posts/client-recommendations-2026/)。
 
 ### Windows
 
@@ -157,7 +157,7 @@ mihomo 最核心的优势在于它的**规则分流体系**：
 |--------|------|------|--------|
 | [Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev) | mihomo | 规则分流强大，GUI 美观，跨平台一致体验 | ⭐⭐⭐⭐⭐ |
 | [v2rayN](https://github.com/2dust/v2rayN) | xray-core / sing-box | 功能全面，支持切换内核，协议支持最广 | ⭐⭐⭐⭐ |
-| NekoBox | sing-box | 轻量简洁，sing-box 原生生态 | ⭐⭐⭐ |
+| [Throne](https://github.com/throneproj/Throne) | sing-box（另可调用 Xray） | 已停更的 NekoBox for PC（nekoray）的延续项目，轻量简洁 | ⭐⭐⭐ |
 
 **大多数 Windows 用户的最佳选择是 Clash Verge Rev。** 它安装简单，界面清晰，导入机场订阅后开箱即用，规则分流功能开箱即有。如果你需要使用 Reality、XHTTP 等最新协议特性，或者你更喜欢手动配置节点，v2rayN 是更好的选择。
 
@@ -179,7 +179,7 @@ Clash Verge Rev 在 macOS 上的表现与 Windows 版完全一致，是多数用
 |--------|------|------|--------|
 | Shadowrocket | 自研内核 | 价格便宜（$2.99），功能完善，性价比极高 | ⭐⭐⭐⭐⭐ |
 | [Surge](https://nssurge.com/) | 自研内核 | 功能最强大，调试能力最好，价格最贵（$49.99） | ⭐⭐⭐⭐ |
-| [Stash](https://apps.apple.com/app/stash-rule-based-proxy/id1596063349) | mihomo | Clash 规则生态，支持 rule-provider | ⭐⭐⭐⭐ |
+| [Stash](https://apps.apple.com/app/stash-rule-based-proxy/id1596063349) | 自研内核（兼容 Clash 配置） | Clash 规则生态，支持 rule-provider | ⭐⭐⭐⭐ |
 | [Loon](https://apps.apple.com/app/loon/id1373567447) | 自研内核 | 功能介于 Shadowrocket 和 Surge 之间 | ⭐⭐⭐ |
 
 iOS 平台的客户端几乎全部是付费应用（因 App Store 政策限制）。**Shadowrocket 是性价比之王**——仅需 2.99 美元，支持主流协议，配置简单，满足绝大多数用户的日常需求。Surge 适合对代理有极高要求的高级用户，它的网络调试、MitM 抓包、脚本引擎等功能远超其他客户端，但 49.99 美元的价格也远超其他选择。Stash 适合习惯了 Clash 规则体系、希望在 iOS 上使用相同规则配置的用户。
@@ -235,7 +235,7 @@ Linux 用户通常有一定的技术背景，可根据需求选择：
 │
 ├── Windows / macOS / Linux
 │   ├── 大多数用户 → Clash Verge Rev
-│   └── 需要最新协议特性 → v2rayN（Windows）
+│   └── 需要最新协议特性 → v2rayN（Windows / macOS / Linux 均有）
 │
 └── 路由器（OpenWrt）→ OpenClash
 ```
@@ -250,7 +250,7 @@ Linux 用户通常有一定的技术背景，可根据需求选择：
 
 这是一个非常常见的误解。2023 年 11 月，原版 Clash Premium 的作者确实删除了代码库并停止开发。但这影响的只是原版内核。社区分叉 Clash Meta（现已更名为 mihomo）在此之前就已经独立发展，功能上远远超过了原版，并且一直保持活跃更新。
 
-目前所有主流的 Clash 系客户端——Clash Verge Rev、Clash Meta for Android、OpenClash、Stash——使用的都是 mihomo 内核，而非已停更的原版。**Clash 生态不仅没有死，反而比原版时期更加活跃。**
+目前主流的开源 Clash 系客户端——Clash Verge Rev、Clash Meta for Android、OpenClash——使用的都是 mihomo 内核，而非已停更的原版；iOS 上的 Stash 则使用兼容 Clash 配置的自研内核。**Clash 生态不仅没有死，反而比原版时期更加活跃。**
 
 ### 选 Clash 系还是 V2Ray 系？
 
@@ -264,7 +264,7 @@ Linux 用户通常有一定的技术背景，可根据需求选择：
 
 ### 免费客户端和付费客户端有什么区别？
 
-桌面端（Windows、macOS、Linux）的客户端**大多数是免费且开源的**。Clash Verge Rev、v2rayN、v2rayNG、NekoBox、sing-box 都是免费的开源项目。
+桌面端（Windows、macOS、Linux）的客户端**大多数是免费且开源的**。Clash Verge Rev、v2rayN、Throne、sing-box 都是免费的开源项目，Android 上的 v2rayNG、NekoBox 也是如此。
 
 付费客户端主要集中在 iOS 平台（由于 App Store 的分发机制）。付费不一定意味着更好——Shadowrocket 只需 2.99 美元但功能非常完善，Surge 要 49.99 美元但提供了许多普通用户用不到的高级功能。对于绝大多数用户来说，Shadowrocket 的性价比远高于 Surge。
 
@@ -292,6 +292,6 @@ macOS 上的 Surge 也是付费软件，如果你不追求极致的原生体验�
 
 代理软件的选择不需要过度纠结。对于大多数用户来说，核心需求无非是：能连上、速度快、分流准。满足这三点的客户端都是好客户端。
 
-如果你是完全的新手，按照本文的推荐选一个客户端安装好，然后去看 [第一次使用代理：从零开始的配置指南](./first-time-setup.md) 完成初始配置即可。更深入的技术细节（协议选择、规则配置、DNS 优化）可以等你用熟了之后再慢慢了解。
+如果你是完全的新手，按照本文的推荐选一个客户端安装好，然后去看 [第一次使用代理：从零开始的配置指南](/posts/first-time-setup/) 完成初始配置即可。更深入的技术细节（协议选择、规则配置、DNS 优化）可以等你用熟了之后再慢慢了解。
 
 **先跑起来，再慢慢优化。**

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="1" stop-color="#171b36"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.5">
+      <stop offset="0" stop-color="#f59e0b" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+  <line x1="90" y1="120" x2="330" y2="90" stroke="#f59e0b" stroke-opacity="0.18" stroke-width="1.5"/><line x1="90" y1="120" x2="160" y2="360" stroke="#f59e0b" stroke-opacity="0.18" stroke-width="1.5"/><line x1="160" y1="360" x2="210" y2="560" stroke="#f59e0b" stroke-opacity="0.18" stroke-width="1.5"/><line x1="160" y1="360" x2="260" y2="250" stroke="#f59e0b" stroke-opacity="0.18" stroke-width="1.5"/><line x1="260" y1="250" x2="330" y2="90" stroke="#f59e0b" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1050" y1="110" x2="880" y2="70" stroke="#f59e0b" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1050" y1="110" x2="1000" y2="300" stroke="#f59e0b" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1000" y1="300" x2="1110" y2="420" stroke="#f59e0b" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1110" y1="420" x2="960" y2="580" stroke="#f59e0b" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1000" y1="300" x2="960" y2="580" stroke="#f59e0b" stroke-opacity="0.18" stroke-width="1.5"/><circle cx="90" cy="120" r="5" fill="#f59e0b" fill-opacity="0.45"/><circle cx="210" cy="560" r="3.5" fill="#f59e0b" fill-opacity="0.45"/><circle cx="330" cy="90" r="3.5" fill="#f59e0b" fill-opacity="0.45"/><circle cx="160" cy="360" r="5" fill="#f59e0b" fill-opacity="0.45"/><circle cx="1050" cy="110" r="3.5" fill="#f59e0b" fill-opacity="0.45"/><circle cx="1110" cy="420" r="3.5" fill="#f59e0b" fill-opacity="0.45"/><circle cx="960" cy="580" r="5" fill="#f59e0b" fill-opacity="0.45"/><circle cx="880" cy="70" r="3.5" fill="#f59e0b" fill-opacity="0.45"/><circle cx="260" cy="250" r="3.5" fill="#f59e0b" fill-opacity="0.45"/><circle cx="1000" cy="300" r="5" fill="#f59e0b" fill-opacity="0.45"/>
+  <g>
+        <line x1="350" y1="270" x2="860" y2="270" stroke="#f59e0b" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/>
+        
+          <circle cx="380" cy="270" r="11" fill="#0f172a" stroke="#f59e0b" stroke-width="4"/>
+          <text x="380" y="236" text-anchor="middle" font-family="'JetBrains Mono','Cascadia Code','Consolas','Menlo',monospace" font-size="20" font-weight="700" fill="#cbd5e1">2012</text>
+          <rect x="358" y="166" width="44" height="44" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-opacity="0.35" stroke-width="2"/>
+          <circle cx="380" cy="188" r="8" fill="#f59e0b" fill-opacity="0.3"/>
+          <circle cx="470" cy="270" r="11" fill="#0f172a" stroke="#f59e0b" stroke-width="4"/>
+          <text x="470" y="322" text-anchor="middle" font-family="'JetBrains Mono','Cascadia Code','Consolas','Menlo',monospace" font-size="20" font-weight="700" fill="#cbd5e1">2015</text>
+          <rect x="448" y="336" width="44" height="44" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-opacity="0.44999999999999996" stroke-width="2"/>
+          <circle cx="470" cy="358" r="8" fill="#f59e0b" fill-opacity="0.42"/>
+          <circle cx="560" cy="270" r="11" fill="#0f172a" stroke="#f59e0b" stroke-width="4"/>
+          <text x="560" y="236" text-anchor="middle" font-family="'JetBrains Mono','Cascadia Code','Consolas','Menlo',monospace" font-size="20" font-weight="700" fill="#cbd5e1">2019</text>
+          <rect x="538" y="166" width="44" height="44" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-opacity="0.55" stroke-width="2"/>
+          <circle cx="560" cy="188" r="8" fill="#f59e0b" fill-opacity="0.54"/>
+          <circle cx="650" cy="270" r="11" fill="#0f172a" stroke="#f59e0b" stroke-width="4"/>
+          <text x="650" y="322" text-anchor="middle" font-family="'JetBrains Mono','Cascadia Code','Consolas','Menlo',monospace" font-size="20" font-weight="700" fill="#cbd5e1">2023</text>
+          <rect x="628" y="336" width="44" height="44" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-opacity="0.65" stroke-width="2"/>
+          <circle cx="650" cy="358" r="8" fill="#f59e0b" fill-opacity="0.6599999999999999"/>
+          <circle cx="740" cy="270" r="11" fill="#0f172a" stroke="#f59e0b" stroke-width="4"/>
+          <text x="740" y="236" text-anchor="middle" font-family="'JetBrains Mono','Cascadia Code','Consolas','Menlo',monospace" font-size="20" font-weight="700" fill="#cbd5e1">2024</text>
+          <rect x="718" y="166" width="44" height="44" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-opacity="0.75" stroke-width="2"/>
+          <circle cx="740" cy="188" r="8" fill="#f59e0b" fill-opacity="0.78"/>
+          <circle cx="830" cy="270" r="16" fill="#f59e0b" stroke="#f59e0b" stroke-width="4"/>
+          <text x="830" y="322" text-anchor="middle" font-family="'JetBrains Mono','Cascadia Code','Consolas','Menlo',monospace" font-size="20" font-weight="700" fill="#f59e0b">2026</text>
+          <rect x="808" y="336" width="44" height="44" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-opacity="0.85" stroke-width="2"/>
+          <circle cx="830" cy="358" r="8" fill="#f59e0b" fill-opacity="0.8999999999999999"/>
+      </g>
+  <text x="600" y="500" text-anchor="middle" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="60" font-weight="700" fill="#f1f5f9" letter-spacing="2">代理客户端十四年</text>
+  <rect x="540" y="524" width="120" height="4" rx="2" fill="url(#acc)"/>
+  <text x="600" y="572" text-anchor="middle" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="20" font-weight="600" fill="#f59e0b" fill-opacity="0.9" letter-spacing="5">2012 → 2026 · CLIENT HISTORY</text>
+</svg>

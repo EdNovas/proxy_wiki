@@ -1,7 +1,7 @@
 ---
 title: TUN 模式不生效的常见原因
 date: 2026-05-10
-updated: 2026-05-10
+updated: 2026-09-25
 categories:
   - 排障手册
 tags:
@@ -396,7 +396,7 @@ rules:
 
 1. **排除 WSL 网段**：在分流规则中将 WSL 使用的虚拟网段（通常在 `172.16.0.0/12` 范围内）设为 DIRECT
 2. **切换到系统代理模式**：系统代理不修改路由表，不会影响 WSL 网络
-3. **在 WSL 内部手动配置代理**：设置 `export http_proxy=http://宿主机IP:7890` 和 `export https_proxy=http://宿主机IP:7890`，宿主机 IP 可通过 WSL 内 `cat /etc/resolv.conf` 中的 nameserver 获取
+3. **在 WSL 内部手动配置代理**：设置 `export http_proxy=http://宿主机IP:7890` 和 `export https_proxy=http://宿主机IP:7890`。默认的 NAT 模式下，宿主机 IP 按[微软 WSL 网络文档](https://learn.microsoft.com/en-us/windows/wsl/networking)的方法用 `ip route show | grep -i default | awk '{ print $3}'` 取默认网关，代理客户端还需开启 allow-lan；不要用 `/etc/resolv.conf` 里的 nameserver——Windows 11 22H2 及以上默认开启 DNS 隧道（`dnsTunneling`），那里写的是 `10.255.255.254`，并不是宿主机。如果改用 mirrored 模式（Windows 11 22H2 及以上），WSL 内直接用 `http://127.0.0.1:7890` 即可。详见 [命令行与开发工具走代理](/posts/terminal-proxy/) 的 WSL2 部分
 4. **使用 mixed 栈**：部分用户反馈 mixed 栈对 WSL 虚拟网络的兼容性优于 gVisor 栈
 
 ### Q：开启 TUN 后完全断网了怎么办？

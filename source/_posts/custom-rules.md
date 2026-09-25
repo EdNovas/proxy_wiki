@@ -1,7 +1,7 @@
 ---
 title: 如何自定义规则：让特定网站走代理/直连/特定节点
 date: 2026-05-10
-updated: 2026-05-10
+updated: 2026-09-25
 categories:
   - 规则与分流
 tags:
@@ -319,7 +319,7 @@ function main(config) {
 - PROCESS-NAME,GenshinImpact.exe,Gaming
 ```
 
-**注意**：`PROCESS-NAME` 规则需要在 TUN 模式下才能生效。系统代理模式无法捕获进程信息。如果你还没开启 TUN 模式，参考客户端设置中的 TUN 选项。
+**注意**：`PROCESS-NAME` 规则本身并不依赖 TUN。只要 `find-process-mode` 没有设为 `off`（mihomo 默认为 `strict`），系统代理模式下本机程序发起的连接同样能按进程名匹配。但游戏客户端大多不遵循系统代理设置（UDP 流量也无法经过系统代理），流量根本不会进入 Clash，规则自然无从生效，所以游戏场景仍建议开启 TUN 模式。如果你还没开启 TUN 模式，参考客户端设置中的 TUN 选项。另外，来自局域网其他设备的连接无法获取进程信息，`PROCESS-NAME` 对它们无效。
 
 ### 场景三：AI 服务走专用节点组
 
@@ -401,7 +401,7 @@ ChatGPT、Claude 等 AI 服务对 IP 地区有要求。有些节点的 IP 被这
 - DOMAIN-KEYWORD,analytics,REJECT
 - DOMAIN-KEYWORD,tracking,REJECT
 
-# 屏蔽特定 App 的联网请求（需要 TUN 模式）
+# 屏蔽特定 App 的联网请求（建议开启 TUN 模式，确保该 App 的流量都经过 Clash）
 - PROCESS-NAME,bloatware.exe,REJECT
 ```
 
@@ -503,7 +503,7 @@ my-rules:
 | IP 段 | `IP-CIDR` | `IP-CIDR,1.2.3.0/24,DIRECT` | 匹配目标 IP 在指定范围内 |
 | IPv6 段 | `IP-CIDR6` | `IP-CIDR6,2001:db8::/32,DIRECT` | 匹配目标 IPv6 地址在指定范围内 |
 | 国家 IP | `GEOIP` | `GEOIP,CN,DIRECT` | 根据 GeoIP 数据库判断目标 IP 所属国家 |
-| 进程名 | `PROCESS-NAME` | `PROCESS-NAME,chrome.exe,Proxy` | 匹配发出请求的进程名（需要 TUN 模式） |
+| 进程名 | `PROCESS-NAME` | `PROCESS-NAME,chrome.exe,Proxy` | 匹配发出请求的进程名（仅对本机发起的连接有效，`find-process-mode` 不能为 `off`） |
 | 目标端口 | `DST-PORT` | `DST-PORT,22,DIRECT` | 匹配目标端口号 |
 | 源端口 | `SRC-PORT` | `SRC-PORT,7777,DIRECT` | 匹配来源端口号 |
 | 规则集 | `RULE-SET` | `RULE-SET,my-rules,Proxy` | 引用 rule-provider 中定义的规则集 |
@@ -641,7 +641,7 @@ function main(config) {
 - PROCESS-NAME,steam.exe,Gaming
 ```
 
-**前提条件**：必须开启 TUN 模式。系统代理模式下，代理客户端只能看到来自设置了代理的应用的流量，无法获取进程信息。TUN 模式通过虚拟网卡捕获所有流量，可以识别每个连接的来源进程。
+**前提条件**：流量要能进入 Clash，且 `find-process-mode` 不能设为 `off`（mihomo 默认为 `strict`；官方文档推荐在路由器上设为 `off`）。如果进程规则不生效，先检查最终生效的配置（包括订阅或客户端写入的部分）里这一项是否被设成了 `off`。系统代理模式下同样可以识别本机连接的来源进程，但代理客户端只能看到遵循系统代理设置的应用的流量，不走系统代理的程序（比如很多游戏）根本不会经过 Clash。TUN 模式通过虚拟网卡捕获所有流量，能覆盖这类程序，所以按应用分流时更推荐开启 TUN 模式。注意进程识别只对本机发起的连接有效，局域网其他设备经由本机代理的流量无法按进程名匹配。
 
 查看进程名的方法：打开任务管理器（Ctrl+Shift+Esc），在"详细信息"标签页中找到目标程序的进程名（"名称"列显示的就是 `PROCESS-NAME` 规则需要的值）。
 

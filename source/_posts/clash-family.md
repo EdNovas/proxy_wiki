@@ -1,7 +1,7 @@
 ---
 title: Clash 系列全解：Clash Premium / Clash Meta / mihomo 的关系
 date: 2026-05-10
-updated: 2026-05-10
+updated: 2026-09-25
 categories:
   - 代理软件
 tags:
@@ -99,7 +99,7 @@ mihomo 的定位非常明确：**在完全兼容 Clash 配置格式的前提下�
 
 ## 基于 mihomo 的客户端
 
-mihomo 本身是一个命令行内核。大多数用户通过图形化客户端来使用它——这些客户端内置或调用 mihomo 核心，提供界面操作。
+mihomo 本身是一个命令行内核。大多数用户通过图形化客户端来使用它——这些客户端内置或调用 mihomo 核心，提供界面操作。下面介绍几款代表性客户端；FlClash、Clash Party（2025 年 8 月由 Mihomo Party 更名而来）等其他 mihomo 客户端及各平台的对比，见 [2026 各平台代理客户端推荐清单](/posts/client-recommendations-2026/)。
 
 ### Clash Verge Rev（桌面端首选）
 
@@ -136,12 +136,16 @@ Clash Verge Rev 是原 Clash Verge 项目的社区继承版本。原版 Clash Ve
 
 不过需要注意，Android 端目前也有 sing-box 等替代方案正在快速发展。
 
+## 兼容 Clash 配置的非 mihomo 客户端
+
+也有一些客户端并不基于 mihomo，只是兼容 Clash 的配置格式，底层是自己开发的内核。
+
 ### Stash（iOS 端）
 
-- **平台**：iOS / macOS
-- **定位**：兼容 Clash 配置格式的商业客户端
+- **平台**：iOS / macOS / tvOS / visionOS
+- **定位**：兼容 Clash 配置格式的商业客户端，闭源自研内核
 
-[Stash](https://apps.apple.com/app/stash-rule-based-proxy/id1596063349) 是一款付费应用（App Store 上架），**不直接使用 mihomo 内核**，而是使用自己的实现。但它兼容 Clash YAML 配置格式，这意味着你为 Clash/mihomo 编写的配置文件可以直接导入 Stash 使用。
+[Stash](https://apps.apple.com/app/stash-rule-based-proxy/id1596063349) 是一款付费应用（App Store 上架），**不使用 mihomo 内核**，而是使用 Stash 团队自研的闭源内核。但它兼容 Clash YAML 配置格式，这意味着你为 Clash/mihomo 编写的配置文件可以直接导入 Stash 使用。
 
 对于 iOS 用户来说，Stash 和 Shadowrocket 是两个主要选择。Stash 更偏向"Clash 生态"，Shadowrocket 则更通用。
 
@@ -227,7 +231,7 @@ Clash Verge 是原版客户端，由 zzzgydi 开发。在删库事件后，原�
 
 ### Q：mihomo 的名字为什么这么奇怪？
 
-mihomo 这个名字并没有特别深的含义。项目更名的主要目的是与"Clash"品牌脱钩，降低因品牌名称关联而带来的法律和安全风险。名字本身不重要——重要的是它是目前最活跃、功能最完整的 Clash 兼容内核。
+mihomo 这个名字并没有特别深的含义。项目更名的主要目的是与"Clash"品牌脱钩，降低因品牌名称关联而带来的法律和安全风险。名字本身不重要——重要的是它是目前最活跃、功能最完整的开源 Clash 兼容内核。
 
 ### Q：我是新用户，应该从哪个客户端开始？
 
@@ -246,7 +250,7 @@ Clash 的故事是开源社区韧性的一个缩影。原始项目虽然消失�
 
 当前的 Clash 生态简单明了：
 
-- **内核**：mihomo（MetaCubeX/mihomo）——唯一活跃维护的 Clash 兼容内核。
+- **内核**：mihomo（MetaCubeX/mihomo）——最主流的开源 Clash 兼容内核，持续活跃维护。
 - **桌面客户端**：Clash Verge Rev——最推荐的跨平台图形化客户端。
 - **路由器**：OpenClash——OpenWrt 上的首选方案。
 - **配置格式**：Clash YAML——经过 mihomo 扩展，支持所有现代协议。
