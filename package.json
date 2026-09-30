@@ -12,6 +12,7 @@
     "version": "8.1.2"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.2",
     "colorjs.io": "^0.6.1",
     "hexo": "^8.0.0",
     "hexo-generator-archive": "^2.0.0",

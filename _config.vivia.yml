@@ -27,7 +27,7 @@ banner:
 hue: 260                   # 蓝色调
 
 # 个人信息
-avatar: https://cdn.jsdelivr.net/gh/wdm1732418365/CDN/New%20folder/icon.png
+avatar: /images/avatar-icon.png   # 原图：cdn.jsdelivr.net/gh/wdm1732418365/CDN/New%20folder/icon.png（jsDelivr 在大陆不稳定，改为本站托管）
 author: 代理百科
 subtitle: 协议 · 工具 · 入门 · 实践 —— 一站式代理技术博客
 links:
