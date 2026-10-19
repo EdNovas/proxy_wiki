@@ -1,7 +1,7 @@
 ---
 title: 什么是分流规则？为什么需要它
 date: 2026-05-10
-updated: 2026-05-10
+updated: 2026-10-19
 categories:
   - 规则与分流
 tags:
@@ -114,10 +114,10 @@ DOMAIN-KEYWORD,google,Proxy
 匹配一个特定的 IP 地址范围。CIDR 是一种标准的 IP 段表示方法。
 
 ```
-IP-CIDR,91.108.0.0/16,Proxy
+IP-CIDR,149.154.160.0/20,Proxy,no-resolve
 ```
 
-这条规则匹配所有以 `91.108` 开头的 IP 地址（`91.108.0.0` 到 `91.108.255.255`）。上面这个例子是 Telegram 的 IP 段——Telegram 的服务器用的就是这个 IP 范围，把它走代理可以确保 Telegram 正常连接。
+这条规则匹配 `149.154.160.0` 到 `149.154.175.255` 范围内的 IP 地址。上面这个例子是 Telegram 官方公布的 IP 段之一，完整列表以 [core.telegram.org/resources/cidr.txt](https://core.telegram.org/resources/cidr.txt) 为准——只写这一条覆盖不了 Telegram 的全部服务器，完整写法见 [Telegram 代理与分流规则](/posts/telegram-proxy-guide/)。末尾的 `no-resolve` 表示：目标是域名的请求检查到这条规则时，不会专门为它去做 DNS 解析；没有现成的解析结果，就视为不匹配，继续往下检查。
 
 **GEOIP（地理位置匹配）**
 

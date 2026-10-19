@@ -1,6 +1,7 @@
 ---
 title: VLESS + Reality 深度解析
 date: 2026-05-10
+updated: 2026-10-19
 categories:
   - 协议与原理
 tags:
@@ -10,12 +11,12 @@ tags:
   - TLS
   - 深度解析
   - Xray
-excerpt: VLESS+Reality 借用真实网站的 TLS 证书伪装代理流量。深入解析工作原理、配置要点和最佳实践。
+excerpt: VLESS+Reality 借用真实网站的 TLS 身份伪装代理流量。深入解析工作原理、配置要点和最佳实践。
 mermaid: true
 index_img: /images/posts/vless-reality-deep-dive.png
 ---
 
-> **摘要**: VLESS + Reality 是当前最受推荐的代理协议组合。Reality 的核心创新在于"借用"真实网站的 TLS 证书进行伪装，使代理流量在 GFW 看来与正常 HTTPS 连接完全一致。本文深入解析 Reality 的工作原理、配置要点和最佳实践。
+> **摘要**: VLESS + Reality 是当前最受推荐的代理协议组合。Reality 的核心创新在于"借用"真实网站的 TLS 身份进行伪装，使代理流量在 GFW 看来与正常 HTTPS 连接完全一致。本文深入解析 Reality 的工作原理、配置要点和最佳实践。
 
 ## VLESS 协议基础
 
@@ -35,7 +36,7 @@ VLESS 的设计思路非常直接：**既然外层已经有 TLS 了，协议本�
 
 在 Reality 出现之前，如果你想让代理流量看起来像正常的 HTTPS 连接，标准做法是使用 Trojan 或者 VLESS+TLS——也就是给你的代理服务器配一个真实的域名、申请一张真实的 TLS 证书。这种方案确实能让流量在加密层面看起来像 HTTPS，但存在三个根本性的弱点：域名和证书暴露身份、TLS 指纹与真实浏览器不一致（详见 [TLS 指纹与 uTLS](/posts/tls-fingerprinting/)）、主动探测可以暴露代理。
 
-[Reality](https://github.com/XTLS/REALITY) 的设计目标就是**一次性解决以上所有问题**。它不需要你拥有任何域名，不需要你申请任何证书，也不依赖回落机制来应对探测。它的核心思路只有一句话：**借用目标网站的真实 TLS 证书来伪装自己**。
+[Reality](https://github.com/XTLS/REALITY) 的设计目标就是**一次性解决以上所有问题**。它不需要你拥有任何域名，不需要你申请任何证书，也不依赖回落机制来应对探测。它的核心思路只有一句话：**借用目标网站的真实身份来伪装自己**。
 
 
 ## Reality 工作原理（核心）
@@ -50,11 +51,11 @@ VLESS 的设计思路非常直接：**既然外层已经有 TLS 了，协议本�
 1. 客户端使用 [uTLS](https://github.com/refraction-networking/utls) 库生成与真实浏览器完全一致的 TLS Client Hello，SNI 填写 dest 目标站的域名（如 `apple.com`）
 2. 客户端在 Client Hello 中嵌入基于 x25519 的认证数据
 3. 服务端用预配置的私钥验证客户端身份
-4. 服务端将 Client Hello 转发给真实目标站获取真实 TLS 证书
-5. 服务端将真实证书转发给客户端完成握手
+4. 服务端早在连接建立时就已拨号 dest、把 Client Hello 转发过去（不论认证是否通过，每条连接都如此）；认证通过后，它参照目标站返回的握手消息长度做填充，**自己**完成 TLS 1.3 握手——出示给客户端的是由"临时认证密钥"签发的"临时可信证书"，而不是目标站的真证书
+5. 客户端校验临时可信证书后完成握手；如果收到的反而是目标站的真证书（说明服务端拒绝了它的 Client Hello，或者连接被中间设备导向了目标站、遭到了中间人攻击），客户端会进入"爬虫模式"，不会把它当作代理连接
 6. TLS 握手完成后切换到代理模式，VLESS 协议开始传输数据
 
-**最终效果**：从 GFW 的视角来看，整个过程就是一个使用最新版 Chrome 浏览器访问 `apple.com` 的标准 HTTPS 连接。TLS 证书是真的，客户端指纹是真的，SNI 是真的——因为它们本来就是真的。
+**最终效果**：从 GFW 的视角来看，整个过程就是一个使用最新版 Chrome 浏览器访问 `apple.com` 的标准 HTTPS 连接。客户端指纹是真的，SNI 是真的，握手消息的长度也照着目标站来——至于证书，TLS 1.3 的证书本来就是加密传输的，GFW 根本看不到客户端收到的是哪一张。
 
 ```mermaid
 sequenceDiagram
@@ -65,11 +66,11 @@ sequenceDiagram
     
     C->>S: TLS Client Hello (SNI: apple.com)<br/>+ x25519 认证
     Note over G: 看到: 正常的到 apple.com 的连接
+    S->>T: 转发 Client Hello（每条连接都会拨号 dest）
     S->>S: 验证认证 ✓
-    S->>T: 转发 Client Hello
-    T->>S: Server Hello + 真实证书
-    S->>C: 转发真实 Server Hello
-    Note over G: 看到: 真实的 apple.com 证书 ✓
+    T->>S: Server Hello 等握手消息（只用来参照长度）
+    S->>C: 自己完成 TLS 1.3 握手<br/>出示临时可信证书，并按目标站长度填充
+    Note over G: 看到: 与 apple.com 一致的握手<br/>证书在 TLS 1.3 中加密，不可见
     C->>S: 加密代理数据
     S->>C: 加密代理数据
     Note over G: 看到: 正常 HTTPS 流量
@@ -206,7 +207,7 @@ proxies:
 
 ### Q: dest 目标站能看到我的代理流量吗？
 
-不能。Reality 在 TLS 握手阶段与 dest 站点通信获取证书，但握手完成后，代理数据的传输完全在客户端和你的代理服务器之间进行，与 dest 站点没有任何数据交互。
+不能。Reality 在 TLS 握手阶段会把 Client Hello 转发给 dest 站点、参照它的握手消息长度（并不把它的证书交给客户端），但握手完成后，代理数据的传输完全在客户端和你的代理服务器之间进行，与 dest 站点没有任何数据交互。
 
 ### Q: 能通过 Reality 解锁 Netflix 等流媒体吗？
 

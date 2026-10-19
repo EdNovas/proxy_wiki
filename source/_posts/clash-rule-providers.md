@@ -1,7 +1,7 @@
 ---
 title: Clash 规则集详解：rule-provider 是什么、怎么用
 date: 2026-05-10
-updated: 2026-05-10
+updated: 2026-10-19
 categories:
   - 规则与分流
 tags:
@@ -30,8 +30,8 @@ rules:
   - DOMAIN-SUFFIX,twitter.com,Proxy
   - DOMAIN-SUFFIX,facebook.com,Proxy
   # ... 还有几千条
-  - IP-CIDR,91.108.0.0/16,Proxy
-  - IP-CIDR,149.154.0.0/16,Proxy
+  - IP-CIDR,91.108.4.0/22,Proxy
+  - IP-CIDR,149.154.160.0/20,Proxy
   # ... 还有几百条 IP 段
 ```
 
@@ -75,7 +75,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
     path: ./ruleset/google.txt
     interval: 86400
-    format: text
+    format: yaml   # 扩展名是 .txt，内容却是 payload 列表，不能写 text
 
   cn-cidr:
     type: http
@@ -83,7 +83,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
     path: ./ruleset/cncidr.txt
     interval: 86400
-    format: text
+    format: yaml
 
 rules:
   - RULE-SET,google,Proxy
@@ -105,7 +105,7 @@ rules:
 
 这是最容易混淆的参数，决定了规则文件内容的解析方式。三种取值对应三种不同的文件格式要求：
 
-- `domain`：文件中每一行是一个域名，Clash 自动按 DOMAIN-SUFFIX 逻辑匹配。
+- `domain`：文件中每一行是一个域名。不带前缀只匹配该域名本身，写成 `+.google.com` 才同时匹配它和所有子域名。
 - `ipcidr`：文件中每一行是一个 IP CIDR 段。
 - `classical`：文件中每一行是完整的规则语法（包含规则类型前缀）。
 
@@ -127,6 +127,8 @@ rules:
 - `yaml`：YAML 格式，规则在 `payload` 列表中。
 - `mrs`：mihomo 的二进制格式，解析速度最快。
 
+不写 `format` 时，mihomo 默认按 `yaml` 解析。`format` 要按文件的实际内容填，不能看扩展名：Loyalsoldier 的 `.txt` 文件内容是 YAML（`payload:` 加 `- '…'` 列表），如果写成 `text`，mihomo 只会逐行去掉首尾空白、跳过注释，把 `payload:` 和 `- '91.108.4.0/22'` 这样的行原样当成规则，结果全部无效，整个规则集等于空的。
+
 ### behavior 类型详细说明
 
 三种 behavior 的区别是新手最容易踩坑的地方。文件内容格式必须和 behavior 声明严格对应，否则 Clash 无法正确解析。
@@ -136,13 +138,13 @@ rules:
 文件内容只包含域名，不需要规则类型前缀：
 
 ```text
-google.com
-googleapis.com
-youtube.com
-gstatic.com
++.google.com
++.googleapis.com
++.youtube.com
++.gstatic.com
 ```
 
-Clash 会自动将这些域名按 DOMAIN-SUFFIX 逻辑匹配。也就是说，`google.com` 会匹配 `google.com` 本身以及 `mail.google.com`、`docs.google.com` 等所有子域名。
+`+.google.com` 会匹配 `google.com` 本身以及 `mail.google.com`、`docs.google.com` 等所有子域名，效果相当于 DOMAIN-SUFFIX。如果只写 `google.com`，就只匹配 `google.com` 这一个域名，不含子域名。Loyalsoldier 的域名规则集里绝大多数条目都带 `+.` 前缀，就是这个原因。
 
 在 `rules` 中引用时直接写 `RULE-SET,google,Proxy`，不需要再指定匹配类型。
 
@@ -151,8 +153,8 @@ Clash 会自动将这些域名按 DOMAIN-SUFFIX 逻辑匹配。也就是说，`g
 文件内容只包含 IP CIDR 段：
 
 ```text
-91.108.0.0/16
-149.154.0.0/16
+91.108.4.0/22
+149.154.160.0/20
 ```
 
 引用方式与 domain 相同。当流量的目标 IP 落在这些 CIDR 范围内时，规则命中。
@@ -164,7 +166,7 @@ Clash 会自动将这些域名按 DOMAIN-SUFFIX 逻辑匹配。也就是说，`g
 ```text
 DOMAIN-SUFFIX,google.com
 DOMAIN-KEYWORD,youtube
-IP-CIDR,91.108.0.0/16,no-resolve
+IP-CIDR,91.108.4.0/22,no-resolve
 DOMAIN,api.openai.com
 ```
 
@@ -226,7 +228,7 @@ rules:
 
 **URL 基础路径**：`https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/`
 
-**格式**：text
+**格式**：YAML。文件扩展名虽然是 `.txt`，内容却是 `payload:` 列表，所以 `format` 写 `yaml` 或干脆不写（[README](https://github.com/Loyalsoldier/clash-rules) 的示例就没写），不能写 `text`。
 
 **适合人群**：大多数用户。规则分类清晰，文件格式统一，文档完善。
 
@@ -269,7 +271,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
     path: ./ruleset/reject.txt
     interval: 43200
-    format: text
+    format: yaml
 
   # 私有网络
   private:
@@ -278,7 +280,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
     path: ./ruleset/private.txt
     interval: 86400
-    format: text
+    format: yaml
 
   # 国内直连域名
   cn-domain:
@@ -287,7 +289,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
     path: ./ruleset/direct.txt
     interval: 86400
-    format: text
+    format: yaml
 
   # 国内 IP 段
   cn-cidr:
@@ -296,7 +298,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
     path: ./ruleset/cncidr.txt
     interval: 86400
-    format: text
+    format: yaml
 
   # Google 服务
   google:
@@ -305,7 +307,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
     path: ./ruleset/google.txt
     interval: 86400
-    format: text
+    format: yaml
 
   # Apple 服务
   apple:
@@ -314,7 +316,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
     path: ./ruleset/apple.txt
     interval: 86400
-    format: text
+    format: yaml
 
   # iCloud
   icloud:
@@ -323,7 +325,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
     path: ./ruleset/icloud.txt
     interval: 86400
-    format: text
+    format: yaml
 
   # Telegram IP 段
   telegram-cidr:
@@ -332,7 +334,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
     path: ./ruleset/telegramcidr.txt
     interval: 86400
-    format: text
+    format: yaml
 
   # 流媒体 - Netflix
   netflix:
@@ -364,7 +366,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
     path: ./ruleset/gfw.txt
     interval: 86400
-    format: text
+    format: yaml
 
   # 需要代理的域名
   proxy-domain:
@@ -373,7 +375,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
     path: ./ruleset/proxy.txt
     interval: 86400
-    format: text
+    format: yaml
 
 # ==================== 分流规则 ====================
 rules:
@@ -391,7 +393,8 @@ rules:
   - RULE-SET,disney,Streaming
 
   # 5. Telegram - 基于 IP 段匹配
-  - RULE-SET,telegram-cidr,Telegram
+  #    加 no-resolve：否则走到这里的每个域名请求都要先用 nameserver 解析一次（fake-ip 模式也一样）
+  - RULE-SET,telegram-cidr,Telegram,no-resolve
 
   # 6. Google 服务
   - RULE-SET,google,Proxy
@@ -402,7 +405,7 @@ rules:
 
   # 8. 国内域名和 IP - 直连
   - RULE-SET,cn-domain,DIRECT
-  - RULE-SET,cn-cidr,DIRECT
+  - RULE-SET,cn-cidr,DIRECT,no-resolve
 
   # 9. GFW 列表和通用代理域名
   - RULE-SET,gfw,Proxy
@@ -425,6 +428,7 @@ DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claude.com
 DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,gemini.google.com
 DOMAIN-SUFFIX,bard.google.com

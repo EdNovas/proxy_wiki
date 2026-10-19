@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#171b36"/></linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.5"><stop offset="0" stop-color="#facc15" stop-opacity="0.32"/><stop offset="1" stop-color="#facc15" stop-opacity="0"/></radialGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#facc15"/><stop offset="1" stop-color="#f97316"/></linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+  <line x1="90" y1="120" x2="330" y2="90" stroke="#facc15" stroke-opacity="0.18" stroke-width="1.5"/><line x1="90" y1="120" x2="160" y2="360" stroke="#facc15" stroke-opacity="0.18" stroke-width="1.5"/><line x1="160" y1="360" x2="210" y2="560" stroke="#facc15" stroke-opacity="0.18" stroke-width="1.5"/><line x1="160" y1="360" x2="260" y2="250" stroke="#facc15" stroke-opacity="0.18" stroke-width="1.5"/><line x1="260" y1="250" x2="330" y2="90" stroke="#facc15" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1050" y1="110" x2="880" y2="70" stroke="#facc15" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1050" y1="110" x2="1000" y2="300" stroke="#facc15" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1000" y1="300" x2="1110" y2="420" stroke="#facc15" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1110" y1="420" x2="960" y2="580" stroke="#facc15" stroke-opacity="0.18" stroke-width="1.5"/><line x1="1000" y1="300" x2="960" y2="580" stroke="#facc15" stroke-opacity="0.18" stroke-width="1.5"/><circle cx="90" cy="120" r="5" fill="#facc15" fill-opacity="0.45"/><circle cx="210" cy="560" r="3.5" fill="#facc15" fill-opacity="0.45"/><circle cx="330" cy="90" r="3.5" fill="#facc15" fill-opacity="0.45"/><circle cx="160" cy="360" r="5" fill="#facc15" fill-opacity="0.45"/><circle cx="1050" cy="110" r="3.5" fill="#facc15" fill-opacity="0.45"/><circle cx="1110" cy="420" r="3.5" fill="#facc15" fill-opacity="0.45"/><circle cx="960" cy="580" r="5" fill="#facc15" fill-opacity="0.45"/><circle cx="880" cy="70" r="3.5" fill="#facc15" fill-opacity="0.45"/><circle cx="260" cy="250" r="3.5" fill="#facc15" fill-opacity="0.45"/><circle cx="1000" cy="300" r="5" fill="#facc15" fill-opacity="0.45"/>
+  <g>
+        <rect x="470" y="150" width="200" height="230" rx="10" fill="#0f172a" stroke="#facc15" stroke-opacity="0.45" stroke-width="3" transform="rotate(-8 570 265)"/>
+        <rect x="500" y="140" width="200" height="230" rx="10" fill="#0f172a" stroke="#facc15" stroke-opacity="0.7" stroke-width="3" transform="rotate(4 600 255)"/>
+        <rect x="520" y="130" width="200" height="230" rx="10" fill="#0f172a" stroke="#facc15" stroke-width="4"/>
+        <rect x="545" y="160" width="120" height="10" rx="5" fill="#facc15" fill-opacity="0.7"/>
+        <rect x="545" y="186" width="150" height="8" rx="4" fill="#cbd5e1" fill-opacity="0.45"/><rect x="545" y="206" width="140" height="8" rx="4" fill="#cbd5e1" fill-opacity="0.45"/><rect x="545" y="226" width="150" height="8" rx="4" fill="#0b1020" fill-opacity="1"/><rect x="545" y="246" width="110" height="8" rx="4" fill="#cbd5e1" fill-opacity="0.45"/><rect x="545" y="266" width="150" height="8" rx="4" fill="#0b1020" fill-opacity="1"/><rect x="545" y="286" width="130" height="8" rx="4" fill="#cbd5e1" fill-opacity="0.45"/>
+        <circle cx="760" cy="330" r="48" fill="#0f172a" stroke="#facc15" stroke-width="6"/>
+        <line x1="794" y1="364" x2="832" y2="402" stroke="#facc15" stroke-width="11" stroke-linecap="round"/></g>
+  <text x="600" y="500" text-anchor="middle" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="60" font-weight="700" fill="#f1f5f9" letter-spacing="2">GFW 泄露事件解读</text>
+  <rect x="540" y="524" width="120" height="4" rx="2" fill="url(#acc)"/>
+  <text x="600" y="572" text-anchor="middle" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans SC',sans-serif" font-size="20" font-weight="600" fill="#facc15" fill-opacity="0.9" letter-spacing="5">2025 · PUBLIC REPORTING · ANALYSIS</text>
+</svg>

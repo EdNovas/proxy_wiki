@@ -1,7 +1,7 @@
 ---
 title: IPv4 与 IPv6 基础：为什么机场越来越多提到 IPv6
 date: 2026-05-10
-updated: 2026-05-10
+updated: 2026-10-19
 categories:
   - 网络知识
 tags:
@@ -235,7 +235,7 @@ dns:
 
 ### IPv6 与分流规则
 
-如果你在分流规则中使用了 `IP-CIDR` 规则匹配 IPv4 地址段，这些规则不会匹配 IPv6 地址。你需要使用 `IP-CIDR6` 规则来匹配 IPv6 地址段。
+如果你在分流规则中使用了 `IP-CIDR` 规则匹配 IPv4 地址段，这些规则不会匹配 IPv6 地址。你需要把对应的 IPv6 地址段也写进规则：在 mihomo 中 `IP-CIDR` 与 `IP-CIDR6` 效果相同（`IP-CIDR6` 只是别名，参见 [mihomo 规则文档](https://wiki.metacubex.one/config/rules/)），直接用 `IP-CIDR` 写 IPv6 地址段也能匹配；Surge 等客户端则要求 IPv6 地址段使用 `IP-CIDR6`。
 
 同样，`GEOIP` 规则对 IPv4 和 IPv6 都有效——GeoIP 数据库同时包含 IPv4 和 IPv6 的地理归属信息。但在某些旧版本的 GeoIP 数据库中，IPv6 的覆盖率可能不如 IPv4 完整，导致部分 IPv6 地址无法被正确归类。
 

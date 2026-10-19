@@ -1,6 +1,7 @@
 ---
 title: "TLS 指纹识别：JA3/JA4 与反检测策略"
 date: 2026-05-10
+updated: 2026-10-19
 categories:
   - GFW 与审查
 tags:
@@ -123,7 +124,7 @@ JA4 的改进主要体现在以下几个方面：
 
 uTLS 的工作原理并不复杂：它预先收集了各种浏览器（Chrome、Firefox、Safari、Edge 等）在不同版本下的 Client Hello 参数模板。当代理客户端需要发起 TLS 连接时，uTLS 不使用 Go 标准库的默认参数，而是按照选定的浏览器模板来构造 Client Hello，包括完全一致的加密套件列表及顺序、扩展列表及顺序、椭圆曲线选择等。
 
-在 **[Xray-core](https://github.com/XTLS/Xray-core)** 和 **Sing-box** 中，用户可以通过 `fingerprint` 参数来启用 uTLS，并指定要模拟的浏览器类型：
+在 **[Xray-core](https://github.com/XTLS/Xray-core)** 中，用户通过 `fingerprint` 参数指定要模拟的浏览器类型（**Sing-box** 中对应的是 `utls` 字段里的 `enabled` 和 `fingerprint`）：
 
 ```json
 {
@@ -139,25 +140,27 @@ uTLS 的工作原理并不复杂：它预先收集了各种浏览器（Chrome、
 - **GREASE 的模拟难度**：GREASE 是一种由浏览器引入的机制，会在 Client Hello 中随机插入未知的扩展值或加密套件值，以确保服务端实现能正确忽略未知参数。浏览器每次连接时 GREASE 值都会变化，而 uTLS 的 GREASE 实现是否足够随机、是否符合真实浏览器的分布规律，是一个持续存在的挑战。
 - **只解决了 Client Hello 的问题**：TLS 握手不只有 Client Hello，还有 Client 在后续阶段的行为（如密钥交换方式、Session Resumption 行为等）。uTLS 主要集中在 Client Hello 层面，对握手的其他阶段覆盖有限。
 
-尽管如此，uTLS 仍然是目前最实用且最易部署的方案，能有效对抗基于 JA3/JA4 的被动指纹检测。
+尽管如此，uTLS 仍然是目前最易部署的方案，能应对基于 JA3/JA4 的常规被动指纹检测，但它终究是"模仿"，并非没有争议。截至 2026 年 10 月，[sing-box 的 TLS 文档](https://sing-box.sagernet.org/configuration/shared/tls/)把 uTLS 标为"不推荐"（Not Recommended），理由有三：研究者多次发现它的指纹缺陷；浏览器各自的 TLS 栈（Chrome 用 BoringSSL、Firefox 用 NSS）无法靠复制 Client Hello 的结构完全模仿；库本身也缺乏维护。文档建议真正需要抗指纹时改用 [NaiveProxy](/posts/naiveproxy/)。一个具体例子是 2026 年 2 月公开的 [CVE-2026-27017](https://advisories.gitlab.com/golang/github.com/refraction-networking/utls/CVE-2026-27017/)：uTLS 的 Chrome 模板在 GREASE ECH 中有一半概率组合出真实 Chrome 不会产生的加密套件搭配，直到 1.8.1 才修复。另一方面，Xray 的 Reality 仍然依赖 uTLS，客户端的 `fingerprint` 是必填项（见 [Xray REALITY 文档](https://xtls.github.io/config/transports/reality.html)）。
 
-### Reality：从根本上解决问题
+### Reality：借用真实网站的身份
 
-**Reality** 协议（由 XTLS 团队开发，集成在 Xray-core 中）采用了一种比 uTLS 更彻底的方法。它的思路不是"模拟浏览器去欺骗审查者"，而是"让审查者看到的就是一个真实的 TLS 连接"。
+**Reality** 协议（由 XTLS 团队开发，集成在 Xray-core 中）并不取代 uTLS：客户端仍然靠 uTLS 模拟浏览器指纹。它补上的是服务端这一侧：服务端不需要自己的域名和证书，而是借用一个真实大网站的身份，让审查者无论被动观察握手还是主动探测，看到的都尽量与访问那个网站一致。
 
 Reality 的工作流程如下：
 
-1. **客户端使用 uTLS 发送 Client Hello**：客户端首先利用 uTLS 构造一个模拟浏览器指纹的 Client Hello，发送给 Reality 服务端。从 GFW 的角度看，这个 Client Hello 的指纹与真实浏览器一致。
-2. **服务端将 Client Hello 转发给真实目标**：Reality 服务端收到 Client Hello 后，将其原封不动地转发给一个预先配置的真实目标网站（例如 `apple.com` 或 `www.microsoft.com`）。
-3. **真实目标返回 Server Hello 和证书**：目标网站正常处理这个 Client Hello，返回自己的 Server Hello、真实的 TLS 证书以及完成握手所需的参数。
-4. **服务端将真实响应转发给客户端**：Reality 服务端把从目标网站收到的 Server Hello 和证书原样转发给客户端。
-5. **切换到代理加密通道**：在 TLS 握手表面上完成后，客户端和服务端之间切换到代理自己的加密通道进行实际数据传输。
+1. **客户端使用 uTLS 发送 Client Hello**：客户端首先利用 uTLS 构造一个模拟浏览器指纹的 Client Hello，发送给 Reality 服务端。从 GFW 的角度看，这个 Client Hello 的指纹接近真实浏览器，但上一节提到的 uTLS 局限在这里同样存在。
+2. **服务端将 Client Hello 转发给真实目标，同时验证身份**：Reality 服务端收到 Client Hello 后，将其原封不动地转发给一个预先配置的真实目标网站（例如 `apple.com` 或 `www.microsoft.com`），同时检查其中是否藏有只有持有服务端公钥和 shortId 的客户端才能生成的认证信息。
+3. **真实目标返回 Server Hello**：目标网站正常处理这个 Client Hello，返回自己的 Server Hello 和后续握手消息。Reality 服务端借此得知目标网站选用的加密套件、密钥交换方式以及各条握手消息的长度。
+4. **按认证结果分流**：对通过认证的客户端，Reality 服务端**不会**把目标网站的响应转发过去，而是沿用目标 Server Hello 的参数、换上自己的密钥交换公钥，以 TLS 1.3 服务端身份自己完成握手，并参照目标网站的消息长度对后续握手记录做填充；它出示的是由本次连接的"临时认证密钥"签发的临时证书，客户端据此确认对端确实是 Reality 服务端。未通过认证的连接（包括审查者的主动探测）则被直接转发给目标网站，对方拿到的是目标网站的真实握手和真实证书。
+5. **在这条 TLS 连接中传输代理数据**：握手是客户端与 Reality 服务端之间真正完成的，之后的代理数据（如 VLESS）就在这条 TLS 1.3 连接中加密传输。
 
 这种设计的巧妙之处在于：
 
-- **GFW 看到的是一个完全真实的 TLS 连接**：Client Hello 指纹正常（来自 uTLS），Server Hello 和证书也是真实的（来自目标网站），整个握手过程没有任何可疑之处。
+- **GFW 看到的握手与访问目标网站高度相似**：Client Hello 指纹模仿浏览器（来自 uTLS），Server Hello 的参数和后续握手记录的长度都参照目标网站；而 TLS 1.3 的证书是加密传输的，旁观者看不到通过认证的客户端收到的其实是临时证书。
 - **主动探测也无法识别**：如果审查者主动连接 Reality 服务端，服务端会直接将其代理到真实目标网站。审查者看到的就是一个正常运行的网站，完全无法判断服务端背后是否运行着代理服务。
-- **不需要自己的 TLS 证书**：Reality 服务端不需要申请和维护 TLS 证书，因为它使用的是目标网站的真实证书。这也消除了因证书特征（如 Let's Encrypt 的签发模式）被识别的风险。
+- **不需要自己的 TLS 证书**：Reality 服务端不需要申请和维护 TLS 证书。通过认证的客户端收到的是服务端临时签发的证书，主动探测者被转发到目标网站，看到的是目标网站的真实证书。这也消除了因证书特征（如 Let's Encrypt 的签发模式）被识别的风险。
+
+需要区分的是，让客户端与目标网站完成真实握手、服务端只负责转发的是 ShadowTLS，而不是 Reality。两者的逐项差异见 [Shadowsocks 2022 与 ShadowTLS](/posts/ss2022-shadowtls/) 中的对比表。
 
 Reality 的主要注意事项是目标网站（dest）的选择：应选择支持 TLS 1.3、有 HTTP/2 支持、在目标地区正常可访问且不会频繁变化的大型网站。
 
@@ -212,12 +215,12 @@ ECH 的基本原理是：服务器预先通过 DNS 记录（HTTPS RR）发布一
 
 ### Q: uTLS 选哪个浏览器指纹最好？
 
-推荐选择 **Chrome**。原因很简单：Chrome 在全球浏览器市场中占据最高的份额（超过 60%）。选择 Chrome 指纹意味着你的 TLS 连接在统计上看起来最"普通"，不会因为使用了一个罕见的浏览器指纹而引起注意。相比之下，选择 Safari 或 Firefox 虽然也能工作，但这些浏览器的市场份额较低，如果某个 IP 地址同时发起了大量看起来来自 Safari 的连接，在统计分析中可能显得异常。此外，Chrome 指纹在 uTLS 中的维护也最为积极，通常能最快跟进新版本的变化。
+推荐选择 **Chrome**。原因很简单：Chrome 在全球浏览器市场中占据最高的份额（超过 60%）。选择 Chrome 指纹意味着你的 TLS 连接在统计上看起来最"普通"，不会因为使用了一个罕见的浏览器指纹而引起注意。相比之下，选择 Safari 或 Firefox 虽然也能工作，但这些浏览器的市场份额较低，如果某个 IP 地址同时发起了大量看起来来自 Safari 的连接，在统计分析中可能显得异常。此外，Chrome 指纹在 uTLS 中的维护也最为积极，通常能最快跟进新版本的变化。但要注意，选哪个模板都改变不了 uTLS 是"模仿"这一点：前面提到的 CVE-2026-27017 恰恰出在 Chrome 模板上，sing-box 文档也把 uTLS 整体标为不推荐。对指纹特别敏感的场景，可以考虑直接使用 Chromium 网络栈的 [NaiveProxy](/posts/naiveproxy/)。
 
 ### Q: 不配置 fingerprint 参数会怎样？
 
-如果不显式配置 `fingerprint` 参数，代理客户端将使用 **Go 语言原生的 crypto/tls 库**发起 TLS 连接。这意味着你的连接会携带一个典型的 Go 程序指纹，与任何主流浏览器都不相同。对于 GFW 的 TLS 指纹检测系统来说，这几乎等于在明文告诉审查者"我是一个 Go 语言程序"。在当前的网络审查环境下，不配置 fingerprint 参数是一个显著的安全隐患，强烈建议所有使用 TLS 类协议的用户都明确设置此参数。
+这要看客户端。sing-box 不启用 uTLS（`utls.enabled`）时，会使用 **Go 语言原生的 crypto/tls 库**发起 TLS 连接；Xray-core 则不同，截至 2026 年 10 月，其 [TLS 文档](https://xtls.github.io/config/transports/tls.html)写明 `fingerprint` 默认值为 `chrome`，只有显式设为 `unsafe` 才会回到 Go 原生 TLS。一旦用的是 Go 原生 TLS，你的连接就会携带一个典型的 Go 程序指纹，与任何主流浏览器都不相同。对于 GFW 的 TLS 指纹检测系统来说，这几乎等于在明文告诉审查者"我是一个 Go 语言程序"。因此建议所有使用 TLS 类协议的用户都明确设置此参数，不要依赖各客户端的默认值。
 
 ### Q: JA3 指纹可以完全伪造吗？
 
-技术上可以通过 uTLS **完全伪造** JA3 指纹。uTLS 允许逐字段地构造 Client Hello，理论上可以精确复制任何浏览器的参数组合。但"完美度"取决于几个因素：uTLS 库中浏览器指纹模板的更新是否及时、GREASE 等随机化机制的模拟是否足够真实、以及 TLS 握手后续阶段的行为是否与浏览器一致。在实践中，uTLS 对 JA3 指纹的模拟已经足够欺骗目前已知的大多数检测系统，但不能排除未来出现更精细的检测手段（例如结合 JA3 之外的握手行为特征进行综合分析）。
+技术上可以通过 uTLS **完全伪造** JA3 指纹。uTLS 允许逐字段地构造 Client Hello，理论上可以精确复制任何浏览器的参数组合。但"完美度"取决于几个因素：uTLS 库中浏览器指纹模板的更新是否及时、GREASE 等随机化机制的模拟是否足够真实、以及 TLS 握手后续阶段的行为是否与浏览器一致。在实践中，uTLS 对 JA3 指纹的模拟已经足够应付常见的检测系统，但研究者已多次发现它与真实浏览器之间的可区分之处（见上文 uTLS 一节），也不能排除未来出现更精细的检测手段（例如结合 JA3 之外的握手行为特征进行综合分析）。

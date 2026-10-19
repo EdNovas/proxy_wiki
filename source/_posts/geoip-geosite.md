@@ -1,7 +1,7 @@
 ---
 title: GeoIP / GeoSite 数据库：原理与更新
 date: 2026-05-10
-updated: 2026-05-10
+updated: 2026-10-19
 categories:
   - 规则与分流
 tags:
@@ -105,7 +105,7 @@ rules:
   - GEOSITE,cn,DIRECT                       # 中国网站直连
   - GEOSITE,google,Proxy                    # Google 走代理
   - GEOSITE,netflix,Streaming               # Netflix 走流媒体节点组
-  - GEOSITE,telegram,Proxy                  # Telegram 走代理
+  - GEOSITE,telegram,Proxy                  # Telegram 网页与链接域名；客户端还需 IP 规则，见 /posts/telegram-proxy-guide/
   - GEOIP,CN,DIRECT                         # 中国 IP 直连（兜底）
   - MATCH,Proxy                             # 其余走代理（最终兜底）
 ```
@@ -243,7 +243,7 @@ GeoIP 和 GeoSite 数据库的上游项目通常每周或每月发布新版本�
 | `youtube` | YouTube 相关域名 | `GEOSITE,youtube,Proxy` |
 | `facebook` | Facebook/Meta 服务 | `GEOSITE,facebook,Proxy` |
 | `twitter` | Twitter/X 服务 | `GEOSITE,twitter,Proxy` |
-| `telegram` | Telegram 相关域名 | `GEOSITE,telegram,Proxy` |
+| `telegram` | Telegram 相关域名（不含客户端连接的 IP 段） | `GEOSITE,telegram,Proxy` |
 | `netflix` | Netflix 域名 | `GEOSITE,netflix,Streaming` |
 | `openai` | OpenAI/ChatGPT 域名 | `GEOSITE,openai,AI` |
 | `apple` | Apple 服务 | `GEOSITE,apple,Apple` |

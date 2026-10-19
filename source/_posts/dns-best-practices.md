@@ -1,6 +1,7 @@
 ---
 title: 各客户端 DNS 配置最佳实践
 date: 2026-05-10
+updated: 2026-10-19
 categories:
   - DNS 专题
 tags:
@@ -64,9 +65,9 @@ Fake-IP 的核心思路是：**先不做真正的 DNS 解析，而是立即返�
 **优势**：
 
 - **解析速度快**：DNS 请求在本地立即返回，不需要等待任何上游 DNS 的网络往返，应用几乎感受不到 DNS 延迟
-- **彻底避免 DNS 泄漏**：走代理的域名，其真实 DNS 解析发生在远端节点，国内 DNS 服务器完全看不到你访问了哪些国外域名
+- **彻底避免 DNS 泄漏**：走代理的域名，其真实 DNS 解析发生在远端节点，国内 DNS 服务器完全看不到你访问了哪些国外域名（前提是 IP 类规则配置得当，见下文 `nameserver` 的配置说明）
 - **规则匹配准确**：分流判断基于域名（`google.com`），而非 IP 地址。域名匹配不会受到 DNS 污染的影响，规则命中率高
-- **避免 DNS 污染影响**：由于走代理的域名根本不在本地做 DNS 解析，GFW 的 DNS 污染完全不起作用
+- **避免 DNS 污染影响**：走代理的域名是以域名形式交给远端节点解析的，即使本地为匹配 IP 类规则先解析过一次，那次结果也不会用来建立代理连接，GFW 的 DNS 污染影响不到代理连接本身
 
 **注意事项**：
 
@@ -139,7 +140,7 @@ dns:
 - `ipv6: false`：关闭 IPv6 DNS 解析。大多数用户的网络环境不支持完整的 IPv6 链路，开启可能导致部分连接异常或 DNS 泄漏（详见下文 IPv6 章节）
 - `enhanced-mode: fake-ip`：使用 Fake-IP 模式，这是关键配置项
 - `fake-ip-range: 198.18.0.1/16`：Fake-IP 分配的地址段，使用默认值即可。这是一个保留地址段，不会与实际网络冲突
-- `nameserver`：上游 DNS 服务器。这里只需要配置国内 DNS，因为在 Fake-IP 模式下，只有直连域名才会真正触发 DNS 解析。推荐使用 DoH（DNS over HTTPS）来防止 DNS 请求被运营商劫持
+- `nameserver`：上游 DNS 服务器。这里只需要配置国内 DNS，因为在 Fake-IP 模式下，只有直连域名才会真正触发 DNS 解析——前提是 `GEOIP,CN` 等 IP 类规则加了 `no-resolve`，或代理域名已被前面的域名规则命中。域名请求一旦走到不带 `no-resolve` 的 `GEOIP`、`IP-CIDR` 或 ipcidr 规则集，mihomo 会先用 `nameserver` 把它解析一次再匹配，代理域名也不例外（见 [mihomo 规则文档](https://wiki.metacubex.one/config/rules/) 的 no-resolve 一节）。推荐使用 DoH（DNS over HTTPS）来防止 DNS 请求被运营商劫持
 
 
 ### 最常见的配置错误
@@ -150,7 +151,7 @@ dns:
 
 **错误的根源**：网上大量流传的 Clash DNS 配置教程是从 Redir-Host 时代直接复制过来的。在 Redir-Host 模式下，确实需要 fallback 来解决 DNS 污染问题——当 nameserver（国内 DNS）返回被污染的结果时，用 fallback（海外 DNS）的结果来纠正。但在 Fake-IP 模式下，这套机制完全多余。
 
-**为什么多余**：在 Fake-IP 模式下，`nameserver` 只负责解析**直连域名**——也就是那些匹配了直连规则（如 `GEOSITE,cn,DIRECT`）的域名。这些域名本来就是国内域名（如 `baidu.com`、`taobao.com`），用国内 DNS 解析是正确的，根本不存在被污染的问题。走代理的域名（如 `google.com`）则根本不会触发本地 DNS 解析，它们的域名直接发送给远端代理节点处理。
+**为什么多余**：在 Fake-IP 模式下，`nameserver` 原则上只负责解析**直连域名**——也就是那些匹配了直连规则（如 `GEOSITE,cn,DIRECT`）的域名。这些域名本来就是国内域名（如 `baidu.com`、`taobao.com`），用国内 DNS 解析是正确的，根本不存在被污染的问题。走代理的域名（如 `google.com`）只要在遇到不带 `no-resolve` 的 IP 类规则之前已被域名规则命中，就根本不会触发本地 DNS 解析，它们的域名直接发送给远端代理节点处理；否则会先由 `nameserver` 解析一次用来匹配 IP 规则，但最终发给节点的仍是域名。
 
 **加了 fallback 的后果**：
 

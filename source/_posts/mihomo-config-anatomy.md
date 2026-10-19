@@ -1,7 +1,7 @@
 ---
 title: "mihomo（Clash Meta）配置文件逐段详解：从通用设置到代理组"
 date: 2026-09-24
-updated: 2026-09-24
+updated: 2026-10-19
 categories:
   - 客户端教程
 tags:
@@ -373,7 +373,7 @@ TUN 需要管理员（root）权限。在 Clash Verge Rev 里，这些字段大�
 | `server` / `port` | 必填，服务器地址与端口 |
 | `udp` | 是否允许 UDP 走该节点，**默认 `false`**；TUIC 等基于 UDP 的协议默认开启 |
 | `ip-version` | `dual`（默认）/ `ipv4` / `ipv6` / `ipv4-prefer` / `ipv6-prefer` |
-| `client-fingerprint` | uTLS 指纹，适用于 VMess、VLESS、Trojan、AnyTLS，可选 `chrome`、`firefox`、`safari`、`random` 等 |
+| `client-fingerprint` | uTLS 指纹，适用于 VMess、VLESS、Trojan、AnyTLS；Shadowsocks 节点使用 shadow-tls、restls 等插件时同样读取这个字段。可选 `chrome`、`firefox`、`safari`、`random` 等 |
 | `skip-cert-verify` | 跳过证书校验。会让中间人攻击成为可能，自签证书更稳妥的做法是用 `fingerprint` 固定证书 |
 | `dialer-proxy` | 先经过另一个节点或策略组再连本节点，见下文 |
 

@@ -1,6 +1,7 @@
 ---
 title: Fake-IP vs Redir-Host：一次讲清楚
 date: 2026-05-10
+updated: 2026-10-19
 categories:
   - DNS 专题
 tags:
@@ -96,9 +97,11 @@ graph TD
 
 关键点：**真实 DNS 解析发生在路由决策之后。** 只有确认需要直连的域名，才会触发本地 DNS 查询。这意味着 `nameserver` 里配置的 DNS 服务器只会收到国内域名的查询请求——这正是我们想要的结果。
 
+但这有一个前提：域名在规则链里遇到 IP 类规则（`GEOIP`、`IP-CIDR`、ipcidr 类规则集等）之前，已经被域名规则命中；或者这些 IP 类规则都加了 `no-resolve`。mihomo 处理 Fake-IP 连接时只拿域名去匹配规则，一旦走到不带 `no-resolve` 的 IP 类规则，就会先用 `nameserver`（或匹配的 `nameserver-policy`）把域名真实解析一次，再拿解析结果去匹配。常见写法是在 `MATCH` 前放一条不带 `no-resolve` 的 `GEOIP,CN,DIRECT`，这时所有没被域名规则命中的境外域名，都会先交给国内 DNS 查询一遍。
+
 ### 关键优势
 
-**彻底杜绝 DNS 泄漏。** 走代理的域名从不在本地解析，DNS 查询只发生在远端代理节点所在的网络。你的 ISP 和 GFW 看不到任何关于这些域名的 DNS 请求。在 Redir-Host 模式下，即使最终走了代理，DNS 查询本身已经暴露了你的访问意图。
+**避免 DNS 泄漏。** 在 IP 类规则都加了 `no-resolve`、或域名规则先行命中的前提下，走代理的域名不会在本地解析，DNS 查询只发生在远端代理节点所在的网络，你的 ISP 和 GFW 看不到这些域名的 DNS 请求。反过来，如果规则链里不带 `no-resolve` 的 IP 类规则排在前面，Fake-IP 也挡不住这次本地解析（见 [mihomo 文档中 no-resolve 的说明](https://wiki.metacubex.one/config/rules/)）。在 Redir-Host 模式下，即使最终走了代理，DNS 查询本身已经暴露了你的访问意图。
 
 **速度极快。** DNS 请求在本地瞬间返回一个假 IP，没有任何网络往返。应用几乎感受不到 DNS 延迟。相比之下，Redir-Host 需要等待真实 DNS 查询完成（通常几十到几百毫秒），如果配置了 fallback，还要等待多个 DNS 服务器的响应并进行比较。
 
@@ -209,12 +212,12 @@ Redir-Host 的逻辑是传统思路：**先做真实的 DNS 解析，拿到 IP �
 |------|---------|------------|
 | DNS 解析时机 | 路由决策后（先匹配规则，再解析） | 路由决策前（先解析，再匹配规则） |
 | 解析速度 | 极快（本地瞬间返回假 IP） | 较慢（需要等待真实 DNS 查询） |
-| DNS 泄漏风险 | 几乎为零（代理域名从不在本地解析） | 需要精心配置才能降低 |
+| DNS 泄漏风险 | 几乎为零（IP 类规则加 `no-resolve` 时，代理域名不在本地解析） | 需要精心配置才能降低 |
 | 规则匹配方式 | 基于域名（精确、稳定） | 基于 IP（可能不准确、受 CDN 影响） |
 | 配置复杂度 | 简单（只需 nameserver） | 复杂（需要 nameserver + fallback + filter） |
 | CDN 兼容性 | 好（直连域名在本地用国内 DNS 解析） | 可能出问题（fallback 逻辑可能返回错误节点） |
 | 对应用的影响 | 极少数应用可能缓存假 IP（关代理后需清缓存） | 无 |
-| DNS 污染影响 | 无（代理域名不经过本地 DNS） | 大（需要 fallback 机制来对抗） |
+| DNS 污染影响 | 无（代理连接把域名交给节点远端解析） | 大（需要 fallback 机制来对抗） |
 | 适合的用户 | 所有用户 | 有特殊需求的高级用户 |
 
 ## 最常见的配置错误
@@ -241,7 +244,7 @@ dns:
 
 为什么这是错误的？让我逐条解释：
 
-**fallback 是 Redir-Host 的概念，用于对抗 DNS 污染。** 在 Redir-Host 模式下，客户端需要做真实 DNS 解析，国内 DNS 的结果可能被污染，所以需要用海外 DNS 作为 fallback 来交叉验证。但在 Fake-IP 模式下，nameserver 只负责解析**直连域名**——这些域名本来就是 baidu.com、taobao.com 这样的国内域名，用国内 DNS 解析它们是完全正确的，不存在被污染的问题。走代理的域名（google.com、youtube.com）根本不会触发本地 DNS 解析。
+**fallback 是 Redir-Host 的概念，用于对抗 DNS 污染。** 在 Redir-Host 模式下，客户端需要做真实 DNS 解析，国内 DNS 的结果可能被污染，所以需要用海外 DNS 作为 fallback 来交叉验证。但在 Fake-IP 模式下，nameserver 主要负责解析**直连域名**——这些域名本来就是 baidu.com、taobao.com 这样的国内域名，用国内 DNS 解析它们是完全正确的，不存在被污染的问题。走代理的域名（google.com、youtube.com）只要先被域名规则命中、或者 IP 类规则都加了 `no-resolve`，就不会触发本地 DNS 解析。
 
 **加了 fallback 的后果：**
 
@@ -260,9 +263,9 @@ dns:
     - https://dns.google/dns-query    # ← 不应该放在这里
 ```
 
-在 Fake-IP 模式下，nameserver 只用于解析直连域名。如果 nameserver 中包含海外 DNS，国内域名的解析请求也会被发送到 Google DNS。Google DNS 返回的 CDN 节点可能是美国或香港的服务器，导致你直连访问这些海外 CDN，速度大幅下降。
+在 Fake-IP 模式下，nameserver 主要用于解析直连域名。如果 nameserver 中包含海外 DNS，国内域名的解析请求也会被发送到 Google DNS。Google DNS 返回的 CDN 节点可能是美国或香港的服务器，导致你直连访问这些海外 CDN，速度大幅下降。
 
-nameserver 应该只包含**国内 DNS 服务器**——因为它只会被用来解析国内域名。
+nameserver 应该只包含**国内 DNS 服务器**——因为它主要用来解析直连的国内域名。
 
 ### 错误三：同时开启 Fake-IP 和自定义 hosts
 
@@ -316,7 +319,7 @@ dns:
 这个配置的逻辑非常清晰：
 
 - `enhanced-mode: fake-ip`：使用 Fake-IP 模式
-- `nameserver` 只配置国内 DNS，因为只有直连域名会用到它
+- `nameserver` 只配置国内 DNS，因为用到它的主要是直连域名
 - `fake-ip-filter` 列出需要真实 IP 的域名
 - 没有 fallback，因为 Fake-IP 模式不需要它
 
@@ -416,4 +419,4 @@ Fake-IP 模式通常与 TUN 模式配合使用效果最佳。TUN 模式在系统
 
 不建议配太多。每增加一个 DNS 服务器，客户端可能会并行发送查询到所有服务器，增加不必要的网络流量。2 个就足够保证可用性了——一个挂了还有另一个。
 
-也不建议使用传统的明文 DNS（如 `114.114.114.114`）。虽然在 Fake-IP 模式下 nameserver 只解析国内域名，不存在被 GFW 污染的风险，但明文 DNS 查询可能被运营商劫持或篡改（比如将你重定向到运营商的广告页面）。DoH 加密了 DNS 请求本身，避免了运营商劫持。
+也不建议使用传统的明文 DNS（如 `114.114.114.114`）。虽然在 Fake-IP 模式下 nameserver 主要解析国内域名，被 GFW 污染的风险不大，但明文 DNS 查询可能被运营商劫持或篡改（比如将你重定向到运营商的广告页面）。DoH 加密了 DNS 请求本身，避免了运营商劫持。

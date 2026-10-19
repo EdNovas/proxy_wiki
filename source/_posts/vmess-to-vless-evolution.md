@@ -1,6 +1,7 @@
 ---
 title: 从 VMess 到 VLESS：协议演进史
 date: 2026-05-10
+updated: 2026-10-19
 categories:
   - 协议与原理
 tags:
@@ -14,7 +15,7 @@ excerpt: 从 2015 年的 VMess 到 2023 年的 Reality，代理协议演进史�
 index_img: /images/posts/vmess-to-vless-evolution.png
 ---
 
-> **摘要**: 从 2015 年的 VMess 到 2023 年的 VLESS+Reality+XHTTP，代理协议经历了快速演进。每一次升级都是为了应对 GFW 不断增强的检测能力。本文梳理这段演进历史，帮助你理解为什么当前推荐 VLESS+Reality。
+> **摘要**: 从 2015 年的 VMess，到 2023 年的 VLESS+Reality，再到 2024 年的 XHTTP，代理协议经历了快速演进。每一次升级都是为了应对 GFW 不断增强的检测能力。本文梳理这段演进历史，帮助你理解为什么当前推荐 VLESS+Reality。
 
 ## 为什么要了解协议演进
 
@@ -63,9 +64,9 @@ RPRX 从 v2ray-core fork 出了 [Xray-core](https://github.com/XTLS/Xray-core)�
 
 ## 2021-2022: TLS 指纹成为焦点
 
-GFW 开始利用 JA3/JA4 TLS 指纹来识别代理流量。Go 语言标准库的 TLS 实现产生的 JA3 指纹与主流浏览器完全不同，即使用了完美的 TLS 加密，握手阶段的指纹就已经暴露了非浏览器客户端身份。
+2021 年 11 月起，GFW 开始仅凭首包"看起来随机"，被动、按概率封锁 Shadowsocks、VMess 等全加密流量（[USENIX Security 2023 论文](https://gfw.report/publications/usenixsecurity23/en/)；2023 年 3 月 15 日起未再观察到，见 [GFW 如何识别全加密流量](/posts/fully-encrypted-detection/)）。2022 年 10 月，Trojan、VLESS 等 TLS 类工具也出现[大规模封锁](https://github.com/net4people/bbs/issues/129)，研究者推测与客户端的 TLS 指纹（JA3 一类）有关，但未经测量证实。Go 语言标准库的 TLS 实现产生的 JA3 指纹与主流浏览器完全不同，即使用了完美的 TLS 加密，握手阶段的指纹就已经暴露了非浏览器客户端身份。
 
-uTLS 库的出现是对这一检测手段的直接回应。Xray-core 和后来的 [sing-box](https://github.com/SagerNet/sing-box) 都集成了 uTLS，用户只需要配置 `fingerprint: chrome` 就能模拟 Chrome 的 TLS 指纹。
+[uTLS](https://github.com/refraction-networking/utls) 库并非这一时期才出现（其 GitHub 仓库创建于 2017 年），但它正是为模拟浏览器的 TLS 指纹、对抗这类检测而设计的。Xray-core 和后来的 [sing-box](https://github.com/SagerNet/sing-box) 都集成了 uTLS，用户只需要配置 `fingerprint: chrome` 就能模拟 Chrome 的 TLS 指纹。
 
 Trojan 协议在这个时期经历了从崛起到逐渐边缘化的过程——它依赖真实域名和证书，带来了域名可能被封锁、证书续签可能暴露身份等运维风险。
 
@@ -106,7 +107,7 @@ Reality 的部署比传统 TLS 方案更简单：不需要购买域名、不需�
 
 **第一阶段：协议加密（2015-2019）** —— 核心策略是加密流量内容。局限性：加密流量本身就是一个特征。
 
-**第二阶段：流量伪装（2019-2022）** —— 核心策略是让代理流量看起来像正常的 HTTPS 流量。突破口被 GFW 找到：TLS 指纹。
+**第二阶段：流量伪装（2019-2022）** —— 核心策略是让代理流量看起来像正常的 HTTPS 流量。被普遍怀疑的突破口：TLS 指纹（尚未经测量证实）。
 
 **第三阶段：身份借用（2023-至今）** —— 核心策略是借用真实网站的身份，让审查者即使进行主动探测也无法区分代理服务器和真实网站。
 

@@ -1,6 +1,7 @@
 ---
 title: DNS 泄漏是什么、怎么检测、怎么防
 date: 2026-05-10
+updated: 2026-10-19
 categories:
   - DNS 专题
 tags:
@@ -48,15 +49,21 @@ DNS 泄漏不是一个单一的问题，它有多种触发场景。理解每种�
 
 系统代理（System Proxy）的工作方式是：在操作系统层面设置一个 HTTP/SOCKS 代理地址。当应用程序发起 HTTP 或 HTTPS 请求时，这些请求会被转发到代理客户端处理。
 
-问题在于：**DNS 查询不是 HTTP/HTTPS 请求。**
+问题在于：**系统代理只对主动读取它的程序有效。**
 
-DNS 查询使用 UDP 协议的 53 端口。系统代理只接管了 HTTP/HTTPS 流量（TCP 80/443），对 UDP 53 端口的 DNS 查询完全不管。当你的浏览器想访问 `google.com` 时，操作系统首先要做 DNS 解析——这个 DNS 查询直接走本地网络，发送到 ISP 的 DNS 服务器。ISP 收到你的查询，知道你在找 `google.com` 的 IP。然后浏览器拿到 IP，通过系统代理发送 HTTP 请求——这部分确实走了代理，但 DNS 早就泄漏了。
+先看读取系统代理的程序。浏览器访问 `https://google.com` 时，会向代理客户端发送 `CONNECT google.com:443`，把域名原样交给代理，本地不会为 `google.com` 发起 DNS 查询。[Chromium 的代理文档](https://chromium.googlesource.com/chromium/src/+/HEAD/net/docs/proxy.md)写明：Chrome 使用 HTTP 代理时，域名解析总是交给代理；使用 SOCKS5 代理时，也总是在代理端解析。
 
-这种泄漏的特点是**完全无感**。你看到浏览器设置了代理，网页也能正常打开，一切看起来都很正常。但你的每一次 DNS 查询都在本地网络上裸奔。
+系统代理模式下的泄漏主要来自三个地方：
 
-这就是为什么我们反复强调：**系统代理模式下，DNS 泄漏几乎不可避免。** 如果你在意隐私，请使用 TUN 模式。
+- **不读系统代理的程序**：很多命令行工具、游戏和部分桌面应用根本不看系统代理设置，照常调用操作系统的 DNS 解析，查询走 UDP 53 直接发往 ISP 的 DNS 服务器。系统代理对这些 DNS 查询完全不管。
+- **代理客户端为匹配 IP 类规则做的解析**：代理客户端收到的是域名，但遇到 `GEOIP`、没有加 `no-resolve` 的 `IP-CIDR` 这类按目标 IP 匹配的规则时，要先把域名解析成 IP 才能判断（见 [mihomo 规则文档](https://wiki.metacubex.one/config/rules/)）。这次解析走的是客户端自己的 DNS 设置，如果那里配的是 ISP 的明文 DNS，域名同样会暴露。
+- **SOCKS5 本地解析的写法**：有些程序使用 SOCKS5 代理时会先在本机解析域名，再把 IP 交给代理，比如 curl 的 `socks5://`（改成 `socks5h://` 才由代理端解析），详见 [命令行与开发工具走代理](/posts/terminal-proxy/)。
 
-> 关于系统代理和 TUN 模式的详细对比，参见 [TUN 模式 vs 系统代理](../software/tun-vs-system-proxy.md)。
+这种泄漏的特点是**完全无感**。你看到浏览器设置了代理，网页也能正常打开，一切看起来都很正常。但不读系统代理的程序、在本机解析域名的 SOCKS5 写法、客户端为匹配规则发出的 DNS 查询，可能一直在本地网络上裸奔。
+
+这就是为什么我们反复强调：**系统代理模式管不住不读代理设置的程序，DNS 泄漏很难完全杜绝。** 如果你在意隐私，请使用 TUN 模式。
+
+> 关于系统代理和 TUN 模式的详细对比，参见 [TUN 模式 vs 系统代理](/posts/tun-vs-system-proxy/)。
 
 ### 场景二：代理客户端 DNS 配置错误
 
@@ -78,7 +85,7 @@ dns:
 
 另一种常见的错误配置是在 Fake-IP 模式下配置了 `fallback`，并且 fallback 指向海外 DNS。虽然在 Fake-IP 模式下 nameserver 只会收到直连域名的查询，但 fallback 的存在会导致额外的 DNS 查询被发送到海外，这些查询走的是明文或加密通道取决于你的配置，但无论如何，它们增加了不必要的暴露面。
 
-> 关于 Fake-IP 模式下为什么不需要 fallback，参见 [Fake-IP vs Redir-Host](./fake-ip-vs-redir-host.md)。
+> 关于 Fake-IP 模式下为什么不需要 fallback，参见 [Fake-IP vs Redir-Host](/posts/fake-ip-vs-redir-host/)。
 
 ### 场景三：应用绕过代理
 
@@ -90,7 +97,7 @@ dns:
 - **Android 应用**：Android 上的部分应用会硬编码 DNS 服务器地址（如 `8.8.8.8`），直接通过 UDP 53 端口发送查询，完全绕过系统 DNS 和代理客户端。
 - **某些即时通讯软件**：部分 IM 应用为了加速连接，会使用 HTTPDNS（通过 HTTP 接口查询 DNS，而非传统的 UDP 53 端口），这些查询可能不被代理客户端拦截。
 
-在系统代理模式下，这些硬编码 DNS 查询会直接走本地网络，造成泄漏。即使在 TUN 模式下，如果 TUN 的 DNS 劫持配置不完善，某些应用的非标准 DNS 查询也可能漏网。
+在系统代理模式下，Android 应用、IM 软件这类自带 DNS 的查询不经过代理，会直接走本地网络，造成泄漏；Chrome 则不同，它通过系统代理访问网站时会把域名交给代理，不会在本地解析目标域名（见场景一）。即使在 TUN 模式下，如果 TUN 的 DNS 劫持配置不完善，某些应用的非标准 DNS 查询也可能漏网。
 
 ### 场景四：IPv6 DNS 泄漏
 
@@ -229,7 +236,7 @@ TUN（网络隧道）模式在操作系统层面创建一个虚拟网卡，所�
 - 某些企业网络环境可能限制 TUN 模式的使用
 - TUN 模式与其他 VPN 软件可能冲突——同一时间只能有一个 TUN 设备接管网络
 
-> 关于 TUN 模式的详细原理和配置，参见 [TUN 模式 vs 系统代理](../software/tun-vs-system-proxy.md)。
+> 关于 TUN 模式的详细原理和配置，参见 [TUN 模式 vs 系统代理](/posts/tun-vs-system-proxy/)。
 
 ### 方案二：使用 Fake-IP 模式
 
@@ -254,7 +261,7 @@ dns:
     - https://dns.alidns.com/dns-query
 ```
 
-> 关于 Fake-IP 的详细原理，参见 [Fake-IP vs Redir-Host](./fake-ip-vs-redir-host.md)。
+> 关于 Fake-IP 的详细原理，参见 [Fake-IP vs Redir-Host](/posts/fake-ip-vs-redir-host/)。
 
 
 ### 方案三：正确配置 DNS 加密
@@ -281,7 +288,7 @@ DoH 的保护范围：
 - **防篡改**：GFW 无法对 DoH 查询进行 DNS 污染（但可以封锁 DoH 服务器的 IP）
 - **防运营商劫持**：某些运营商会劫持明文 DNS 查询，插入广告或重定向。DoH 完全避免了这个问题
 
-需要注意：DoH 不能替代 TUN 模式。DoH 只加密了 DNS 查询的传输过程，但如果你使用的是系统代理模式，DNS 查询本身仍然不经过代理客户端——操作系统会直接发送 DoH 请求到配置的 DNS 服务器。虽然内容加密了，但 ISP 仍然能看到你在连接某个 DoH 服务器（通过 IP 地址）。
+需要注意：DoH 不能替代 TUN 模式。如果你使用的是系统代理模式，客户端里的 `nameserver` 只用于客户端自己发起的解析（比如直连连接、为匹配 IP 类规则做的解析）；不读系统代理的程序仍然调用操作系统的 DNS 解析，这些查询不经过代理客户端，客户端的 DoH 配置管不到它们。另外，DoH 只加密了 DNS 查询的传输过程：虽然内容加密了，但 ISP 仍然能看到你在连接某个 DoH 服务器（通过 IP 地址）。
 
 ### 方案四：禁用 IPv6
 
@@ -337,7 +344,7 @@ Firefox 提供了更直接的控制方式：
 
 在完成防泄漏配置后，用以下清单逐项检查，确保没有遗漏。
 
-- [ ] **代理模式**：是 TUN 还是系统代理？TUN 更安全。系统代理模式下 DNS 泄漏几乎不可避免。
+- [ ] **代理模式**：是 TUN 还是系统代理？TUN 更安全。系统代理模式管不住不读代理设置的程序，DNS 泄漏很难完全杜绝。
 - [ ] **DNS 增强模式**：是 Fake-IP 还是 Redir-Host？Fake-IP 更安全。Fake-IP 从根本上避免了代理域名的本地 DNS 查询。
 - [ ] **DNS 加密**：nameserver 使用 DoH/DoT 还是明文 UDP？DoH/DoT 更安全。明文 DNS 查询可被 ISP 和 GFW 读取和篡改。
 - [ ] **IPv6**：是否需要 IPv6？不需要就关闭。IPv6 DNS 查询是容易被忽略的泄漏渠道。
@@ -376,7 +383,7 @@ Fake-IP 大幅降低了泄漏风险，但不能说百分之百消除。如果你
 
 iOS 和 Android 上的代理客户端（如 Shadowrocket、Quantumult X、Clash for Android、sing-box）通常通过系统的 VPN 接口工作——这个接口的工作方式类似于桌面端的 TUN 模式，在系统层面接管所有网络流量，包括 DNS 查询。因此，手机上的 DNS 泄漏风险通常比桌面端低。
 
-但也有例外。如果你在手机上使用的是简单的 HTTP 代理模式（而非 VPN 模式），DNS 查询仍然会走本地网络，存在泄漏风险。另外，Android 系统从 9.0 开始引入了"私人 DNS"功能（实际上是 DNS over TLS），如果这个功能配置了和代理客户端冲突的 DNS 服务器，可能导致 DNS 查询走了意料之外的路径。
+但也有例外。如果你在手机上使用的是简单的 HTTP 代理模式（而非 VPN 模式），不读取这个代理设置的应用，DNS 查询仍然会走本地网络，存在泄漏风险。另外，Android 系统从 9.0 开始引入了"私人 DNS"功能（实际上是 DNS over TLS），如果这个功能配置了和代理客户端冲突的 DNS 服务器，可能导致 DNS 查询走了意料之外的路径。
 
 建议：在手机上确认代理客户端使用的是 VPN 模式（状态栏应该出现 VPN 图标），而不是简单的 HTTP 代理模式。
 

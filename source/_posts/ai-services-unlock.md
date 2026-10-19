@@ -1,6 +1,7 @@
 ---
 title: "ChatGPT / Claude / Gemini 的 IP 策略与解锁"
 date: 2026-05-10
+updated: 2026-10-19
 categories:
   - 流媒体与解锁
 tags:
@@ -94,7 +95,7 @@ ChatGPT 网页版（chat.openai.com / chatgpt.com）的限制最严格，因为�
 
 OpenAI API 的限制则相对宽松。API 的计费模式是按量付费，用户已经通过信用卡验证了身份，滥用的经济动机较低。因此 API 对数据中心 IP 的封锁力度明显弱于网页版。很多在网页版被封锁的 IP，通过 API 仍然可以正常调用。
 
-这意味着如果你的主要需求是使用 ChatGPT 的能力（而非必须使用网页界面），通过 API 接入可以绕过大部分 IP 限制。市面上有不少基于 OpenAI API 的第三方客户端，它们的可用性通常优于直接访问 ChatGPT 网页版。
+这意味着如果你的主要需求是使用 ChatGPT 的能力（而非必须使用网页界面），通过 API 接入可以避开大部分针对数据中心 IP 的拦截。市面上有不少基于 OpenAI API 的第三方客户端，它们的可用性通常优于直接访问 ChatGPT 网页版。但地区限制同样适用于 API：OpenAI 的[支持国家和地区列表](https://developers.openai.com/api/docs/supported-countries)写明，在列表之外访问或提供访问服务，可能导致账号被封禁或暂停，中国大陆和香港都不在列表中。
 
 **推荐地区与节点类型**
 
@@ -131,7 +132,7 @@ Anthropic 在逐步扩展 Claude 的可用地区，但截至目前，claude.ai �
 
 **网页版 vs API**
 
-Claude API 的可用范围比网页版更广。API 通过 API Key 认证和按量计费，对 IP 的限制进一步降低。在很多地区，即使 claude.ai 网页版无法直接访问，API 调用仍然正常。
+Claude API 和网页版适用同一份地区限制。Anthropic 的 [Supported Regions Policy](https://www.anthropic.com/legal/supported-regions)（页面标注 2026 年 11 月 12 日起生效的版本）用同一份支持地区列表约束 Claude.ai、Claude Code 和 API / 开发者平台，并按使用者实际所在地判断，中国大陆、香港、澳门都不在列表中。API 通过 API Key 认证和按量计费，技术层面的 IP 拦截可能比网页版少，但不存在"API 可用地区更广"的区别。
 
 和 OpenAI 类似，如果你主要需要 Claude 的能力，通过 API 接入是更稳定的方案。
 
@@ -196,9 +197,9 @@ Perplexity 的可访问性介于 ChatGPT 和 Gemini 之间。对数据中心 IP 
 | 服务 | 封锁力度 | 推荐地区 | 数据中心 IP 可用性 | API 限制 | 注册难度 |
 |------|---------|---------|-----------------|---------|---------|
 | ChatGPT 网页版 | ⭐⭐⭐⭐ | US / JP / SG / TW | 差 | — | 需海外手机号 |
-| ChatGPT API | ⭐⭐ | 广泛 | 中等 | 宽松 | 需国际支付方式 |
+| ChatGPT API | ⭐⭐ | 支持地区均可 | 中等 | 宽松 | 需国际支付方式 |
 | Claude 网页版 | ⭐⭐⭐ | US / UK / JP | 中等 | — | 需海外手机号 |
-| Claude API | ⭐⭐ | 广泛 | 较好 | 宽松 | 需国际支付方式 |
+| Claude API | ⭐⭐ | 支持地区均可 | 较好 | 宽松 | 需国际支付方式 |
 | Gemini | ⭐⭐ | 广泛 | 较好 | 宽松 | 需 Google 账号 |
 | Midjourney | ⭐ | N/A（走 Discord） | 好 | N/A | Discord 账号即可 |
 | Copilot | ⭐ | 全球 | 好 | 宽松 | 微软账号即可 |
@@ -252,6 +253,7 @@ rules:
   # Anthropic / Claude
   - DOMAIN-SUFFIX,anthropic.com,AI
   - DOMAIN-SUFFIX,claude.ai,AI
+  - DOMAIN-SUFFIX,claude.com,AI
 
   # Google Gemini
   - DOMAIN-SUFFIX,gemini.google.com,AI
@@ -419,11 +421,11 @@ API 的缺点是需要按量付费，没有"包月无限使用"的选项（不�
 
 API 的 IP 限制通常比网页版宽松得多。具体差异如下：
 
-- **OpenAI**：API 不限制访问地区（只限制注册地区和支付方式），对数据中心 IP 的容忍度也比网页版高。很多网页版被封锁的 IP 通过 API 仍可正常调用
-- **Anthropic**：Claude API 同样比 claude.ai 网页版限制更少，可用地区更广
+- **OpenAI**：API 对数据中心 IP 的容忍度比网页版高，很多网页版被封锁的 IP 通过 API 仍可正常调用。但地区限制同样适用于 API，在[支持国家和地区列表](https://developers.openai.com/api/docs/supported-countries)之外（包括中国大陆和香港）访问，可能导致账号被封禁或暂停
+- **Anthropic**：Claude API 技术层面的 IP 拦截可能比网页版少，但与 claude.ai 网页版适用[同一份支持地区列表](https://www.anthropic.com/legal/supported-regions)，按使用者实际所在地判断，API 的可用地区并不比网页版更广
 - **Google**：Gemini API（通过 AI Studio 或 Vertex AI）的地区限制与网页版大致相同，因为 Google 的 API 基础设施本身就是全球化的
 
-如果网页版遇到限制，可以优先尝试 API 接入。
+如果网页版遇到的是 IP 类型拦截，可以优先尝试 API 接入；地区限制则换成 API 也一样存在。
 
 ### Q: 有免费使用这些 AI 服务的方法吗？
 

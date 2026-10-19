@@ -1,7 +1,7 @@
 ---
 title: 如何自定义规则：让特定网站走代理/直连/特定节点
 date: 2026-05-10
-updated: 2026-09-25
+updated: 2026-10-19
 categories:
   - 规则与分流
 tags:
@@ -150,6 +150,7 @@ function main(config) {
     "DOMAIN-SUFFIX,chatgpt.com,AI-Services",
     "DOMAIN-SUFFIX,anthropic.com,AI-Services",
     "DOMAIN-SUFFIX,claude.ai,AI-Services",
+    "DOMAIN-SUFFIX,claude.com,AI-Services",
     
     // 游戏走日本节点
     "DOMAIN-SUFFIX,riotgames.com,Gaming-JP",
@@ -337,6 +338,7 @@ ChatGPT、Claude 等 AI 服务对 IP 地区有要求。有些节点的 IP 被这
 # Anthropic / Claude
 - DOMAIN-SUFFIX,anthropic.com,AI-Services
 - DOMAIN-SUFFIX,claude.ai,AI-Services
+- DOMAIN-SUFFIX,claude.com,AI-Services   # 含 platform.claude.com（登录与 OAuth 令牌刷新）
 
 # Google AI
 - DOMAIN-SUFFIX,gemini.google.com,AI-Services
@@ -587,6 +589,7 @@ function main(config) {
     "DOMAIN-SUFFIX,chatgpt.com,AI-Services",
     "DOMAIN-SUFFIX,anthropic.com,AI-Services",
     "DOMAIN-SUFFIX,claude.ai,AI-Services",
+    "DOMAIN-SUFFIX,claude.com,AI-Services",
     
     // 5. 英雄联盟走日本节点
     "DOMAIN-SUFFIX,riotgames.com,Gaming-JP",
